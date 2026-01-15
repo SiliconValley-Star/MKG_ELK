@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>MKG | Systems of Tomorrow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Geist:wght@100..900&family=Syncopate:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            display: ['Geist', 'sans-serif'],
+            tech: ['Syncopate', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#FF3B00',
+              black: '#000000',
+              gray: '#111111',
+            }
+          },
+          animation: {
+            marquee: 'marquee 60s linear infinite',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          },
+          backgroundImage: {
+            'radial-gradient': 'radial-gradient(circle, var(--tw-gradient-stops))',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Base Engineering Grid */
+    .bg-grid-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: 60px 60px;
+      /* Smaller grid for more detail */
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Utility for 3D Transform Container */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF3B00;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="bg-grid-fixed"></div>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+</body>
+
+</html>
