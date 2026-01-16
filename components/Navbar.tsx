@@ -16,11 +16,12 @@ const Navbar: React.FC = () => {
   }, []);
 
   const routes = [
-    { label: 'Home', path: '/', id: '01' },
-    { label: 'Corporate', path: '/corporate', id: '02' },
-    { label: 'Services', path: '/services', id: '03' },
-    { label: 'Projects', path: '/projects', id: '04' },
-    { label: 'Contact', path: '/contact', id: '05' },
+    { label: 'Ana Sayfa', path: '/', id: '01' },
+    { label: 'Kurumsal', path: '/corporate', id: '02' },
+    { label: 'Hizmetler', path: '/services', id: '03' },
+    { label: 'Projeler', path: '/projects', id: '04' },
+    { label: 'Blog', path: '/blog', id: '05' },
+    { label: 'İletişim', path: '/contact', id: '06' },
   ];
 
   return (
@@ -58,7 +59,7 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex items-center gap-6">
           <NavLink to="/contact">
             <button className="group relative overflow-hidden bg-brand-orange text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,59,0,0.3)]">
-              <span className="relative z-10">Get Quote</span>
+              <span className="relative z-10">Teklif Al</span>
               <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 mix-blend-overlay"></div>
             </button>
           </NavLink>
@@ -81,7 +82,7 @@ const Navbar: React.FC = () => {
             className="fixed inset-0 bg-black z-[60] flex flex-col p-6"
           >
             <div className="flex justify-between items-center mb-10">
-              <div className="font-tech text-2xl font-bold text-white tracking-widest">NAVIGATE</div>
+              <div className="font-tech text-2xl font-bold text-white tracking-widest">MENÜ</div>
               <button onClick={() => setIsMenuOpen(false)} className="text-white p-2 bg-white/10 rounded-full hover:bg-brand-orange transition-colors">
                 <X size={24} />
               </button>
@@ -106,11 +107,11 @@ const Navbar: React.FC = () => {
 
             <div className="mt-auto grid grid-cols-2 gap-4">
               <div className="bg-white/5 p-3 sm:p-4 rounded-xl border border-white/10">
-                <p className="text-xs text-gray-500 mb-1">Email</p>
+                <p className="text-xs text-gray-500 mb-1">E-posta</p>
                 <p className="text-white">info@mkg.com</p>
               </div>
               <div className="bg-white/5 p-4 rounded-xl border border-white/10">
-                <p className="text-xs text-gray-500 mb-1">Support</p>
+                <p className="text-xs text-gray-500 mb-1">Destek</p>
                 <p className="text-white">+90 224 000</p>
               </div>
             </div>

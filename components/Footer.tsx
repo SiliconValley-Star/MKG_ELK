@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                             </NavLink>
 
                             <p className="text-slate-400 leading-relaxed text-sm max-w-sm">
-                                MKG Electromechanical Automation is a global engineering partner for the world's most demanding industries. We build the systems of tomorrow, today.
+                                MKG Elektromekanik Otomasyon, dünyanın en zorlu endüstrileri için küresel bir mühendislik ortağıdır. Yarının sistemlerini bugünden inşa ediyoruz.
                             </p>
                         </div>
 
@@ -41,37 +41,37 @@ const Footer: React.FC = () => {
 
                     {/* Column 2: Quick Links (Span 2) */}
                     <div className="lg:col-span-2 space-y-6">
-                        <h4 className="font-display font-bold text-white text-lg tracking-wide">Corporate</h4>
+                        <h4 className="font-display font-bold text-white text-lg tracking-wide">Kurumsal</h4>
                         <ul className="space-y-4 text-sm text-slate-400">
-                            <li><NavLink to="/corporate" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">About Us</NavLink></li>
-                            <li><NavLink to="/projects" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Case Studies</NavLink></li>
-                            <li><NavLink to="/contact" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Careers</NavLink></li>
-                            <li><NavLink to="/faq" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">FAQ</NavLink></li>
-                            <li><NavLink to="/security" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Security & Compliance</NavLink></li>
+                            <li><NavLink to="/corporate" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Hakkımızda</NavLink></li>
+                            <li><NavLink to="/projects" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Başarı Hikayeleri</NavLink></li>
+                            <li><NavLink to="/contact" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Kariyer</NavLink></li>
+                            <li><NavLink to="/faq" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">SSS</NavLink></li>
+                            <li><NavLink to="/security" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Güvenlik & Uyum</NavLink></li>
                         </ul>
                     </div>
 
                     {/* Column 3: Capabilities (Span 2) */}
                     <div className="lg:col-span-2 space-y-6">
-                        <h4 className="font-display font-bold text-white text-lg tracking-wide">Expertise</h4>
+                        <h4 className="font-display font-bold text-white text-lg tracking-wide">Uzmanlık</h4>
                         <ul className="space-y-4 text-sm text-slate-400">
-                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Factory Automation</NavLink></li>
-                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Power Distribution</NavLink></li>
-                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Robotic Cells</NavLink></li>
-                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Digital Twin</NavLink></li>
-                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Functional Safety</NavLink></li>
+                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Fabrika Otomasyonu</NavLink></li>
+                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Güç Dağıtımı</NavLink></li>
+                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Robotik Hücreler</NavLink></li>
+                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Dijital İkiz</NavLink></li>
+                            <li><NavLink to="/services" className="hover:text-brand-orange hover:pl-2 transition-all duration-300 block">Fonksiyonel Güvenlik</NavLink></li>
                         </ul>
                     </div>
 
                     {/* Column 4: Newsletter & Contact (Span 4) */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                            <h4 className="font-bold text-white text-lg mb-2">Industry Insights</h4>
-                            <p className="text-xs text-slate-400 mb-4">Join 2,000+ engineers receiving our whitepapers.</p>
+                            <h4 className="font-bold text-white text-lg mb-2">Sektörel Bakış</h4>
+                            <p className="text-xs text-slate-400 mb-4">Bültenlerimizi alan 2.000+ mühendise katılın.</p>
                             <div className="relative group">
                                 <input
                                     type="email"
-                                    placeholder="Email address"
+                                    placeholder="E-posta adresi"
                                     className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors placeholder:text-slate-600"
                                 />
                                 <button className="absolute right-1 top-1 bottom-1 px-4 bg-brand-orange rounded-md text-white font-bold hover:bg-white hover:text-black transition-colors">
@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
                         <div className="space-y-3 text-sm text-slate-400 font-mono">
                             <div className="flex items-start gap-3 group cursor-pointer hover:text-white transition-colors">
                                 <MapPin size={16} className="text-brand-orange mt-1 shrink-0 group-hover:scale-110 transition-transform" />
-                                <span>Nilufer Org. Ind. Zone, 123 Automation Ave,<br />Bursa / TURKIYE 16000</span>
+                                <span>Nilüfer Org. San. Böl., 123 Otomasyon Cad,<br />Bursa / TÜRKİYE 16000</span>
                             </div>
                             <div className="flex items-center gap-3 group cursor-pointer hover:text-white transition-colors">
                                 <Phone size={16} className="text-brand-orange shrink-0 group-hover:scale-110 transition-transform" />
@@ -109,9 +109,9 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-                        <NavLink to="/privacy" className="hover:text-white transition-colors">Privacy Policy</NavLink>
-                        <NavLink to="/terms" className="hover:text-white transition-colors">Terms of Service</NavLink>
-                        <NavLink to="/cookies" className="hover:text-white transition-colors">Cookies</NavLink>
+                        <NavLink to="/privacy" className="hover:text-white transition-colors">Gizlilik Politikası</NavLink>
+                        <NavLink to="/terms" className="hover:text-white transition-colors">Hizmet Şartları</NavLink>
+                        <NavLink to="/cookies" className="hover:text-white transition-colors">Çerezler</NavLink>
                     </div>
                 </div>
 
