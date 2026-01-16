@@ -22,23 +22,23 @@ const heroSlides = [
     {
         id: "01",
         img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2600",
-        title: "INTELLIGENT\nAUTOMATION",
-        subtitle: "SYSTEMS ARCHITECTURE",
-        desc: "Deploying self-optimizing robotic cells for the Industry 4.0 era."
+        title: "AKILLI\nOTOMASYON",
+        subtitle: "SİSTEM MİMARİSİ",
+        desc: "Endüstri 4.0 çağı için kendi kendini optimize eden robotik hücreler kuruyoruz."
     },
     {
         id: "02",
         img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2600",
-        title: "ENERGY\nRESILIENCE",
-        subtitle: "HIGH VOLTAGE INFRASTRUCTURE",
-        desc: "Designing grid-scale power distribution with zero-failure tolerance."
+        title: "ENERJİ\nDAYANIKLILIĞI",
+        subtitle: "YÜKSEK GERİLİM ALTYAPISI",
+        desc: "Sıfır hata toleranslı şebeke ölçeğinde güç dağıtımı tasarlıyoruz."
     },
     {
         id: "03",
         img: "https://images.unsplash.com/photo-1517420879524-86d64ac2f339?q=80&w=2600",
-        title: "DIGITAL\nTWINS",
-        subtitle: "VIRTUAL COMMISSIONING",
-        desc: "Simulating physics-based factory environments before physical build."
+        title: "DİJİTAL\nİKİZLER",
+        subtitle: "SANAL DEVREYE ALMA",
+        desc: "Fiziksel kurulumdan önce fizik tabanlı fabrika ortamlarını simüle ediyoruz."
     }
 ];
 
@@ -53,7 +53,7 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section className="relative h-screen w-full overflow-hidden bg-slate-950">
+        <section className="relative h-screen w-full overflow-hidden bg-transparent">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={heroSlides[current].id}
@@ -107,7 +107,7 @@ const HeroSection = () => {
                         <NavLink to="/services">
                             <button className="group relative overflow-hidden bg-white text-slate-950 px-10 py-4 rounded-none skew-x-[-10deg] hover:bg-brand-orange transition-colors duration-300">
                                 <div className="skew-x-[10deg] font-bold tracking-widest flex items-center gap-3">
-                                    DISCOVER SOLUTIONS <ArrowRight size={18} />
+                                    ÇÖZÜMLERİ KEŞFET <ArrowRight size={18} />
                                 </div>
                             </button>
                         </NavLink>
@@ -119,7 +119,7 @@ const HeroSection = () => {
             <div className="absolute bottom-0 left-0 w-full border-t border-white/10 bg-slate-950/50 backdrop-blur-md px-6 md:px-20 py-6 flex justify-between items-center z-20">
                 <div className="flex items-center gap-8">
                     <div className="text-xs font-mono text-slate-500">
-                        SYSTEM STATUS: <span className="text-green-500">ONLINE</span>
+                        SİSTEM DURUMU: <span className="text-green-500">ÇEVRİMİÇİ</span>
                     </div>
                     <div className="text-xs font-mono text-slate-500 hidden md:block">
                         LOC: 40.1828° N, 29.0665° E
@@ -146,25 +146,49 @@ const HeroSection = () => {
 
 // --- 2. BRAND TICKER ---
 const BrandTicker = () => {
-    const brands = ["SIEMENS", "ABB", "SCHNEIDER", "KUKA", "FANUC", "MITSUBISHI", "OMRON", "BECKHOFF", "ROCKWELL"];
+    const brands = [
+        "SIEMENS", "ABB", "SCHNEIDER ELECTRIC", "KUKA", "FANUC",
+        "MITSUBISHI ELECTRIC", "OMRON", "BECKHOFF", "ROCKWELL AUTOMATION", "PHOENIX CONTACT"
+    ];
+
     return (
-        <div className="bg-slate-900 border-b border-slate-800 py-10 overflow-hidden relative">
-            <div className="absolute inset-0 bg-slate-900/50 z-10 pointer-events-none"></div>
-            <div className="flex w-max animate-marquee whitespace-nowrap opacity-40">
-                {[...brands, ...brands, ...brands].map((b, i) => (
-                    <span key={i} className="mx-12 text-4xl md:text-6xl font-display font-bold text-transparent stroke-text hover:text-white transition-colors cursor-default select-none" style={{ WebkitTextStroke: '1px #475569' }}>
-                        {b}
-                    </span>
-                ))}
+        <section className="pt-10 pb-12 bg-black/40 backdrop-blur-md border-y border-white/10 relative flex flex-col items-center justify-center">
+
+            {/* Label - Now inside flow with proper spacing */}
+            <div className="mb-6 z-20 bg-black px-6 py-1.5 border border-white/10 rounded-full shadow-lg">
+                <span className="text-[10px] font-mono text-brand-orange tracking-widest uppercase flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-brand-orange rounded-full animate-pulse"></div>
+                    Teknoloji Ekosistemi
+                </span>
             </div>
-        </div>
+
+            {/* Gradient Masks */}
+            <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+            {/* Scrolling Track */}
+            <div className="flex w-full overflow-hidden">
+                <div className="flex w-max animate-marquee items-center">
+                    {/* Quadruple the list to ensure seamless looping on large screens */}
+                    {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
+                        <div key={i} className="flex items-center mx-8 md:mx-12 group cursor-default select-none">
+                            <span className="text-xl md:text-3xl font-display font-bold text-slate-800 group-hover:text-white transition-colors duration-500 uppercase tracking-tight">
+                                {b}
+                            </span>
+                            {/* Technical Separator */}
+                            <div className="ml-8 md:ml-12 w-1.5 h-1.5 bg-slate-800 rounded-full group-hover:bg-brand-orange transition-colors duration-500"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
     )
 }
 
 // --- 3. MANIFESTO (TEXT HEAVY) ---
 const ManifestoSection = () => {
     return (
-        <section className="py-32 px-6 bg-slate-950 relative overflow-hidden">
+        <section className="py-32 px-6 bg-slate-950/80 backdrop-blur-sm relative overflow-hidden">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -173,26 +197,26 @@ const ManifestoSection = () => {
                     transition={{ duration: 0.4 }}
                 >
                     <h2 className="text-sm font-mono text-brand-orange tracking-[0.5em] uppercase mb-8">
-                        The MKG Methodology
+                        MKG Metodolojisi
                     </h2>
                     <p className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-12">
-                        We bridge the gap between <span className="text-slate-600">mechanical limitations</span> and <span className="text-white border-b-2 border-brand-orange">digital possibilities.</span>
+                        <span className="text-slate-600">Mekanik kısıtlamalar</span> ile <span className="text-white border-b-2 border-brand-orange">dijital olanaklar</span> arasındaki boşluğu kapatıyoruz.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left mt-20">
                         <div className="border-l border-slate-800 pl-6">
                             <Layers className="text-brand-orange mb-4" size={32} />
-                            <h3 className="text-xl font-bold text-white mb-2">Scalable Systems</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed"> Modular architectures designed to grow with your production capacity, not constrain it.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Ölçeklenebilir Sistemler</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed"> Üretim kapasitenizle birlikte büyüyen modüler mimariler.</p>
                         </div>
                         <div className="border-l border-slate-800 pl-6">
                             <Activity className="text-brand-orange mb-4" size={32} />
-                            <h3 className="text-xl font-bold text-white mb-2">Real-time Data</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed"> Transforming raw sensor output into actionable business intelligence instantly.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Gerçek Zamanlı Veri</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed"> Ham sensör verilerini anında işlenebilir iş zekasına dönüştürüyoruz.</p>
                         </div>
                         <div className="border-l border-slate-800 pl-6">
                             <Lock className="text-brand-orange mb-4" size={32} />
-                            <h3 className="text-xl font-bold text-white mb-2">Cyber-Physical Safety</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed"> IEC 62443 compliant security protocols integrated into every layer of the OT network.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Siber-Fiziksel Güvenlik</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed"> OT ağının her katmanına entegre edilmiş IEC 62443 uyumlu güvenlik protokolleri.</p>
                         </div>
                     </div>
                 </motion.div>
@@ -204,22 +228,22 @@ const ManifestoSection = () => {
 // --- 4. ECOSYSTEM BENTO GRID ---
 const EcosystemGrid = () => {
     return (
-        <section className="py-24 px-6 bg-slate-950">
+        <section className="py-24 px-6 bg-slate-950/60 backdrop-blur-sm">
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-end mb-12">
-                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white">MKG <span className="text-slate-600">Ecosystem</span></h2>
-                    <NavLink to="/services" className="text-brand-orange font-mono text-sm hover:underline hidden md:block">VIEW ALL CAPABILITIES &rarr;</NavLink>
+                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white">MKG <span className="text-slate-600">Ekosistemi</span></h2>
+                    <NavLink to="/services" className="text-brand-orange font-mono text-sm hover:underline hidden md:block">TÜM YETENEKLERİ GÖRÜNTÜLE &rarr;</NavLink>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[700px]">
 
                     {/* Item 1: Large Video/Image */}
-                    <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-slate-800">
+                    <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden relative group border border-slate-800 bg-slate-900/40 backdrop-blur-md">
                         <img src="https://images.unsplash.com/photo-1535378437327-10ff28d45777?q=80&w=2070" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-                        <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors"></div>
+                        <div className="absolute inset-0 bg-slate-900/60 group-hover:bg-transparent transition-colors"></div>
                         <div className="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent">
-                            <h3 className="text-3xl font-bold text-white mb-2">Robotic Integration</h3>
-                            <p className="text-slate-300 text-sm max-w-sm">Seamless cooperation between humans and machines. Safety rated, high-speed, and precise.</p>
+                            <h3 className="text-3xl font-bold text-white mb-2">Robotik Entegrasyon</h3>
+                            <p className="text-slate-300 text-sm max-w-sm">İnsan ve makine arasında sorunsuz işbirliği. Güvenlik dereceli, yüksek hızlı ve hassas.</p>
                         </div>
                         <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
                             <ArrowUpRight className="text-white" />
@@ -227,31 +251,31 @@ const EcosystemGrid = () => {
                     </div>
 
                     {/* Item 2: Stat Card */}
-                    <div className="md:col-span-1 md:row-span-1 rounded-3xl bg-slate-900 border border-slate-800 p-8 flex flex-col justify-between hover:border-brand-orange/50 transition-colors group">
+                    <div className="md:col-span-1 md:row-span-1 rounded-3xl bg-slate-900/60 backdrop-blur-md border border-slate-800 p-8 flex flex-col justify-between hover:border-brand-orange/50 transition-colors group">
                         <Cpu className="text-brand-orange mb-4 group-hover:scale-110 transition-transform" size={40} />
                         <div>
                             <div className="text-4xl font-mono font-bold text-white mb-2">15ms</div>
-                            <div className="text-sm text-slate-400">Average Loop Cycle Time</div>
+                            <div className="text-sm text-slate-400">Ortalama Döngü Süresi</div>
                         </div>
                     </div>
 
                     {/* Item 3: Service Card */}
-                    <div className="md:col-span-1 md:row-span-1 rounded-3xl bg-slate-900 border border-slate-800 p-8 relative overflow-hidden group">
+                    <div className="md:col-span-1 md:row-span-1 rounded-3xl bg-slate-900/60 backdrop-blur-md border border-slate-800 p-8 relative overflow-hidden group">
                         <div className="absolute -right-4 -top-4 w-24 h-24 bg-brand-orange/20 rounded-full blur-2xl group-hover:bg-brand-orange/40 transition-colors"></div>
-                        <h3 className="text-xl font-bold text-white mb-4 relative z-10">Electrical <br />Engineering</h3>
+                        <h3 className="text-xl font-bold text-white mb-4 relative z-10">Elektrik <br />Mühendisliği</h3>
                         <ul className="space-y-2 text-sm text-slate-400 relative z-10">
                             <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange"></div> EPLAN Pro Panel</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange"></div> UL/CSA Standards</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange"></div> Thermal Analysis</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange"></div> UL/CSA Standartları</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange"></div> Termal Analiz</li>
                         </ul>
                     </div>
 
                     {/* Item 4: Wide Card */}
-                    <div className="md:col-span-2 md:row-span-1 rounded-3xl bg-slate-800 border border-slate-700 relative overflow-hidden group">
+                    <div className="md:col-span-2 md:row-span-1 rounded-3xl bg-slate-800/60 backdrop-blur-md border border-slate-700 relative overflow-hidden group">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670" className="w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:opacity-60 transition-opacity" loading="lazy" />
                         <div className="absolute inset-0 flex flex-col justify-center px-8">
-                            <h3 className="text-2xl font-bold text-white mb-2">Digital Twin Lab</h3>
-                            <p className="text-slate-300 text-sm max-w-md">Our in-house R&D facility simulates your entire production line before a single cable is laid.</p>
+                            <h3 className="text-2xl font-bold text-white mb-2">Dijital İkiz Laboratuvarı</h3>
+                            <p className="text-slate-300 text-sm max-w-md">Şirket içi Ar-Ge tesisimiz, tek bir kablo döşenmeden üretim hattınızın tamamını simüle eder.</p>
                         </div>
                     </div>
 
@@ -266,10 +290,10 @@ const BlueprintSlider = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const sectors = [
-        { id: "SEC-01", title: "Automotive", desc: "Assembly & Paint", img: "https://images.unsplash.com/photo-1613632826230-09e39f730634?q=80&w=800" },
-        { id: "SEC-02", title: "F&B Process", desc: "Hygienic Control", img: "https://images.unsplash.com/photo-1535914254981-b5012eebbd15?q=80&w=800" },
-        { id: "SEC-03", title: "Logistics", desc: "Sorting & AGV", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800" },
-        { id: "SEC-04", title: "Energy", desc: "Grid Distribution", img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800" },
+        { id: "SEC-01", title: "Otomotiv", desc: "Montaj & Boya", img: "https://images.unsplash.com/photo-1613632826230-09e39f730634?q=80&w=800" },
+        { id: "SEC-02", title: "Yiyecek & İçecek", desc: "Hijyenik Kontrol", img: "https://images.unsplash.com/photo-1535914254981-b5012eebbd15?q=80&w=800" },
+        { id: "SEC-03", title: "Lojistik", desc: "Ayrıştırma & AGV", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800" },
+        { id: "SEC-04", title: "Enerji", desc: "Şebeke Dağıtımı", img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800" },
     ];
 
     const scroll = (offset: number) => {
@@ -277,11 +301,11 @@ const BlueprintSlider = () => {
     }
 
     return (
-        <section className="py-24 bg-slate-900 border-y border-slate-800 relative">
+        <section className="py-24 bg-slate-900/80 backdrop-blur-sm border-y border-slate-800 relative">
             <div className="px-6 md:px-20 mb-12 flex justify-between items-center">
                 <div>
-                    <h2 className="text-4xl font-display font-bold text-white">Sectors</h2>
-                    <p className="text-slate-500">Industry-specific engineering expertise.</p>
+                    <h2 className="text-4xl font-display font-bold text-white">Sektörler</h2>
+                    <p className="text-slate-500">Endüstriye özel mühendislik uzmanlığı.</p>
                 </div>
                 <div className="flex gap-4">
                     <button onClick={() => scroll(-400)} className="p-3 border border-slate-700 rounded-full hover:bg-white hover:text-black transition-colors text-white"><ChevronLeft /></button>
@@ -329,24 +353,24 @@ const GlobalImpact = () => {
             <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div>
                     <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8">
-                        Global <br /> Footprint.
+                        Küresel <br /> Ayak İzi.
                     </h2>
                     <p className="text-slate-400 text-lg max-w-md mb-12">
-                        From automotive lines in Germany to textile plants in Turkey, our systems are running 24/7 across 3 continents.
+                        Almanya'daki otomotiv hatlarından Türkiye'deki tekstil fabrikalarına kadar, sistemlerimiz 3 kıtada 7/24 çalışıyor.
                     </p>
                     <NavLink to="/projects">
                         <button className="text-brand-orange font-bold font-mono border-b border-brand-orange pb-1 hover:text-white hover:border-white transition-colors">
-                            VIEW CASE STUDIES
+                            BAŞARI HİKAYELERİNİ GÖR
                         </button>
                     </NavLink>
                 </div>
 
                 <div className="grid grid-cols-2 gap-8">
                     {[
-                        { val: "500+", label: "Projects Delivered" },
-                        { val: "12", label: "Countries Served" },
-                        { val: "45", label: "Expert Engineers" },
-                        { val: "24/7", label: "Support Coverage" }
+                        { val: "500+", label: "Tamamlanan Projeler" },
+                        { val: "12", label: "Hizmet Verilen Ülkeler" },
+                        { val: "45", label: "Uzman Mühendisler" },
+                        { val: "7/24", label: "Destek Kapsamı" }
                     ].map((s, i) => (
                         <div key={i} className="bg-slate-900/80 backdrop-blur-sm p-6 border-l-2 border-brand-orange">
                             <div className="text-4xl font-display font-bold text-white mb-2">{s.val}</div>
@@ -367,12 +391,12 @@ const FinalCTA = () => {
 
             <NavLink to="/contact" className="block relative z-10 text-center">
                 <div className="max-w-4xl mx-auto">
-                    <p className="font-mono text-black/60 font-bold tracking-widest mb-4">READY TO SCALE?</p>
+                    <p className="font-mono text-black/60 font-bold tracking-widest mb-4">ÖLÇEKLENMEYE HAZIR MISINIZ?</p>
                     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500">
-                        START YOUR PROJECT
+                        PROJENİZİ BAŞLATIN
                     </h2>
                     <div className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold">
-                        CONTACT ENGINEERING <ArrowRight size={18} />
+                        MÜHENDİSLİK EKİBİYLE İLETİŞİME GEÇİN <ArrowRight size={18} />
                     </div>
                 </div>
             </NavLink>
