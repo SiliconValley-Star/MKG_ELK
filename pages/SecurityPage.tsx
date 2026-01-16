@@ -16,10 +16,10 @@ const SecurityPage: React.FC = () => {
                 >
                     <ShieldCheck size={40} />
                 </motion.div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white mb-4 sm:mb-6">Security & <br />Compliance</h1>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white mb-4 sm:mb-6">Güvenlik & <br />Uyumluluk</h1>
                 <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                    At MKG, we treat data integrity and system security with the same rigor as our engineering projects.
-                    We adhere to global standards to ensure your intellectual property remains protected.
+                    MKG olarak, veri bütünlüğüne ve sistem güvenliğine mühendislik projelerimizle aynı titizlikle yaklaşıyoruz.
+                    Fikri mülkiyetinizin korunmasını sağlamak için küresel standartlara bağlı kalıyoruz.
                 </p>
             </div>
 
@@ -30,26 +30,26 @@ const SecurityPage: React.FC = () => {
                         <div className="p-10 flex flex-col justify-center">
                             <div className="flex items-center gap-3 mb-6">
                                 <Lock className="text-green-500" size={24} />
-                                <span className="text-green-500 font-mono font-bold tracking-widest">SSL SECURE</span>
+                                <span className="text-green-500 font-mono font-bold tracking-widest">SSL GÜVENLİ</span>
                             </div>
-                            <h2 className="text-3xl font-bold text-white mb-4">End-to-End Encryption</h2>
+                            <h2 className="text-3xl font-bold text-white mb-4">Uçtan Uca Şifreleme</h2>
                             <p className="text-slate-400 leading-relaxed mb-6">
-                                All data transmitted between your browser and our servers is encrypted using
-                                <strong> TLS 1.3 (Transport Layer Security)</strong> protocols with 256-bit AES encryption keys.
-                                This ensures that sensitive project data, schematics, and contact information cannot be intercepted.
+                                Tarayıcınız ile sunucularımız arasında iletilen tüm veriler, 256-bit AES şifreleme anahtarları ile
+                                <strong> TLS 1.3 (Taşıma Katmanı Güvenliği)</strong> protokolleri kullanılarak şifrelenir.
+                                Bu, hassas proje verilerinin, şemaların ve iletişim bilgilerinin ele geçirilememesini sağlar.
                             </p>
                             <ul className="space-y-3">
                                 <li className="flex items-center gap-3 text-sm text-slate-300">
                                     <div className="w-1.5 h-1.5 bg-brand-orange rounded-full"></div>
-                                    Valid Wildcard SSL Certificate (2024-2025)
+                                    Geçerli Wildcard SSL Sertifikası (2024-2025)
                                 </li>
                                 <li className="flex items-center gap-3 text-sm text-slate-300">
                                     <div className="w-1.5 h-1.5 bg-brand-orange rounded-full"></div>
-                                    HSTS (Strict Transport Security) Enabled
+                                    HSTS (Katı Taşıma Güvenliği) Etkin
                                 </li>
                                 <li className="flex items-center gap-3 text-sm text-slate-300">
                                     <div className="w-1.5 h-1.5 bg-brand-orange rounded-full"></div>
-                                    DDoS Protection via Cloudflare Edge
+                                    Cloudflare Edge ile DDOS Koruması
                                 </li>
                             </ul>
                         </div>
@@ -72,21 +72,21 @@ const SecurityPage: React.FC = () => {
                     <Server className="text-brand-orange mb-6" size={32} />
                     <h3 className="text-xl font-bold text-white mb-3">ISO 27001</h3>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                        Information Security Management System (ISMS) certified. We maintain strict controls over data access, asset management, and physical security at our facilities.
+                        Bilgi Güvenliği Yönetim Sistemi (BGYS) sertifikalıdır. Tesislerimizdeki veri erişimi, varlık yönetimi ve fiziksel güvenlik üzerinde sıkı kontroller uyguluyoruz.
                     </p>
                 </div>
                 <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-brand-orange/30 transition-colors">
                     <FileCheck className="text-brand-orange mb-6" size={32} />
                     <h3 className="text-xl font-bold text-white mb-3">GDPR & KVKK</h3>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                        Fully compliant with European General Data Protection Regulation and Turkish Personal Data Protection Law. Your data rights are respected and automated.
+                        Avrupa Genel Veri Koruma Tüzüğü ve Türk Kişisel Verileri Koruma Kanunu ile tam uyumludur. Veri haklarınıza saygı duyulur ve otomatize edilmiştir.
                     </p>
                 </div>
                 <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-brand-orange/30 transition-colors">
                     <Key className="text-brand-orange mb-6" size={32} />
                     <h3 className="text-xl font-bold text-white mb-3">IEC 62443</h3>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                        Industrial communication networks network and system security. We apply these standards to every automation project we deliver to prevent cyber-physical attacks.
+                        Endüstriyel iletişim ağları ağ ve sistem güvenliği. Siber-fiziksel saldırıları önlemek için teslim ettiğimiz her otomasyon projesine bu standartları uyguluyoruz.
                     </p>
                 </div>
             </div>
@@ -94,9 +94,9 @@ const SecurityPage: React.FC = () => {
             {/* Vulnerability Disclosure */}
             <div className="max-w-4xl mx-auto bg-slate-950 border border-slate-800 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-grow">
-                    <h3 className="text-2xl font-bold text-white mb-2">Responsible Disclosure</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">Sorumlu Bildirim</h3>
                     <p className="text-slate-400">
-                        If you believe you have found a security vulnerability in any MKG system or website, please report it to our security team immediately.
+                        Herhangi bir MKG sisteminde veya web sitesinde bir güvenlik açığı bulduğunuza inanıyorsanız, lütfen bunu derhal güvenlik ekibimize bildirin.
                     </p>
                 </div>
                 <a href="mailto:security@mkg.com" className="whitespace-nowrap px-6 py-3 border border-slate-600 rounded-lg text-white hover:bg-white hover:text-black transition-colors font-mono text-sm">

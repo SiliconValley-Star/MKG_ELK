@@ -12,6 +12,8 @@ import SecurityPage from './pages/SecurityPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import LoadingScreen from './components/LoadingScreen';
 
 // Wrapper to handle AnimatePresence logic
@@ -34,6 +36,10 @@ const AnimatedRoutes: React.FC = () => {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/cookies" element={<CookiePolicyPage />} />
+
+          {/* Blog Routes */}
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
 
           <Route path="*" element={<HomePage />} />
         </Routes>

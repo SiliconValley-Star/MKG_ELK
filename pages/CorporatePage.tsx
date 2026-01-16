@@ -19,7 +19,7 @@ const CorporatePage: React.FC = () => {
                             className="flex items-center gap-3 mb-6"
                         >
                             <span className="h-[1px] w-8 bg-brand-orange"></span>
-                            <span className="text-brand-orange font-mono text-sm tracking-widest uppercase">Our DNA</span>
+                            <span className="text-brand-orange font-mono text-sm tracking-widest uppercase">DNA'mız</span>
                         </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, x: -20 }}
@@ -27,7 +27,7 @@ const CorporatePage: React.FC = () => {
                             transition={{ delay: 0.1 }}
                             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 sm:mb-8 leading-tight"
                         >
-                            Engineering <br /> <span className="text-slate-500">Integrity.</span>
+                            Mühendislik <br /> <span className="text-slate-500">Dürüstlüğü.</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0 }}
@@ -35,16 +35,16 @@ const CorporatePage: React.FC = () => {
                             transition={{ delay: 0.2 }}
                             className="text-xl text-slate-400 leading-relaxed mb-10 max-w-lg"
                         >
-                            We don't just build systems; we architect the backbone of modern industry.
-                            Founded in 2008, MKG has evolved from a local automation firm to a global engineering partner.
+                            Biz sadece sistemler kurmuyoruz; modern endüstrinin omurgasını mimarisiyle tasarlıyoruz.
+                            2008'de kurulan MKG, yerel bir otomasyon firmasından küresel bir mühendislik ortağına dönüştü.
                         </motion.p>
 
                         {/* Stats Row */}
                         <div className="grid grid-cols-3 gap-8 border-t border-slate-800 pt-8">
                             {[
-                                { label: "Founded", val: "2008" },
-                                { label: "Engineers", val: "45+" },
-                                { label: "Patents", val: "12" }
+                                { label: "Kuruluş", val: "2008" },
+                                { label: "Mühendis", val: "45+" },
+                                { label: "Patent", val: "12" }
                             ].map((s, i) => (
                                 <div key={i}>
                                     <div className="text-2xl font-bold text-white mb-1">{s.val}</div>
@@ -74,10 +74,9 @@ const CorporatePage: React.FC = () => {
             <div className="max-w-7xl mx-auto mb-32">
                 <div className="bg-slate-900/50 border border-slate-800 p-12 md:p-20 rounded-3xl relative overflow-hidden text-center backdrop-blur-sm">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-orange to-transparent opacity-50"></div>
-                    <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-8">The Mission</h2>
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-8">Misyonumuz</h2>
                     <p className="text-lg md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
-                        "To accelerate the world's transition to autonomous manufacturing by providing
-                        <span className="text-white font-semibold"> intelligent, scalable, and sustainable</span> engineering solutions that stand the test of time."
+                        "Zamanın testine dayanan <span className="text-white font-semibold">akıllı, ölçeklenebilir ve sürdürülebilir</span> mühendislik çözümleri sunarak dünyanın otonom üretime geçişini hızlandırmak."
                     </p>
                 </div>
             </div>
@@ -85,15 +84,15 @@ const CorporatePage: React.FC = () => {
             {/* --- VALUES GRID --- */}
             <div className="max-w-7xl mx-auto mb-32">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-slate-800 pb-6">
-                    <h2 className="text-3xl font-display font-bold text-white">Core Values</h2>
-                    <p className="text-slate-500 mt-2 md:mt-0">The principles that guide every decision.</p>
+                    <h2 className="text-3xl font-display font-bold text-white">Temel Değerler</h2>
+                    <p className="text-slate-500 mt-2 md:mt-0">Her karara rehberlik eden ilkeler.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
-                        { title: "Precision", icon: Target, desc: "We measure twice, cut once. Accuracy is not optional; it is our signature." },
-                        { title: "Innovation", icon: Lightbulb, desc: "We challenge the status quo, leveraging Digital Twins and AI before they were trends." },
-                        { title: "Safety", icon: Award, desc: "Human life comes first. Our systems are designed with redundant safety protocols." }
+                        { title: "Hassasiyet", icon: Target, desc: "İki kez ölçer, bir kez keseriz. Doğruluk isteğe bağlı değil, bizim imzamızdır." },
+                        { title: "İnovasyon", icon: Lightbulb, desc: "Statükoyu sorguluyor, Dijital İkizler ve Yapay Zeka'yı trend olmadan önce kullanıyoruz." },
+                        { title: "Güvenlik", icon: Award, desc: "İnsan hayatı önce gelir. Sistemlerimiz yedekli güvenlik protokolleri ile tasarlanmıştır." }
                     ].map((item, i) => (
                         <div key={i} className="bg-slate-900 border border-slate-800 p-10 rounded-2xl hover:border-brand-orange/50 transition-colors group">
                             <div className="w-14 h-14 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-center text-brand-orange mb-8 group-hover:scale-110 transition-transform shadow-lg shadow-black/20">
@@ -110,13 +109,13 @@ const CorporatePage: React.FC = () => {
 
             {/* --- TIMELINE SECTION --- */}
             <div className="max-w-4xl mx-auto mb-32">
-                <h2 className="text-3xl font-display font-bold text-white mb-16 text-center">Our Journey</h2>
+                <h2 className="text-3xl font-display font-bold text-white mb-16 text-center">Yolculuğumuz</h2>
                 <div className="space-y-12 relative border-l border-slate-800 ml-6 md:ml-0">
                     {[
-                        { year: "2008", title: "Inception", desc: "Founded in Bursa with a focus on textile machinery automation." },
-                        { year: "2012", title: "Expansion", desc: "Opened Istanbul office and entered the Automotive sector." },
-                        { year: "2018", title: "Global Reach", desc: "First turnkey project delivered in Germany. Team grew to 20 engineers." },
-                        { year: "2023", title: "Digital Era", desc: "Launched dedicated R&D department for Digital Twin technologies." },
+                        { year: "2008", title: "Başlangıç", desc: "Bursa'da tekstil makineleri otomasyonuna odaklanarak kuruldu." },
+                        { year: "2012", title: "Büyüme", desc: "İstanbul ofisi açıldı ve Otomotiv sektörüne giriş yapıldı." },
+                        { year: "2018", title: "Küresel Erişim", desc: "Almanya'da ilk anahtar teslim proje teslim edildi. Ekip 20 mühendise ulaştı." },
+                        { year: "2023", title: "Dijital Çağ", desc: "Dijital İkiz teknolojileri için özel Ar-Ge departmanı kuruldu." },
                     ].map((item, i) => (
                         <div key={i} className="relative pl-12 md:pl-0 md:grid md:grid-cols-5 md:gap-12 items-center group">
                             {/* Dot */}
@@ -143,12 +142,12 @@ const CorporatePage: React.FC = () => {
 
                 <NavLink to="/contact" className="block relative z-10 text-center">
                     <div className="max-w-4xl mx-auto">
-                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">GROW WITH US</p>
+                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">BİZİMLE BÜYÜYÜN</p>
                         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500">
-                            JOIN THE VANGUARD
+                            ÖNCÜLERE KATILIN
                         </h2>
                         <div className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold">
-                            CAREERS & PARTNERSHIPS <Briefcase size={18} />
+                            KARİYER & ORTAKLIKLAR <Briefcase size={18} />
                         </div>
                     </div>
                 </NavLink>
