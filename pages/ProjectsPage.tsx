@@ -1,23 +1,87 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Filter, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Filter, ArrowRight, Calendar } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const ProjectsPage: React.FC = () => {
-    const [filter, setFilter] = useState("All");
+    const [filter, setFilter] = useState("all"); // Changed initial filter to "all"
 
-    const categories = ["All", "Automation", "Energy", "Robotics", "Infrastructure"];
-
-    const projects = [
-        { id: 1, title: "GigaFactory Alpha", category: "Automation", client: "Tesla Inc.", year: "2023", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070", size: "large" },
-        { id: 2, title: "Solar Array V", category: "Energy", client: "GreenGrid", year: "2022", img: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=2070", size: "small" },
-        { id: 3, title: "Hydro Logic", category: "Energy", client: "City Water", year: "2021", img: "https://images.unsplash.com/photo-1558494949-efc02570fbc9?q=80&w=2070", size: "small" },
-        { id: 4, title: "AutoLine X", category: "Robotics", client: "BMW Group", year: "2023", img: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=2095", size: "large" },
-        { id: 5, title: "Data Center One", category: "Infrastructure", client: "Google", year: "2020", img: "https://images.unsplash.com/photo-1558494949-efc02570fbc9?q=80&w=2070", size: "small" },
-        { id: 6, title: "Pharma Clean Room", category: "Automation", client: "Pfizer", year: "2022", img: "https://images.unsplash.com/photo-1613632826230-09e39f730634?q=80&w=2070", size: "small" },
+    // Updated categories structure
+    const categories = [
+        { id: 'all', label: 'Tümü' },
+        { id: 'automation', label: 'Otomasyon' },
+        { id: 'power', label: 'Güç' },
+        { id: 'robotics', label: 'Robotik' },
+        { id: 'digital', label: 'Dijital İkiz' },
+        { id: 'process', label: 'Proses' }, // Added 'process' category
     ];
 
-    const filteredProjects = filter === "All" ? projects : projects.filter(p => p.category === filter);
+    // Updated projects array with Turkish content and new fields
+    const projects = [
+        {
+            id: 1,
+            title: "Batarya Gigafactory",
+            cat: "automation",
+            img: "https://images.unsplash.com/photo-1620283085439-386280b2d69f?q=80&w=2600",
+            loc: "Berlin, DE",
+            scope: "Tam montaj hattı SCADA'sı",
+            size: "large" // Added size property
+        },
+        {
+            id: 2,
+            title: "İlaç Fabrikası",
+            cat: "process",
+            img: "https://images.unsplash.com/photo-1576402187878-974f70c890a5?q=80&w=2600",
+            loc: "İstanbul, TR",
+            scope: "HVAC kontrolü & FDA uyumluluğu",
+            size: "small" // Added size property
+        },
+        {
+            id: 3,
+            title: "Lojistik Merkezi",
+            cat: "robotics",
+            img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2600",
+            loc: "Dubai, BAE",
+            scope: "Ayrıştırıcı PLC mantığı",
+            size: "small" // Added size property
+        },
+        {
+            id: 4,
+            title: "Veri Merkezi Gücü",
+            cat: "power",
+            img: "https://images.unsplash.com/photo-1558494949-ef2a0de49341?q=80&w=2600",
+            loc: "Frankfurt, DE",
+            scope: "20MW OG Dağıtımı",
+            size: "large" // Added size property
+        },
+        {
+            id: 5,
+            title: "Gıda Paketleme",
+            cat: "robotics",
+            img: "https://images.unsplash.com/photo-1622675363311-ac60ee2c2cb9?q=80&w=2600",
+            loc: "Bursa, TR",
+            scope: "Delta Robot Hattı",
+            size: "small" // Added size property
+        },
+        {
+            id: 6,
+            title: "Montaj Hattı İkizi",
+            cat: "digital",
+            img: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2600",
+            loc: "İzmir, TR",
+            scope: "NX MCD Simülasyonu",
+            size: "small" // Added size property
+        }
+    ];
+
+    // Updated filter logic to use 'cat' property and 'id' from categories
+    const filteredProjects = filter === "all" ? projects : projects.filter(p => p.cat === filter);
+
+    // Helper to get category label
+    const getCategoryLabel = (catId: string) => {
+        const category = categories.find(c => c.id === catId);
+        return category ? category.label : catId;
+    };
 
     return (
         <div className="min-h-screen bg-transparent pt-32 px-6 flex flex-col">
@@ -26,9 +90,9 @@ const ProjectsPage: React.FC = () => {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                     <div>
-                        <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">Selected Works</h1>
+                        <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">Seçilmiş Projeler</h1>
                         <p className="text-slate-400 max-w-xl text-lg">
-                            A collection of our most significant engineering challenges and the solutions we engineered to overcome them.
+                            Yüksek etkili endüstriyel tesisler için sistem mimarisi ve yazılım çözümleri.
                         </p>
                     </div>
 
@@ -36,14 +100,14 @@ const ProjectsPage: React.FC = () => {
                     <div className="flex flex-wrap gap-2 bg-slate-900 p-2 rounded-xl border border-slate-800 w-full sm:w-auto justify-center sm:justify-start">
                         {categories.map((cat) => (
                             <button
-                                key={cat}
-                                onClick={() => setFilter(cat)}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === cat
-                                        ? 'bg-white text-black shadow-lg'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                key={cat.id} // Use cat.id for key
+                                onClick={() => setFilter(cat.id)} // Set filter to cat.id
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === cat.id // Compare with cat.id
+                                    ? 'bg-white text-black shadow-lg'
+                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                                     }`}
                             >
-                                {cat}
+                                {cat.label} {/* Display cat.label */}
                             </button>
                         ))}
                     </div>
@@ -77,7 +141,7 @@ const ProjectsPage: React.FC = () => {
                                     </div>
                                     {/* Category Badge */}
                                     <div className="absolute top-4 left-4 z-20 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded text-xs font-mono text-white uppercase tracking-wider">
-                                        {p.category}
+                                        {getCategoryLabel(p.cat)} {/* Display category label */}
                                     </div>
                                 </div>
 
@@ -86,9 +150,9 @@ const ProjectsPage: React.FC = () => {
                                     <div>
                                         <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-brand-orange transition-colors">{p.title}</h3>
                                         <div className="flex items-center gap-4 text-sm text-slate-500 font-mono">
-                                            <span>{p.client}</span>
+                                            <span>{p.loc}</span> {/* Changed to p.loc */}
                                             <span className="w-1 h-1 bg-slate-700 rounded-full"></span>
-                                            <span>{p.year}</span>
+                                            <span>{p.scope}</span> {/* Changed to p.scope */}
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +164,7 @@ const ProjectsPage: React.FC = () => {
                 {/* Empty State */}
                 {filteredProjects.length === 0 && (
                     <div className="py-20 text-center text-slate-500 font-mono">
-                        No projects found in this category.
+                        Bu kategoride proje bulunamadı.
                     </div>
                 )}
 
@@ -112,12 +176,12 @@ const ProjectsPage: React.FC = () => {
 
                 <NavLink to="/contact" className="block relative z-10 text-center">
                     <div className="max-w-4xl mx-auto">
-                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">MAKE AN IMPACT</p>
+                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">BENZER BİR ÇÖZÜM MÜ ARIYORSUNUZ?</p>
                         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500">
-                            BUILD YOUR LEGACY
+                            PROJENİZİ TARTIŞALIM
                         </h2>
                         <div className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold">
-                            START A PROJECT <ArrowRight size={18} />
+                            TOPLANTI PLANLAYIN <Calendar size={18} />
                         </div>
                     </div>
                 </NavLink>
