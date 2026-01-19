@@ -131,6 +131,7 @@ const ProjectsPage: React.FC = () => {
                                     <img
                                         src={p.img}
                                         alt={p.title}
+                                        loading="lazy"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
                                     />
                                     {/* Overlay Button */}

@@ -62,6 +62,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.7 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <img
                         src={heroSlides[current].img}
@@ -88,6 +89,7 @@ const HeroSection = () => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <div className="flex items-center gap-4 mb-4">
                             <span className="px-3 py-1 bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-mono tracking-widest uppercase rounded">
@@ -131,10 +133,10 @@ const HeroSection = () => {
                     <div className="w-32 h-[2px] bg-slate-800 relative overflow-hidden">
                         <motion.div
                             key={current}
-                            initial={{ width: 0 }}
-                            animate={{ width: "100%" }}
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
                             transition={{ duration: 7, ease: "linear" }}
-                            className="absolute top-0 left-0 h-full bg-brand-orange"
+                            className="absolute top-0 left-0 h-full bg-brand-orange origin-left"
                         />
                     </div>
                     <span className="font-mono text-sm text-slate-500">03</span>
@@ -195,6 +197,7 @@ const ManifestoSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.4 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <h2 className="text-sm font-mono text-brand-orange tracking-[0.5em] uppercase mb-8">
                         MKG Metodolojisi
@@ -347,7 +350,7 @@ const GlobalImpact = () => {
         <section className="py-32 px-6 relative overflow-hidden">
             {/* Abstract Map Background */}
             <div className="absolute inset-0 opacity-20 pointer-events-none">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" className="w-full h-full object-cover md:object-contain invert" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" className="w-full h-full object-cover md:object-contain invert" loading="lazy" alt="World Map" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">

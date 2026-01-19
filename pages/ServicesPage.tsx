@@ -62,7 +62,7 @@ const ServicesPage: React.FC = () => {
                         <div className="absolute top-6 left-6 z-20 bg-brand-orange/90 text-black text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">
                             AMİRAL GEMİSİ
                         </div>
-                        <img src="https://images.unsplash.com/photo-1565514020176-892eb5badeef?q=80&w=2070" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+                        <img src="https://images.unsplash.com/photo-1565514020176-892eb5badeef?q=80&w=2070" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" loading="lazy" alt="Process Control" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
                         <div className="absolute bottom-8 left-8 right-8">
                             <h3 className="text-3xl font-display font-bold text-white mb-2">Proses Kontrolü</h3>

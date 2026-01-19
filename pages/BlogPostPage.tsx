@@ -81,6 +81,7 @@ const BlogPostPage: React.FC = () => {
                 <img
                     src={post.image}
                     alt={post.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-slate-950" />
@@ -217,7 +218,7 @@ const BlogPostPage: React.FC = () => {
                                 <NavLink key={rp.id} to={`/blog/${rp.slug}`} className="group">
                                     <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden h-full flex flex-col hover:border-brand-orange/50 hover:shadow-xl hover:shadow-brand-orange/5 transition-all duration-300">
                                         <div className="h-44 overflow-hidden relative">
-                                            <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                            <img src={rp.image} alt={rp.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
                                         </div>
                                         <div className="p-5 flex-grow flex flex-col">

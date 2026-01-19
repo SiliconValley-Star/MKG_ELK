@@ -1,9 +1,58 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Send, Globe, Clock, MessageSquare, Headphones, ShieldAlert, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Mail, Phone, Send, Globe, Clock, MessageSquare, Headphones, ShieldAlert, ArrowRight, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const ContactPage: React.FC = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            fullname: formData.get('fullname'),
+            company: formData.get('company'),
+            email: formData.get('email'),
+            dept: formData.get('dept'),
+            message: formData.get('message'),
+        };
+
+        // Simulated API call (replace with actual API endpoint)
+        try {
+            await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simulate 90% success rate
+                    if (Math.random() > 0.1) {
+                        resolve(data);
+                    } else {
+                        reject(new Error('Network error'));
+                    }
+                }, 1500);
+            });
+
+            setSubmitStatus('success');
+            e.currentTarget.reset();
+            
+            // Auto-hide success message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus('idle');
+            }, 5000);
+        } catch (error) {
+            setSubmitStatus('error');
+            
+            // Auto-hide error message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus('idle');
+            }, 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="bg-transparent min-h-screen pt-32 px-6 flex flex-col">
             <div className="max-w-7xl mx-auto flex-grow mb-32">
@@ -15,6 +64,7 @@ const ContactPage: React.FC = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="flex items-center gap-2 mb-4"
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <div className="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></div>
                             <span className="text-brand-orange font-mono text-xs uppercase tracking-widest">Yeni Projeler İçin Müsait</span>
@@ -23,6 +73,7 @@ const ContactPage: React.FC = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             Çözümü Birlikte <br /> Tasarlayalım.
                         </motion.h1>
@@ -40,49 +91,139 @@ const ContactPage: React.FC = () => {
                             {/* Decorative Background */}
                             <div className="absolute top-0 right-0 w-64 h-64 bg-slate-800/30 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3 relative z-10">
-                                <MessageSquare className="text-brand-orange" /> Proje Sorgusu
+                            <h3 id="contact-form-title" className="text-2xl font-bold text-white mb-8 flex items-center gap-3 relative z-10">
+                                <MessageSquare className="text-brand-orange" aria-hidden="true" /> Proje Sorgusu
                             </h3>
 
-                            <form className="space-y-6 relative z-10">
+                            <form className="space-y-6 relative z-10" onSubmit={handleSubmit} aria-labelledby="contact-form-title">
+                                {/* Success/Error Messages */}
+                                <AnimatePresence>
+                                    {submitStatus === 'success' && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            role="alert"
+                                            aria-live="polite"
+                                            className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl flex items-center gap-3"
+                                        >
+                                            <CheckCircle className="text-green-500 shrink-0" size={20} aria-hidden="true" />
+                                            <div>
+                                                <p className="text-green-500 font-bold text-sm">Mesajınız başarıyla gönderildi!</p>
+                                                <p className="text-green-400 text-xs mt-1">Ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                    {submitStatus === 'error' && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            role="alert"
+                                            aria-live="assertive"
+                                            className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-3"
+                                        >
+                                            <XCircle className="text-red-500 shrink-0" size={20} aria-hidden="true" />
+                                            <div>
+                                                <p className="text-red-500 font-bold text-sm">Mesaj gönderilemedi</p>
+                                                <p className="text-red-400 text-xs mt-1">Lütfen daha sonra tekrar deneyin veya doğrudan iletişime geçin.</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="group">
-                                        <label className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Ad Soyad</label>
-                                        <input type="text" className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700" placeholder="John Doe" />
+                                        <label htmlFor="fullname" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
+                                            Ad Soyad <span className="text-brand-orange">*</span>
+                                        </label>
+                                        <input
+                                            id="fullname"
+                                            name="fullname"
+                                            type="text"
+                                            required
+                                            minLength={3}
+                                            className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500"
+                                            placeholder="John Doe"
+                                        />
                                     </div>
                                     <div className="group">
-                                        <label className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Şirket</label>
-                                        <input type="text" className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700" placeholder="Organization Ltd." />
+                                        <label htmlFor="company" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Şirket</label>
+                                        <input
+                                            id="company"
+                                            name="company"
+                                            type="text"
+                                            className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700"
+                                            placeholder="Organization Ltd."
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="group">
-                                    <label className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">E-posta Adresi</label>
-                                    <input type="email" className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700" placeholder="john@example.com" />
+                                    <label htmlFor="email" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
+                                        E-posta Adresi <span className="text-brand-orange">*</span>
+                                    </label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        required
+                                        className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500"
+                                        placeholder="john@example.com"
+                                    />
                                 </div>
 
-                                <div className="group">
-                                    <label className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Departman</label>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                <fieldset className="group">
+                                    <legend className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
+                                        Departman <span className="text-brand-orange">*</span>
+                                    </legend>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2" role="radiogroup" aria-required="true">
                                         {['Satış', 'Destek', 'Mühendislik', 'Diğer'].map((opt) => (
                                             <label key={opt} className="cursor-pointer">
-                                                <input type="radio" name="dept" className="peer sr-only" />
+                                                <input type="radio" name="dept" value={opt} required className="peer sr-only" aria-label={`${opt} departmanı`} />
                                                 <div className="text-center py-3 rounded-lg border border-slate-800 bg-slate-900/80 backdrop-blur-md text-slate-400 text-sm peer-checked:bg-white peer-checked:text-black peer-checked:font-bold transition-all hover:bg-slate-900/50">
                                                     {opt}
                                                 </div>
                                             </label>
                                         ))}
                                     </div>
-                                </div>
+                                </fieldset>
 
                                 <div className="group">
-                                    <label className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Proje Detayları</label>
-                                    <textarea rows={5} className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700" placeholder="Gereksinimlerinizi tanımlayın..."></textarea>
+                                    <label htmlFor="message" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
+                                        Proje Detayları <span className="text-brand-orange">*</span>
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        rows={5}
+                                        required
+                                        minLength={10}
+                                        className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500 resize-none"
+                                        placeholder="Gereksinimlerinizi tanımlayın... (min. 10 karakter)"
+                                    ></textarea>
                                 </div>
 
-                                <button type="button" className="w-full bg-brand-orange text-white font-bold py-5 rounded-xl hover:bg-white hover:text-black transition-all duration-300 flex justify-center items-center gap-2 shadow-lg shadow-brand-orange/20">
-                                    MESAJ GÖNDER <Send size={18} />
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    aria-label={isSubmitting ? "Form gönderiliyor, lütfen bekleyin" : "Formu gönder"}
+                                    className="w-full bg-brand-orange text-white font-bold py-5 rounded-xl hover:bg-white hover:text-black transition-all duration-300 flex justify-center items-center gap-2 shadow-lg shadow-brand-orange/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="animate-spin" size={18} aria-hidden="true" />
+                                            GÖNDERİLİYOR...
+                                        </>
+                                    ) : (
+                                        <>
+                                            MESAJ GÖNDER <Send size={18} aria-hidden="true" />
+                                        </>
+                                    )}
                                 </button>
+                                <p className="text-xs text-slate-500 text-center">
+                                    <span className="text-brand-orange">*</span> işaretli alanlar zorunludur
+                                </p>
                             </form>
                         </div>
                     </div>
@@ -129,7 +270,8 @@ const ContactPage: React.FC = () => {
                         <div className="h-64 rounded-3xl overflow-hidden border border-slate-800 relative group">
                             <img
                                 src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074"
-                                alt="Map"
+                                alt="MKG Elektromekanik ofis konumu haritası"
+                                loading="lazy"
                                 className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
@@ -157,10 +299,16 @@ const ContactPage: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full lg:w-auto">
-                        <button className="px-4 sm:px-6 py-3 border border-slate-700 rounded-lg text-slate-300 hover:text-white hover:border-white transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
-                            <ShieldAlert size={16} /> ACİL DURUM HATTI
+                        <button
+                            aria-label="Acil durum destek hattını ara"
+                            className="px-4 sm:px-6 py-3 border border-slate-700 rounded-lg text-slate-300 hover:text-white hover:border-white transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
+                        >
+                            <ShieldAlert size={16} aria-hidden="true" /> ACİL DURUM HATTI
                         </button>
-                        <button className="px-6 py-3 bg-slate-800 rounded-lg text-white hover:bg-slate-700 transition-colors">
+                        <button
+                            aria-label="Müşteri portalına giriş yap"
+                            className="px-6 py-3 bg-slate-800 rounded-lg text-white hover:bg-slate-700 transition-colors"
+                        >
                             MÜŞTERİ PORTALI GİRİŞİ
                         </button>
                     </div>

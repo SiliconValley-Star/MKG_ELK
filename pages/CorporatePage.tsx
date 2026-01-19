@@ -64,6 +64,7 @@ const CorporatePage: React.FC = () => {
                         <img
                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070"
                             alt="Engineering Team"
+                            loading="lazy"
                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                         />
                     </motion.div>
