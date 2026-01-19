@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* MKG Global Styles */
 /* This file provides global utilities and animations */
 
@@ -12,9 +16,65 @@ html {
   color: black;
 }
 
-/* Focus visible for accessibility */
+/* ============================================
+   ACCESSIBILITY: ENHANCED FOCUS INDICATORS
+   ============================================ */
+
+/* Default focus style for all interactive elements */
+*:focus {
+  outline: none;
+}
+
 *:focus-visible {
+  outline: 3px solid #FF3B00;
+  outline-offset: 3px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* Enhanced focus for buttons */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #FF3B00;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(255, 59, 0, 0.1);
+}
+
+/* Form elements focus */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   outline: 2px solid #FF3B00;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 59, 0, 0.1);
+}
+
+/* Card/Article focus for keyboard navigation */
+article:focus-visible,
+.card:focus-visible {
+  outline: 2px solid #FF3B00;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 59, 0, 0.05);
+}
+
+/* Skip to main content link (accessibility) */
+.skip-to-main {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF3B00;
+  color: white;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  z-index: 9999;
+  transition: top 0.3s ease;
+}
+
+.skip-to-main:focus {
+  top: 1rem;
+  outline: 3px solid white;
   outline-offset: 2px;
 }
 
@@ -86,4 +146,72 @@ body {
 .min-h-screen-safe {
   min-height: 100vh;
   min-height: 100dvh;
+}
+
+/* ============================================
+   ACCESSIBILITY: REDUCED MOTION SUPPORT
+   ============================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable Background3D particle animations */
+  canvas {
+    display: none !important;
+  }
+
+  /* Keep static gradients for visual consistency */
+  .bg-gradient-to-r,
+  .bg-gradient-to-l,
+  .bg-gradient-to-t,
+  .bg-gradient-to-b,
+  .bg-radial-gradient {
+    animation: none !important;
+  }
+
+  /* Disable Tailwind's built-in animations */
+  .animate-pulse,
+  .animate-spin,
+  .animate-ping,
+  .animate-bounce,
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  /* Keep visual feedback but remove motion */
+  .group:hover *,
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover {
+    transform: none !important;
+  }
+
+  /* Preserve interactive states with instant transitions */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition: background-color 0.01ms, color 0.01ms, border-color 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+  
+  .text-slate-400,
+  .text-slate-500,
+  .text-slate-600 {
+    color: #fff !important;
+  }
 }

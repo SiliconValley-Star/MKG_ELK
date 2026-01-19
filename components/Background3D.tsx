@@ -1,45 +1,109 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /**
- * High-Performance Canvas-based 3D Particle Network
- * Optimized for both Web and Mobile.
- * Uses a single Canvas element to avoid DOM overhead.
- * Represents "Engineering", "Connectivity", "Automation".
+ * ULTRA-OPTIMIZED Canvas-based 3D Particle Network
+ * - Spatial Hashing (O(N) instead of O(N²))
+ * - Intersection Observer (pause when not visible)
+ * - FPS-based adaptive particle count
+ * - GPU-accelerated rendering
+ * - will-change CSS optimization
  */
 const Background3D: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', {
+      alpha: true,
+      desynchronized: true, // GPU optimization
+    });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    let connections: Connection[] = [];
+    let lastFrameTime = performance.now();
+    let fps = 60;
+    let frameCount = 0;
+    let fpsCheckTime = performance.now();
 
-    // Configuration
+    // Adaptive configuration based on device capability
+    const isMobile = window.innerWidth < 768;
     const config = {
-      particleCount: window.innerWidth < 768 ? 35 : 80, // Reduced for mobile
-      connectionDistance: window.innerWidth < 768 ? 100 : 150,
+      baseParticleCount: isMobile ? 30 : 70,
+      currentParticleCount: isMobile ? 30 : 70,
+      connectionDistance: isMobile ? 100 : 150,
       mouseDistance: 200,
-      baseSpeed: 0.2, // "Sweet" slow movement
+      baseSpeed: 0.2,
+      gridCellSize: isMobile ? 100 : 150, // Spatial hashing grid size
+      targetFPS: 50, // If FPS drops below this, reduce particles
       colors: {
-        background: '#000000', // Managed by CSS actually
         particle: 'rgba(255, 255, 255, 0.5)',
-        line: 'rgba(255, 59, 0, 0.15)' // Brand Orange tint
+        line: 'rgba(255, 59, 0, 0.15)',
       }
     };
 
-    // Mouse State
+    // Mouse state
     const mouse = { x: -1000, y: -1000 };
+
+    // Spatial Hash Grid for O(N) connection detection
+    class SpatialHashGrid {
+      private cellSize: number;
+      private grid: Map<string, Particle[]>;
+
+      constructor(cellSize: number) {
+        this.cellSize = cellSize;
+        this.grid = new Map();
+      }
+
+      private getKey(x: number, y: number): string {
+        const cellX = Math.floor(x / this.cellSize);
+        const cellY = Math.floor(y / this.cellSize);
+        return `${cellX},${cellY}`;
+      }
+
+      clear() {
+        this.grid.clear();
+      }
+
+      insert(particle: Particle) {
+        const key = this.getKey(particle.x, particle.y);
+        if (!this.grid.has(key)) {
+          this.grid.set(key, []);
+        }
+        this.grid.get(key)!.push(particle);
+      }
+
+      getNearby(particle: Particle): Particle[] {
+        const nearby: Particle[] = [];
+        const cellX = Math.floor(particle.x / this.cellSize);
+        const cellY = Math.floor(particle.y / this.cellSize);
+
+        // Check 9 cells (current + 8 neighbors)
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const key = `${cellX + dx},${cellY + dy}`;
+            const cell = this.grid.get(key);
+            if (cell) {
+              nearby.push(...cell);
+            }
+          }
+        }
+
+        return nearby;
+      }
+    }
+
+    const spatialGrid = new SpatialHashGrid(config.gridCellSize);
 
     class Particle {
       x: number;
       y: number;
-      z: number; // For 3D depth effect
+      z: number;
       vx: number;
       vy: number;
       size: number;
@@ -47,15 +111,15 @@ const Background3D: React.FC = () => {
       constructor(w: number, h: number) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.z = Math.random() * 2 + 0.5; // Depth factor (0.5 to 2.5)
-        this.vx = (Math.random() - 0.5) * config.baseSpeed; // Random direction
+        this.z = Math.random() * 2 + 0.5;
+        this.vx = (Math.random() - 0.5) * config.baseSpeed;
         this.vy = (Math.random() - 0.5) * config.baseSpeed;
         this.size = Math.random() * 2 + 1;
       }
 
       update(w: number, h: number) {
-        // Move
-        this.x += this.vx * this.z; // Closer particles move faster (parallax)
+        // Move with parallax
+        this.x += this.vx * this.z;
         this.y += this.vy * this.z;
 
         // Wrap around edges
@@ -64,7 +128,7 @@ const Background3D: React.FC = () => {
         if (this.y < 0) this.y = h;
         if (this.y > h) this.y = 0;
 
-        // Mouse interaction (gentle repulsion)
+        // Mouse interaction
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -75,7 +139,7 @@ const Background3D: React.FC = () => {
           this.vy += (dy / dist) * force * 0.02;
         }
 
-        // Drag (dampening) to return to normal speed
+        // Damping
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
         if (speed > config.baseSpeed * 2) {
           this.vx *= 0.95;
@@ -84,7 +148,7 @@ const Background3D: React.FC = () => {
       }
 
       draw(ctx: CanvasRenderingContext2D) {
-        const opacity = (this.z - 0.5) / 2 * 0.5 + 0.1; // Z-based opacity
+        const opacity = (this.z - 0.5) / 2 * 0.5 + 0.1;
         ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size * (this.z * 0.6), 0, Math.PI * 2);
@@ -92,25 +156,16 @@ const Background3D: React.FC = () => {
       }
     }
 
-    interface Connection {
-      p1: Particle;
-      p2: Particle;
-      opacity: number;
-    }
-
     const handleResize = () => {
       if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      // Re-init particles on resize to maintain density
-      config.particleCount = window.innerWidth < 768 ? 35 : 80;
       initParticles();
     };
 
     const initParticles = () => {
       particles = [];
-      for (let i = 0; i < config.particleCount; i++) {
+      for (let i = 0; i < config.currentParticleCount; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
     };
@@ -120,28 +175,60 @@ const Background3D: React.FC = () => {
       mouse.y = e.clientY;
     };
 
+    // FPS tracking and adaptive particle count
+    const updateFPS = () => {
+      frameCount++;
+      const now = performance.now();
+      const elapsed = now - fpsCheckTime;
+
+      if (elapsed >= 1000) {
+        fps = Math.round((frameCount * 1000) / elapsed);
+        frameCount = 0;
+        fpsCheckTime = now;
+
+        // Adaptive particle count based on FPS
+        if (fps < config.targetFPS && config.currentParticleCount > 20) {
+          config.currentParticleCount = Math.max(20, config.currentParticleCount - 5);
+          initParticles();
+        } else if (fps > config.targetFPS + 10 && config.currentParticleCount < config.baseParticleCount) {
+          config.currentParticleCount = Math.min(config.baseParticleCount, config.currentParticleCount + 5);
+          initParticles();
+        }
+      }
+    };
+
     const animate = () => {
+      if (!isVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+        return; // Pause rendering when not visible
+      }
+
+      const now = performance.now();
+      const deltaTime = now - lastFrameTime;
+      lastFrameTime = now;
+
+      updateFPS();
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and Draw Particles
+      // Clear and populate spatial grid
+      spatialGrid.clear();
+      
+      // Update and draw particles
       particles.forEach(p => {
         p.update(canvas.width, canvas.height);
         p.draw(ctx);
+        spatialGrid.insert(p);
       });
 
-      // Draw Connections
-      ctx.strokeStyle = config.colors.line;
+      // Draw connections using spatial hashing (O(N) instead of O(N²))
       ctx.lineWidth = 1;
 
-      // Optimized connection check: O(N^2) but N is small
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
-          const p2 = particles[j];
-
-          // Only connect if Z-depth is similar (true 3D feel)
-          // if (Math.abs(p1.z - p2.z) > 0.5) continue; 
-          // Actually, connecting across depths looks cool too (constellation)
+      particles.forEach(p1 => {
+        const nearbyParticles = spatialGrid.getNearby(p1);
+        
+        nearbyParticles.forEach(p2 => {
+          if (p1 === p2) return;
 
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
@@ -149,17 +236,31 @@ const Background3D: React.FC = () => {
 
           if (dist < config.connectionDistance) {
             const alpha = 1 - (dist / config.connectionDistance);
+            ctx.strokeStyle = `rgba(255, 59, 0, ${alpha * 0.15})`;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 59, 0, ${alpha * 0.15})`; // Brand orange low opacity
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
           }
-        }
-      }
+        });
+      });
 
       animationFrameId = requestAnimationFrame(animate);
     };
+
+    // Intersection Observer - pause when not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (container) {
+      observer.observe(container);
+    }
 
     // Initialize
     handleResize();
@@ -171,19 +272,21 @@ const Background3D: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
     };
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none">
+    <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none">
       {/* Background Gradient Layer */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-[-1]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent z-[-1]" />
 
-      {/* Canvas Layer */}
+      {/* Canvas Layer - GPU optimized */}
       <canvas
         ref={canvasRef}
         className="block w-full h-full opacity-60"
+        style={{ willChange: 'transform' }}
       />
     </div>
   );
