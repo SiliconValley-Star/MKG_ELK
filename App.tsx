@@ -1,12 +1,13 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import Layout from './components/Layout';
 import LoadingScreen from './components/LoadingScreen';
-import SuspenseFallback from './components/SuspenseFallback';
 import ErrorBoundary from './components/ErrorBoundary';
+import SuspenseFallback from './components/SuspenseFallback';
+import { useIsMobile } from './hooks/useIsMobile';
 
-// Code splitting: Lazy load all pages
+// Lazy-loaded pages for code splitting and better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CorporatePage = lazy(() => import('./pages/CorporatePage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
@@ -19,7 +20,8 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
 
 // Wrapper to handle AnimatePresence logic
 const AnimatedRoutes: React.FC = () => {
@@ -33,7 +35,9 @@ const AnimatedRoutes: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/corporate" element={<CorporatePage />} />
             <Route path="/services" element={<ServicesPage />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
             <Route path="/contact" element={<ContactPage />} />
 
             {/* New Enterprise Routes */}
@@ -47,8 +51,7 @@ const AnimatedRoutes: React.FC = () => {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-            {/* 404 Not Found */}
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </Suspense>
       </div>
@@ -58,93 +61,74 @@ const AnimatedRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    const MIN_LOADING_TIME = 800; // Minimum 800ms (flash önleme)
-    const MAX_LOADING_TIME = 5000; // Maximum 5sn (timeout)
-    const startTime = Date.now();
     let assetsLoaded = false;
     let minTimeElapsed = false;
 
-    // Font yükleme takibi
-    const checkFonts = async () => {
+    // Check if fonts and critical assets are loaded
+    const checkAssets = async () => {
       try {
-        await document.fonts.ready;
-        return true;
-      } catch (error) {
-        return false;
-      }
-    };
-
-    // Görsellerin yüklenmesini kontrol et
-    const checkImages = () => {
-      const images = Array.from(document.images);
-      return Promise.all(
-        images.map(img => {
-          if (img.complete) return Promise.resolve();
-          return new Promise((resolve) => {
-            img.onload = resolve;
-            img.onerror = resolve; // Hata olsa bile devam et
+        // Wait for document to be ready
+        if (document.readyState === 'complete') {
+          assetsLoaded = true;
+        } else {
+          await new Promise(resolve => {
+            window.addEventListener('load', resolve, { once: true });
           });
-        })
-      );
-    };
-
-    // Tüm assetlerin yüklenmesini bekle
-    const loadAssets = async () => {
-      try {
-        await Promise.all([
-          checkFonts(),
-          checkImages()
-        ]);
-        assetsLoaded = true;
-        checkReadyToShow();
+          assetsLoaded = true;
+        }
+        
+        // Also check if fonts are loaded (if using web fonts)
+        if ('fonts' in document) {
+          await document.fonts.ready;
+        }
+        
+        checkIfReady();
       } catch (error) {
+        console.error('Asset loading error:', error);
+        // Fallback: still show content after timeout
         assetsLoaded = true;
-        checkReadyToShow();
+        checkIfReady();
       }
     };
 
-    // Minimum sürenin geçmesini bekle
-    const minTimeTimer = setTimeout(() => {
+    // Minimum time for animation - Optimized by device type
+    const isMobile = window.innerWidth < 768;
+    const minLoadTime = isMobile ? 500 : 1000; // Mobile: 500ms, Desktop: 1000ms
+    const minTimer = setTimeout(() => {
       minTimeElapsed = true;
-      checkReadyToShow();
-    }, MIN_LOADING_TIME);
+      checkIfReady();
+    }, minLoadTime);
 
-    // Maximum süre timeout
-    const maxTimeTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, MAX_LOADING_TIME);
-
-    // Hem assetler yüklendi hem minimum süre geçti mi kontrol et
-    const checkReadyToShow = () => {
+    const checkIfReady = () => {
+      // Only hide loading when BOTH conditions are met
       if (assetsLoaded && minTimeElapsed) {
         setIsLoading(false);
       }
     };
 
-    // Asset yüklemeyi başlat
-    loadAssets();
+    checkAssets();
 
-    return () => {
-      clearTimeout(minTimeTimer);
-      clearTimeout(maxTimeTimer);
-    };
+    return () => clearTimeout(minTimer);
   }, []);
 
   return (
     <ErrorBoundary>
-      <AnimatePresence>
-        {isLoading && <LoadingScreen key="loader" />}
-      </AnimatePresence>
+      <MotionConfig reducedMotion={isMobile ? "always" : "never"}>
+        <AnimatePresence>
+          {isLoading && <LoadingScreen key="loader" />}
+        </AnimatePresence>
 
-      {!isLoading && (
-        <HashRouter>
-          <Layout>
-            <AnimatedRoutes />
-          </Layout>
-        </HashRouter>
-      )}
+        {!isLoading && (
+          <HashRouter>
+            <Layout>
+              <AnimatedRoutes />
+            </Layout>
+          </HashRouter>
+        )}
+      </MotionConfig>
     </ErrorBoundary>
   );
 };

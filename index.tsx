@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { registerServiceWorker } from './src/utils/serviceWorker';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -14,16 +13,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-// Register Service Worker for PWA functionality
-registerServiceWorker({
-  onSuccess: () => {
-    console.log('[PWA] Content cached for offline use');
-  },
-  onUpdate: () => {
-    console.log('[PWA] New content available, reload to update');
-  },
-  onOfflineReady: () => {
-    console.log('[PWA] App ready to work offline');
-  }
-});
