@@ -1,192 +1,170 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Filter, ArrowRight, Calendar } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, MapPin, ArrowRight, ArrowUpRight, Database } from 'lucide-react';
+import { PROJECTS } from '../data/projectsData';
+import CTASection from '../components/CTASection';
 
 const ProjectsPage: React.FC = () => {
-    const [filter, setFilter] = useState("all"); // Changed initial filter to "all"
+    const [filter, setFilter] = useState("Tümü");
 
-    // Updated categories structure
-    const categories = [
-        { id: 'all', label: 'Tümü' },
-        { id: 'automation', label: 'Otomasyon' },
-        { id: 'power', label: 'Güç' },
-        { id: 'robotics', label: 'Robotik' },
-        { id: 'digital', label: 'Dijital İkiz' },
-        { id: 'process', label: 'Proses' }, // Added 'process' category
-    ];
+    const categories = ["Tümü", "Banka & Finans", "Endüstriyel Tesis", "Eğitim & Kampüs", "Otel & Turizm", "Lüks Konut & Villa"];
 
-    // Updated projects array with Turkish content and new fields
-    const projects = [
-        {
-            id: 1,
-            title: "Batarya Gigafactory",
-            cat: "automation",
-            img: "https://images.unsplash.com/photo-1620283085439-386280b2d69f?q=80&w=2600",
-            loc: "Berlin, DE",
-            scope: "Tam montaj hattı SCADA'sı",
-            size: "large" // Added size property
-        },
-        {
-            id: 2,
-            title: "İlaç Fabrikası",
-            cat: "process",
-            img: "https://images.unsplash.com/photo-1576402187878-974f70c890a5?q=80&w=2600",
-            loc: "İstanbul, TR",
-            scope: "HVAC kontrolü & FDA uyumluluğu",
-            size: "small" // Added size property
-        },
-        {
-            id: 3,
-            title: "Lojistik Merkezi",
-            cat: "robotics",
-            img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2600",
-            loc: "Dubai, BAE",
-            scope: "Ayrıştırıcı PLC mantığı",
-            size: "small" // Added size property
-        },
-        {
-            id: 4,
-            title: "Veri Merkezi Gücü",
-            cat: "power",
-            img: "https://images.unsplash.com/photo-1558494949-ef2a0de49341?q=80&w=2600",
-            loc: "Frankfurt, DE",
-            scope: "20MW OG Dağıtımı",
-            size: "large" // Added size property
-        },
-        {
-            id: 5,
-            title: "Gıda Paketleme",
-            cat: "robotics",
-            img: "https://images.unsplash.com/photo-1622675363311-ac60ee2c2cb9?q=80&w=2600",
-            loc: "Bursa, TR",
-            scope: "Delta Robot Hattı",
-            size: "small" // Added size property
-        },
-        {
-            id: 6,
-            title: "Montaj Hattı İkizi",
-            cat: "digital",
-            img: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2600",
-            loc: "İzmir, TR",
-            scope: "NX MCD Simülasyonu",
-            size: "small" // Added size property
-        }
-    ];
-
-    // Updated filter logic to use 'cat' property and 'id' from categories
-    const filteredProjects = filter === "all" ? projects : projects.filter(p => p.cat === filter);
-
-    // Helper to get category label
-    const getCategoryLabel = (catId: string) => {
-        const category = categories.find(c => c.id === catId);
-        return category ? category.label : catId;
-    };
+    const filteredProjects = filter === "Tümü" ? PROJECTS : PROJECTS.filter(project => project.category === filter);
 
     return (
-        <div className="min-h-screen bg-transparent pt-32 px-6 flex flex-col">
-            <div className="max-w-7xl mx-auto mb-20 flex-grow">
-
-                {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 flex flex-col pb-16 sm:pb-20 md:pb-24">
+            
+            {/* --- HEADER --- */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-[1920px] mx-auto w-full mb-12 sm:mb-14 md:mb-16 border-b border-white/10 pb-6 sm:pb-8"
+            >
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 sm:gap-8">
                     <div>
-                        <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">Seçilmiş Projeler</h1>
-                        <p className="text-slate-400 max-w-xl text-lg">
-                            Yüksek etkili endüstriyel tesisler için sistem mimarisi ve yazılım çözümleri.
-                        </p>
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="flex items-center gap-2 mb-3 sm:mb-4"
+                        >
+                            <Database size={14} className="text-brand-orange"/>
+                            <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Proje Portföyü</span>
+                        </motion.div>
+                        <motion.h1
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white leading-[0.9]"
+                        >
+                            Referans <br/> Projelerimiz
+                        </motion.h1>
                     </div>
-
-                    {/* Filter Tabs */}
-                    <div className="flex flex-wrap gap-2 bg-slate-900 p-2 rounded-xl border border-slate-800 w-full sm:w-auto justify-center sm:justify-start">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat.id} // Use cat.id for key
-                                onClick={() => setFilter(cat.id)} // Set filter to cat.id
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === cat.id // Compare with cat.id
-                                    ? 'bg-white text-black shadow-lg'
-                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                                    }`}
-                            >
-                                {cat.label} {/* Display cat.label */}
-                            </button>
-                        ))}
+                    <div className="flex flex-col items-start md:items-end gap-3 sm:gap-4 w-full md:w-auto">
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="text-zinc-400 md:text-right max-w-md text-sm sm:text-base hidden md:block"
+                        >
+                            Türkiye'nin dört bir yanında gerçekleştirdiğimiz elektrik, otomasyon ve enerji yönetimi projeleri.
+                        </motion.p>
+                        {/* Tech Filter Tabs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="relative overflow-x-auto scrollbar-hide w-full md:w-auto"
+                        >
+                            <div className="flex flex-nowrap gap-1 bg-zinc-900/50 p-1 rounded-lg border border-white/10 min-w-max">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setFilter(cat)}
+                                        className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap tap-target ${
+                                            filter === cat
+                                            ? 'bg-brand-orange text-black font-bold shadow-[0_0_15px_rgba(255,59,0,0.3)]'
+                                            : 'text-zinc-500 hover:text-white hover:bg-white/5'
+                                        }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
+            </motion.div>
 
-                {/* Projects Grid */}
-                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* --- GRID --- */}
+            <div className="max-w-[1920px] mx-auto w-full">
+                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
                     <AnimatePresence>
-                        {filteredProjects.map((p) => (
+                        {filteredProjects.map((project, index) => (
                             <motion.div
                                 layout
-                                initial={{ opacity: 0, scale: 0.9 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
-                                key={p.id}
-                                className={`group relative flex flex-col gap-4 ${p.size === 'large' ? 'md:col-span-2' : 'col-span-1'}`}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.4 }}
+                                key={project.id}
+                                className={`group relative flex flex-col bg-zinc-950 border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors ${index === 0 ? 'md:col-span-2 md:row-span-2' : 'col-span-1'}`}
                             >
-                                {/* Image Container */}
-                                <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 aspect-[4/3] md:aspect-auto md:h-[400px]">
+                                {/* Image Area */}
+                                <NavLink to={`/projects/${project.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${index === 0 ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
+                                    <div className="absolute inset-0 bg-zinc-900 z-0"></div>
                                     <img
-                                        src={p.img}
-                                        alt={p.title}
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-50"
                                         loading="lazy"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
                                     />
-                                    {/* Overlay Button */}
-                                    <div className="absolute top-4 right-4 z-20">
-                                        <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-brand-orange hover:border-brand-orange">
-                                            <ArrowUpRight size={18} />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                                    
+                                    {/* Overlay Badge */}
+                                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20">
+                                        <div className="px-2.5 sm:px-3 py-1 bg-black/50 backdrop-blur border border-white/10 text-[10px] font-mono text-brand-orange uppercase tracking-widest flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 bg-brand-orange rounded-full animate-pulse"></span>
+                                            {project.category}
                                         </div>
                                     </div>
-                                    {/* Category Badge */}
-                                    <div className="absolute top-4 left-4 z-20 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded text-xs font-mono text-white uppercase tracking-wider">
-                                        {getCategoryLabel(p.cat)} {/* Display category label */}
+                                </NavLink>
+
+                                {/* Content Area */}
+                                <div className={`relative z-10 flex flex-col justify-between p-5 sm:p-6 ${index === 0 ? 'md:absolute md:bottom-0 md:left-0 md:w-full md:bg-gradient-to-t md:from-black md:to-transparent md:pt-20 lg:pt-24' : 'bg-zinc-950 border-t border-white/10'}`}>
+                                    <div>
+                                        <NavLink to={`/projects/${project.slug}`}>
+                                            <h3 className={`font-display font-bold text-white mb-2 group-hover:text-brand-orange transition-colors ${index === 0 ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-lg sm:text-xl'}`}>
+                                                {project.title}
+                                            </h3>
+                                        </NavLink>
+                                        <p className="text-zinc-400 text-sm mb-4 sm:mb-6 line-clamp-2">
+                                            {project.description}
+                                        </p>
+                                    </div>
+
+                                    {/* Meta Info Grid */}
+                                    <div className="grid grid-cols-2 gap-y-3 sm:gap-y-4 gap-x-2 text-[10px] font-mono text-zinc-500 uppercase border-t border-white/10 pt-3 sm:pt-4">
+                                        <div className="flex items-center gap-2">
+                                            <Calendar size={12} className="text-zinc-600 shrink-0"/>
+                                            <span className="truncate">{project.year}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <MapPin size={12} className="text-zinc-600 shrink-0"/>
+                                            <span className="truncate">{project.location}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 col-span-2">
+                                            <span className="truncate">{project.id}</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Metadata Below Image (Cleaner Look) */}
-                                <div className="flex justify-between items-start px-2">
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-brand-orange transition-colors">{p.title}</h3>
-                                        <div className="flex items-center gap-4 text-sm text-slate-500 font-mono">
-                                            <span>{p.loc}</span> {/* Changed to p.loc */}
-                                            <span className="w-1 h-1 bg-slate-700 rounded-full"></span>
-                                            <span>{p.scope}</span> {/* Changed to p.scope */}
-                                        </div>
+                                {/* Corner Interaction */}
+                                <NavLink to={`/projects/${project.slug}`} className="absolute top-0 right-0 p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 bg-brand-orange text-black flex items-center justify-center tap-target">
+                                        <ArrowUpRight size={18} className="sm:w-5 sm:h-5" />
                                     </div>
-                                </div>
+                                </NavLink>
+
                             </motion.div>
                         ))}
                     </AnimatePresence>
                 </motion.div>
-
+                
                 {/* Empty State */}
                 {filteredProjects.length === 0 && (
-                    <div className="py-20 text-center text-slate-500 font-mono">
-                        Bu kategoride proje bulunamadı.
+                    <div className="py-16 sm:py-20 text-center border border-dashed border-zinc-800 rounded-xl">
+                        <div className="text-zinc-500 font-mono mb-2 text-xs sm:text-sm">SYSTEM ALERT</div>
+                        <div className="text-white text-lg sm:text-xl font-display">Bu kategoride proje bulunamadı.</div>
                     </div>
                 )}
 
             </div>
 
-            {/* --- BOLD ORANGE CTA: BUILD YOUR LEGACY --- */}
-            <section className="w-full py-16 sm:py-24 bg-brand-orange relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-multiply"></div>
-
-                <NavLink to="/contact" className="block relative z-10 text-center">
-                    <div className="max-w-4xl mx-auto">
-                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">BENZER BİR ÇÖZÜM MÜ ARIYORSUNUZ?</p>
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500">
-                            PROJENİZİ TARTIŞALIM
-                        </h2>
-                        <div className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold">
-                            TOPLANTI PLANLAYIN <Calendar size={18} />
-                        </div>
-                    </div>
-                </NavLink>
-            </section>
+            {/* --- CTA --- */}
+            <CTASection />
 
         </div>
     );

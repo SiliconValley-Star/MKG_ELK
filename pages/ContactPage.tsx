@@ -1,337 +1,356 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Mail, Phone, Send, Globe, Clock, MessageSquare, Headphones, ShieldAlert, ArrowRight, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MapPin, Mail, Phone, Send, Globe, Clock, Terminal, Briefcase, Headphones, FileText, ArrowUpRight, Copy } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
+import { sendContactEmail } from '../services/emailService';
+import { useIsMobile } from '../hooks/useIsMobile';
+import CTASection from '../components/CTASection';
 
 const ContactPage: React.FC = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const isMobile = useIsMobile();
+    const [selectedDepartment, setSelectedDepartment] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitStatus('idle');
-
-        const formData = new FormData(e.currentTarget);
-        const data = {
-            fullname: formData.get('fullname'),
-            company: formData.get('company'),
-            email: formData.get('email'),
-            dept: formData.get('dept'),
-            message: formData.get('message'),
-        };
-
-        // Simulated API call (replace with actual API endpoint)
-        try {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // Simulate 90% success rate
-                    if (Math.random() > 0.1) {
-                        resolve(data);
-                    } else {
-                        reject(new Error('Network error'));
-                    }
-                }, 1500);
+    const { values, errors, isSubmitting, submitSuccess, handleChange, handleBlur, handleSubmit } = useForm(
+        {
+            name: '',
+            company: '',
+            email: '',
+            message: '',
+        },
+        {
+            name: {
+                required: true,
+                minLength: 2,
+                message: 'Lütfen adınızı ve soyadınızı girin',
+            },
+            email: {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Geçerli bir e-posta adresi girin',
+            },
+            message: {
+                required: true,
+                minLength: 10,
+                message: 'Lütfen en az 10 karakter uzunluğunda bir mesaj girin',
+            },
+        },
+        async (formData) => {
+            await sendContactEmail({
+                ...formData,
+                department: selectedDepartment,
             });
-
-            setSubmitStatus('success');
-            e.currentTarget.reset();
-            
-            // Auto-hide success message after 5 seconds
-            setTimeout(() => {
-                setSubmitStatus('idle');
-            }, 5000);
-        } catch (error) {
-            setSubmitStatus('error');
-            
-            // Auto-hide error message after 5 seconds
-            setTimeout(() => {
-                setSubmitStatus('idle');
-            }, 5000);
-        } finally {
-            setIsSubmitting(false);
         }
-    };
+    );
 
     return (
-        <div className="bg-transparent min-h-screen pt-32 px-6 flex flex-col">
-            <div className="max-w-7xl mx-auto flex-grow mb-32">
-
-                {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                    <div className="max-w-2xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="flex items-center gap-2 mb-4"
-                            style={{ willChange: 'transform, opacity' }}
-                        >
-                            <div className="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></div>
-                            <span className="text-brand-orange font-mono text-xs uppercase tracking-widest">Yeni Projeler İçin Müsait</span>
-                        </motion.div>
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
-                            style={{ willChange: 'transform, opacity' }}
-                        >
-                            Çözümü Birlikte <br /> Tasarlayalım.
-                        </motion.h1>
+        <div className="bg-transparent min-h-screen pt-32 px-6 pb-24 flex flex-col">
+            
+            {/* --- HEADER --- */}
+            <div className="max-w-[1920px] mx-auto w-full mb-12 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-8 gap-8">
+                <div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className={`w-2 h-2 bg-brand-orange rounded-full ${isMobile ? '' : 'animate-pulse'}`}></span>
+                        <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Sistem Aktif</span>
                     </div>
-                    <p className="text-slate-400 text-lg max-w-md text-right hidden md:block">
-                        Ekibimiz teknik danışmanlık ve fizibilite çalışmaları sağlamak için hazır.
-                    </p>
+                    <h1 className="text-5xl md:text-8xl font-display font-bold text-white">İletişim</h1>
+                </div>
+                <p className="text-zinc-400 max-w-xl text-right text-lg hidden md:block">
+                    Mühendislik ve ticari departmanlarımıza doğrudan ulaşın. <br/>
+                    Protokolü başlatmak için aşağıdan bir kanal seçin.
+                </p>
+            </div>
+
+            {/* --- BENTO GRID LAYOUT --- */}
+            <div className="max-w-[1920px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                {/* BLOCK 1: GLOBAL MAP VISUAL (Spans 2 cols, 2 rows on large) */}
+                <div className="col-span-1 md:col-span-3 lg:col-span-2 row-span-2 bg-zinc-800 border border-white/10 relative overflow-hidden group min-h-[400px]">
+                    {/* Map Graphic */}
+                    <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png')] bg-cover bg-center opacity-100 invert brightness-[1000] saturate-0 contrast-50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-800/20 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-6 left-6">
+                        <div className="flex items-center gap-2 mb-1">
+                            <Globe size={16} className="text-white"/>
+                            <span className="text-xs font-bold text-white uppercase tracking-widest">Küresel Operasyonlar</span>
+                        </div>
+                        <div className="text-[10px] font-mono text-zinc-500">GERÇEK ZAMANLI AKTİF NOKTALAR</div>
+                    </div>
+
+                    {/* Map Pins */}
+                    <div className="absolute top-[35%] left-[55%] flex flex-col items-center group/pin cursor-pointer">
+                        {!isMobile && <div className="w-3 h-3 bg-brand-orange rounded-full animate-ping absolute"></div>}
+                        <div className="w-3 h-3 bg-brand-orange rounded-full relative z-10 border border-black"></div>
+                        <div className="mt-2 bg-black/80 backdrop-blur border border-white/20 px-3 py-1 rounded text-[10px] text-white opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="text-brand-orange font-bold">MERKEZ:</span> Bursa, TR
+                        </div>
+                    </div>
+
+                    <div className="absolute top-[28%] left-[51%] flex flex-col items-center group/pin cursor-pointer">
+                        <div className="w-2 h-2 bg-white rounded-full relative z-10"></div>
+                        <div className="mt-2 bg-black/80 backdrop-blur border border-white/20 px-3 py-1 rounded text-[10px] text-white opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="text-zinc-400 font-bold">Ar-Ge:</span> Berlin, DE
+                        </div>
+                    </div>
+
+                    {/* Bottom Info */}
+                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end border-t border-white/10 pt-4">
+                        <div>
+                            <div className="text-2xl font-bold text-white">Genel Merkez</div>
+                            <div className="text-sm text-zinc-400">Nilüfer Organize Sanayi Bölgesi</div>
+                            <div className="text-sm text-zinc-500 font-mono mt-1">Bursa / TÜRKİYE</div>
+                        </div>
+                        <div className="text-right hidden sm:block">
+                            <div className="text-xs font-mono text-zinc-500 uppercase mb-1">Şu Anki Saat</div>
+                            <div className="text-xl font-mono text-brand-orange flex items-center gap-2 justify-end">
+                                {new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', hour12: false })} <Clock size={16}/>
+                            </div>
+                            <div className="text-xs text-zinc-600">GMT+3</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                {/* BLOCK 2: NEW BUSINESS (Sales) */}
+                <div className="col-span-1 md:col-span-1 bg-zinc-900 border border-white/10 p-8 flex flex-col justify-between group hover:border-brand-orange/50 transition-colors">
+                    <div>
+                        <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors">
+                            <Briefcase size={20} />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">Yeni Projeler</h3>
+                        <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                            Teklif talepleri, fizibilite çalışmaları ve otomasyon & enerji konusunda ortaklık sorguları için.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="text-[10px] font-mono text-zinc-500 uppercase mb-1">Direkt Hat</div>
+                        <a href="mailto:satis@mkg.com" className="text-lg text-white font-mono hover:text-brand-orange transition-colors flex items-center gap-2">
+                            satis@mkg.com <ArrowUpRight size={14} />
+                        </a>
+                    </div>
+                </div>
 
-                    {/* Left Column: Form (Span 7) */}
-                    <div className="lg:col-span-7">
-                        <div className="bg-slate-900/70 backdrop-blur-xl border border-slate-800 p-8 md:p-12 rounded-3xl relative overflow-hidden">
-                            {/* Decorative Background */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-slate-800/30 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+                {/* BLOCK 3: TECHNICAL SUPPORT */}
+                <div className="col-span-1 md:col-span-1 bg-zinc-900 border border-white/10 p-8 flex flex-col justify-between group hover:border-brand-orange/50 transition-colors">
+                    <div>
+                        <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors">
+                            <Headphones size={20} />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">Destek & SLA</h3>
+                        <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                            Mevcut müşteriler için 7/24 teknik yardım ve kritik duruş bildirimleri.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="text-[10px] font-mono text-zinc-500 uppercase mb-1">Öncelikli Kanal</div>
+                        <a href="mailto:destek@mkg.com" className="text-lg text-white font-mono hover:text-brand-orange transition-colors flex items-center gap-2">
+                            destek@mkg.com <ArrowUpRight size={14} />
+                        </a>
+                    </div>
+                </div>
 
-                            <h3 id="contact-form-title" className="text-2xl font-bold text-white mb-8 flex items-center gap-3 relative z-10">
-                                <MessageSquare className="text-brand-orange" aria-hidden="true" /> Proje Sorgusu
-                            </h3>
+                {/* BLOCK 4: CONTACT FORM (The Terminal) */}
+                <div className="col-span-1 md:col-span-3 lg:col-span-2 row-span-2 bg-black border border-white/10 p-8 md:p-12 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <Terminal size={200} className="text-zinc-500" strokeWidth={0.5} />
+                    </div>
+                    
+                    <div className="relative z-10">
+                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <span className="w-1.5 h-6 bg-brand-orange"></span>
+                            Talep Başlat
+                        </h3>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            {submitSuccess && (
+                                <motion.div
+                                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={isMobile ? { duration: 0.01 } : { duration: 0.3 }}
+                                    className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-500 text-sm"
+                                >
+                                    ✓ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+                                </motion.div>
+                            )}
 
-                            <form className="space-y-6 relative z-10" onSubmit={handleSubmit} aria-labelledby="contact-form-title">
-                                {/* Success/Error Messages */}
-                                <AnimatePresence>
-                                    {submitStatus === 'success' && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            role="alert"
-                                            aria-live="polite"
-                                            className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl flex items-center gap-3"
-                                        >
-                                            <CheckCircle className="text-green-500 shrink-0" size={20} aria-hidden="true" />
-                                            <div>
-                                                <p className="text-green-500 font-bold text-sm">Mesajınız başarıyla gönderildi!</p>
-                                                <p className="text-green-400 text-xs mt-1">Ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                    {submitStatus === 'error' && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            role="alert"
-                                            aria-live="assertive"
-                                            className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-3"
-                                        >
-                                            <XCircle className="text-red-500 shrink-0" size={20} aria-hidden="true" />
-                                            <div>
-                                                <p className="text-red-500 font-bold text-sm">Mesaj gönderilemedi</p>
-                                                <p className="text-red-400 text-xs mt-1">Lütfen daha sonra tekrar deneyin veya doğrudan iletişime geçin.</p>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                            {errors.submit && (
+                                <motion.div
+                                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={isMobile ? { duration: 0.01 } : { duration: 0.3 }}
+                                    className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-500 text-sm"
+                                >
+                                    {errors.submit}
+                                </motion.div>
+                            )}
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="group">
-                                        <label htmlFor="fullname" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
-                                            Ad Soyad <span className="text-brand-orange">*</span>
-                                        </label>
-                                        <input
-                                            id="fullname"
-                                            name="fullname"
-                                            type="text"
-                                            required
-                                            minLength={3}
-                                            className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div className="group">
-                                        <label htmlFor="company" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">Şirket</label>
-                                        <input
-                                            id="company"
-                                            name="company"
-                                            type="text"
-                                            className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700"
-                                            placeholder="Organization Ltd."
-                                        />
-                                    </div>
-                                </div>
-
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="group">
-                                    <label htmlFor="email" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
-                                        E-posta Adresi <span className="text-brand-orange">*</span>
-                                    </label>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        required
-                                        className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500"
-                                        placeholder="john@example.com"
+                                    <label className="block text-[10px] font-mono uppercase text-zinc-500 mb-2">Kimlik / Ad Soyad</label>
+                                    <input 
+                                        type="text"
+                                        name="name"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`w-full bg-zinc-900 border text-white p-4 focus:border-brand-orange focus:outline-none focus:bg-zinc-900/80 transition-all font-mono text-sm ${
+                                            errors.name ? 'border-red-500' : 'border-zinc-800'
+                                        }`}
+                                        placeholder="TAM_ADINIZ_SOYADINIZ" 
+                                    />
+                                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                                </div>
+                                <div className="group">
+                                    <label className="block text-[10px] font-mono uppercase text-zinc-500 mb-2">Organizasyon</label>
+                                    <input 
+                                        type="text"
+                                        name="company"
+                                        value={values.company}
+                                        onChange={handleChange}
+                                        className="w-full bg-zinc-900 border border-zinc-800 text-white p-4 focus:border-brand-orange focus:outline-none focus:bg-zinc-900/80 transition-all font-mono text-sm"
+                                        placeholder="ŞIRKET_LTD" 
                                     />
                                 </div>
+                            </div>
 
-                                <fieldset className="group">
-                                    <legend className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
-                                        Departman <span className="text-brand-orange">*</span>
-                                    </legend>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2" role="radiogroup" aria-required="true">
-                                        {['Satış', 'Destek', 'Mühendislik', 'Diğer'].map((opt) => (
-                                            <label key={opt} className="cursor-pointer">
-                                                <input type="radio" name="dept" value={opt} required className="peer sr-only" aria-label={`${opt} departmanı`} />
-                                                <div className="text-center py-3 rounded-lg border border-slate-800 bg-slate-900/80 backdrop-blur-md text-slate-400 text-sm peer-checked:bg-white peer-checked:text-black peer-checked:font-bold transition-all hover:bg-slate-900/50">
-                                                    {opt}
-                                                </div>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </fieldset>
+                            <div className="group">
+                                <label className="block text-[10px] font-mono uppercase text-zinc-500 mb-2">Dönüş Adresi / E-posta</label>
+                                <input 
+                                    type="email"
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full bg-zinc-900 border text-white p-4 focus:border-brand-orange focus:outline-none focus:bg-zinc-900/80 transition-all font-mono text-sm ${
+                                        errors.email ? 'border-red-500' : 'border-zinc-800'
+                                    }`}
+                                    placeholder="kullanici@domain.com" 
+                                />
+                                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                            </div>
 
-                                <div className="group">
-                                    <label htmlFor="message" className="block text-xs font-mono uppercase text-slate-500 mb-2 group-focus-within:text-brand-orange transition-colors">
-                                        Proje Detayları <span className="text-brand-orange">*</span>
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows={5}
-                                        required
-                                        minLength={10}
-                                        className="w-full bg-slate-950/50 border border-slate-800 rounded-xl p-4 text-white focus:border-brand-orange focus:outline-none transition-all placeholder:text-slate-700 invalid:border-red-500 resize-none"
-                                        placeholder="Gereksinimlerinizi tanımlayın... (min. 10 karakter)"
-                                    ></textarea>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    aria-label={isSubmitting ? "Form gönderiliyor, lütfen bekleyin" : "Formu gönder"}
-                                    className="w-full bg-brand-orange text-white font-bold py-5 rounded-xl hover:bg-white hover:text-black transition-all duration-300 flex justify-center items-center gap-2 shadow-lg shadow-brand-orange/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="animate-spin" size={18} aria-hidden="true" />
-                                            GÖNDERİLİYOR...
-                                        </>
-                                    ) : (
-                                        <>
-                                            MESAJ GÖNDER <Send size={18} aria-hidden="true" />
-                                        </>
-                                    )}
-                                </button>
-                                <p className="text-xs text-slate-500 text-center">
-                                    <span className="text-brand-orange">*</span> işaretli alanlar zorunludur
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Info (Span 5) */}
-                    <div className="lg:col-span-5 space-y-8">
-
-                        {/* Main HQ Card */}
-                        <div className="bg-slate-900/70 backdrop-blur-xl border border-slate-800 p-8 rounded-3xl">
-                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-800 pb-4">Genel Merkez</h4>
-
-                            <div className="space-y-6">
-                                <div className="flex gap-4">
-                                    <div className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white shrink-0">
-                                        <MapPin size={18} />
-                                    </div>
-                                    <div>
-                                        <p className="text-white font-medium mb-1">Bursa, Türkiye</p>
-                                        <p className="text-slate-500 text-sm leading-relaxed">Nilüfer Org. San. Böl.,<br />123 Otomasyon Cad, 16000</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <div className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white shrink-0">
-                                        <Phone size={18} />
-                                    </div>
-                                    <div>
-                                        <p className="text-white font-medium mb-1">+90 224 555 0100</p>
-                                        <p className="text-slate-500 text-sm">Pzt-Cum, 09:00 - 18:00</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <div className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white shrink-0">
-                                        <Mail size={18} />
-                                    </div>
-                                    <div>
-                                        <p className="text-white font-medium mb-1">info@mkg.com</p>
-                                        <p className="text-slate-500 text-sm">Genel Sorular</p>
-                                    </div>
+                            <div className="group">
+                                <label className="block text-[10px] font-mono uppercase text-zinc-500 mb-2">Konu Sektörü</label>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    {['Otomasyon', 'Enerji', 'Yazılım', 'Genel'].map((opt) => (
+                                        <label key={opt} className="cursor-pointer">
+                                            <input 
+                                                type="radio" 
+                                                name="topic"
+                                                value={opt}
+                                                checked={selectedDepartment === opt}
+                                                onChange={(e) => setSelectedDepartment(e.target.value)}
+                                                className="peer sr-only" 
+                                            />
+                                            <div className="text-center py-3 border border-zinc-800 bg-zinc-900 text-zinc-500 text-xs font-mono uppercase peer-checked:bg-white peer-checked:text-black peer-checked:font-bold transition-all hover:bg-zinc-800">
+                                                {opt}
+                                            </div>
+                                        </label>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Map Preview */}
-                        <div className="h-64 rounded-3xl overflow-hidden border border-slate-800 relative group">
-                            <img
-                                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074"
-                                alt="MKG Elektromekanik ofis konumu haritası"
-                                loading="lazy"
-                                className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="bg-brand-orange p-3 rounded-full shadow-xl shadow-brand-orange/30 animate-bounce">
-                                    <MapPin className="text-white" size={24} />
-                                </div>
+                            <div className="group">
+                                <label className="block text-[10px] font-mono uppercase text-zinc-500 mb-2">İletim Verisi</label>
+                                <textarea 
+                                    rows={4}
+                                    name="message"
+                                    value={values.message}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full bg-zinc-900 border text-white p-4 focus:border-brand-orange focus:outline-none focus:bg-zinc-900/80 transition-all font-mono text-sm ${
+                                        errors.message ? 'border-red-500' : 'border-zinc-800'
+                                    }`}
+                                    placeholder="Proje parametrelerini veya özel gereksinimlerinizi açıklayın..."
+                                ></textarea>
+                                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                             </div>
-                        </div>
 
+                            <button 
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full bg-brand-orange text-black font-bold py-4 hover:bg-white transition-all duration-300 flex justify-center items-center gap-2 uppercase tracking-widest text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        {isMobile ? (
+                                            <Send size={16} />
+                                        ) : (
+                                            <motion.div
+                                                animate={{ rotate: 360 }}
+                                                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                                            >
+                                                <Send size={16} />
+                                            </motion.div>
+                                        )}
+                                        VERİ İLETİLİYOR...
+                                    </>
+                                ) : (
+                                    <>
+                                        VERİYİ İLET <Send size={16} />
+                                    </>
+                                )}
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
 
-            {/* Technical Support Strip */}
-            <div className="w-full bg-[#0a0a0a]/90 backdrop-blur-md border-t border-slate-800 py-8 sm:py-12 mb-0">
-                <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row justify-between items-center gap-6 sm:gap-8">
-                    <div className="flex items-center gap-6">
-                        <div className="p-4 bg-slate-900 border border-slate-800 rounded-full text-brand-orange">
-                            <Headphones size={32} />
+                {/* BLOCK 5: CAREERS (HR) */}
+                <div className="col-span-1 md:col-span-1 bg-zinc-900 border border-white/10 p-8 flex flex-col justify-between group hover:border-brand-orange/50 transition-colors">
+                    <div>
+                        <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors">
+                            <FileText size={20} />
                         </div>
+                        <h3 className="text-xl font-bold text-white mb-2">Kariyer</h3>
+                        <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                            Öncü kadromuz katılın. CV ve portföyünüzü İK departmanımıza gönderin.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="text-[10px] font-mono text-zinc-500 uppercase mb-1">İnsan Kaynakları</div>
+                        <a href="mailto:kariyer@mkg.com" className="text-lg text-white font-mono hover:text-brand-orange transition-colors flex items-center gap-2">
+                            kariyer@mkg.com <ArrowUpRight size={14} />
+                        </a>
+                    </div>
+                </div>
+
+                {/* BLOCK 6: GENERAL INFO */}
+                <div className="col-span-1 md:col-span-1 bg-zinc-900 border border-white/10 p-8 flex flex-col justify-between group hover:border-brand-orange/50 transition-colors">
+                    <div>
+                        <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors">
+                            <Phone size={20} />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">Santral</h3>
+                        <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                            Genel sorular ve resepsiyon. 09:00 - 18:00 (GMT+3) saatleri arası müsait.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="text-[10px] font-mono text-zinc-500 uppercase mb-1">Merkez Hat</div>
+                        <a href="tel:+902245550100" className="text-lg text-white font-mono hover:text-brand-orange transition-colors flex items-center gap-2">
+                            +90 224 555 0100
+                        </a>
+                    </div>
+                </div>
+
+                {/* BLOCK 7: FAQ LINK (Full Width Bottom) */}
+                <NavLink to="/faq" className="col-span-1 md:col-span-3 lg:col-span-4 bg-zinc-950 border border-white/10 p-6 flex items-center justify-between hover:bg-zinc-900 transition-colors group">
+                    <div className="flex items-center gap-4">
+                        <div className="p-2 bg-zinc-900 rounded-lg text-brand-orange border border-zinc-800"><Copy size={20}/></div>
                         <div>
-                            <h3 className="text-xl font-bold text-white">Mevcut Müşteri misiniz?</h3>
-                            <p className="text-slate-500 text-sm">Acil durum destek veya SLA sorguları için direkt hattı kullanın.</p>
+                            <h4 className="text-white font-bold">Genel sorularınız mı var?</h4>
+                            <p className="text-xs text-zinc-500">Standart protokoller için bilgi tabanımıza erişin.</p>
                         </div>
                     </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full lg:w-auto">
-                        <button
-                            aria-label="Acil durum destek hattını ara"
-                            className="px-4 sm:px-6 py-3 border border-slate-700 rounded-lg text-slate-300 hover:text-white hover:border-white transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
-                        >
-                            <ShieldAlert size={16} aria-hidden="true" /> ACİL DURUM HATTI
-                        </button>
-                        <button
-                            aria-label="Müşteri portalına giriş yap"
-                            className="px-6 py-3 bg-slate-800 rounded-lg text-white hover:bg-slate-700 transition-colors"
-                        >
-                            MÜŞTERİ PORTALI GİRİŞİ
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* --- BOLD ORANGE CTA: SEE OUR IMPACT --- */}
-            <section className="w-full py-16 sm:py-24 bg-brand-orange relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-multiply"></div>
-
-                <NavLink to="/projects" className="block relative z-10 text-center">
-                    <div className="max-w-4xl mx-auto">
-                        <p className="font-mono text-black/60 font-bold tracking-widest mb-4">HENÜZ EMİN DEĞİL MİSİNİZ?</p>
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500">
-                            ETKİMİZİ GÖRÜN
-                        </h2>
-                        <div className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold">
-                            BAŞARI HİKAYELERİNİ İNCELE <ArrowRight size={18} />
-                        </div>
+                    <div className="text-xs font-mono text-brand-orange uppercase flex items-center gap-2">
+                        Veritabanını Aç <ArrowUpRight size={14} className="group-hover:translate-x-1 transition-transform"/>
                     </div>
                 </NavLink>
-            </section>
 
+            </div>
+
+            {/* CTA SECTION */}
+            <CTASection />
         </div>
     );
 };

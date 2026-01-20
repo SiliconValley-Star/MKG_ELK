@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Search, HelpCircle, MessageCircle } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import CTASection from '../components/CTASection';
 
 const FAQPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('general');
@@ -58,41 +59,42 @@ const FAQPage: React.FC = () => {
   const currentFaqs = faqs[activeTab];
 
   return (
-    <div className="min-h-screen bg-transparent pt-32 px-6 pb-24">
+    <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-14 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-brand-orange text-xs font-mono mb-6"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-slate-900 border border-slate-800 text-brand-orange text-[10px] sm:text-xs font-mono mb-4 sm:mb-5 md:mb-6"
           >
-            <HelpCircle size={14} /> BİLGİ BANKASI
+            <HelpCircle size={12} className="sm:w-3.5 sm:h-3.5" /> BİLGİ BANKASI
           </motion.div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 sm:mb-6">Sıkça Sorulan Sorular</h1>
-          <p className="text-slate-400 max-w-xl mx-auto text-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-white mb-3 sm:mb-4 md:mb-6 break-words">Sıkça Sorulan Sorular</h1>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed">
             Mühendislik süreçlerimiz, teknik yeteneklerimiz ve destek yapılarımız hakkında yaygın sorular ve cevapları.
           </p>
         </div>
 
         {/* Search Bar (Visual Only) */}
-        <div className="relative max-w-xl mx-auto mb-12">
+        <div className="relative max-w-xl mx-auto mb-10 sm:mb-12">
           <input
             type="text"
             placeholder="Anahtar kelime ara (örn., 'PLC', 'Garanti')..."
-            className="w-full bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl py-4 pl-12 pr-4 text-white focus:border-brand-orange focus:outline-none transition-colors"
+            className="w-full bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-lg sm:rounded-xl py-3 sm:py-4 pl-10 sm:pl-12 pr-3 sm:pr-4 text-white text-sm sm:text-base focus:border-brand-orange focus:outline-none transition-colors"
           />
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+          <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-10 sm:mb-12">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => { setActiveTab(cat.id); setOpenIndex(0); }}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === cat.id
+              aria-label={`Filter: ${cat.label}`}
+              className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 tap-target ${activeTab === cat.id
                 ? 'bg-brand-orange text-black shadow-lg shadow-brand-orange/20'
                 : 'bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-600'
                 }`}
@@ -103,7 +105,7 @@ const FAQPage: React.FC = () => {
         </div>
 
         {/* Accordion */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <AnimatePresence mode='wait'>
             {currentFaqs.map((item: any, index: number) => (
               <motion.div
@@ -112,20 +114,21 @@ const FAQPage: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ delay: index * 0.1 }}
-                className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === index
+                className={`border rounded-xl sm:rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === index
                   ? 'bg-slate-900 border-brand-orange/50'
                   : 'bg-slate-950/50 border-slate-800 hover:border-slate-700'
                   }`}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full p-6 text-left flex justify-between items-start gap-4"
+                  aria-expanded={openIndex === index}
+                  className="w-full p-4 sm:p-5 md:p-6 text-left flex justify-between items-start gap-3 sm:gap-4 tap-target"
                 >
-                  <span className={`font-bold text-lg transition-colors ${openIndex === index ? 'text-white' : 'text-slate-300'}`}>
+                  <span className={`font-bold text-sm sm:text-base md:text-lg transition-colors break-words ${openIndex === index ? 'text-white' : 'text-slate-300'}`}>
                     {item.q}
                   </span>
                   <div className={`mt-1 flex-shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-brand-orange' : 'text-slate-500'}`}>
-                    {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
+                    {openIndex === index ? <Minus size={18} className="sm:w-5 sm:h-5" /> : <Plus size={18} className="sm:w-5 sm:h-5" />}
                   </div>
                 </button>
 
@@ -137,7 +140,7 @@ const FAQPage: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 text-slate-400 leading-relaxed border-t border-slate-800/50 pt-4">
+                      <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6 text-slate-400 text-sm sm:text-base leading-relaxed border-t border-slate-800/50 pt-3 sm:pt-4">
                         {item.a}
                       </div>
                     </motion.div>
@@ -149,18 +152,21 @@ const FAQPage: React.FC = () => {
         </div>
 
         {/* Contact CTA */}
-        <div className="mt-16 text-center bg-slate-900 border border-slate-800 p-8 rounded-3xl">
-          <MessageCircle className="mx-auto text-brand-orange mb-4" size={32} />
-          <h3 className="text-xl font-bold text-white mb-2">Hala sorularınız mı var?</h3>
-          <p className="text-slate-400 mb-6">Teknik satış ekibimiz özel sorularınız için yardıma hazır.</p>
+        <div className="mt-12 sm:mt-14 md:mt-16 text-center bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl">
+          <MessageCircle className="mx-auto text-brand-orange mb-3 sm:mb-4" size={28} />
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">Hala sorularınız mı var?</h3>
+          <p className="text-slate-400 mb-5 sm:mb-6 text-sm sm:text-base">Teknik satış ekibimiz özel sorularınız için yardıma hazır.</p>
           <NavLink to="/contact">
-            <button className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-brand-orange transition-colors">
+            <button className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-bold rounded-full hover:bg-brand-orange transition-colors text-sm sm:text-base tap-target">
               Destek ile İletişime Geçin
             </button>
           </NavLink>
         </div>
 
       </div>
+
+      {/* CTA SECTION */}
+      <CTASection />
     </div>
   );
 };

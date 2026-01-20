@@ -1,242 +1,171 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Calendar, User, ArrowRight, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { Calendar, User, ArrowRight, ArrowUpRight, Database } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
+import CTASection from '../components/CTASection';
 
 const BlogPage: React.FC = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedTag, setSelectedTag] = useState<string | null>(null);
-    const [newsletterEmail, setNewsletterEmail] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [filter, setFilter] = useState("Tümü");
 
-    // Filter logic
-    const filteredPosts = blogPosts.filter(post => {
-        const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true;
-        return matchesSearch && matchesTag;
-    });
+    const categories = ["Tümü", "Endüstri", "Enerji", "Robotik", "Güvenlik", "Yazılım"];
 
-    // Extract all unique tags
-    const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
-
-    const handleNewsletterSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitStatus('idle');
-
-        try {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    if (Math.random() > 0.1) {
-                        resolve(newsletterEmail);
-                    } else {
-                        reject(new Error('Network error'));
-                    }
-                }, 1200);
-            });
-
-            setSubmitStatus('success');
-            setNewsletterEmail("");
-            
-            setTimeout(() => {
-                setSubmitStatus('idle');
-            }, 5000);
-        } catch (error) {
-            setSubmitStatus('error');
-            
-            setTimeout(() => {
-                setSubmitStatus('idle');
-            }, 5000);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    const filteredPosts = filter === "Tümü" ? blogPosts : blogPosts.filter(post => post.category === filter);
 
     return (
-        <div className="min-h-screen bg-transparent pt-32 px-6 flex flex-col">
-            <div className="max-w-7xl mx-auto w-full mb-32 flex-grow">
-
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
-                        style={{ willChange: 'transform, opacity' }}
-                    >
-                        MKG <span className="text-slate-600">İçgörüleri</span>
-                    </motion.h1>
-                    <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
-                        Endüstriyel otomasyon, dijital dönüşüm ve mühendislik dünyasından en son haberler ve teknik makaleler.
-                    </p>
-
-                    {/* Search & Filter Bar */}
-                    <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-3xl mx-auto">
-                        <div className="relative w-full md:w-2/3">
-                            <input
-                                type="text"
-                                placeholder="Makale ara..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full bg-slate-900/50 backdrop-blur-md border border-slate-700 rounded-full py-3 px-6 pl-12 text-white placeholder:text-slate-500 focus:border-brand-orange focus:outline-none transition-colors"
-                            />
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-                        </div>
-
-                        <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
-                            <button
-                                onClick={() => setSelectedTag(null)}
-                                className={`px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap border transition-all ${!selectedTag ? 'bg-white text-black border-white' : 'bg-slate-900/50 text-slate-400 border-slate-700 hover:border-slate-500'}`}
-                            >
-                                Hepsi
-                            </button>
-                            {allTags.slice(0, 4).map(tag => (
-                                <button
-                                    key={tag}
-                                    onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                                    className={`px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap border transition-all ${tag === selectedTag ? 'bg-brand-orange text-white border-brand-orange' : 'bg-slate-900/50 text-slate-400 border-slate-700 hover:border-slate-500'}`}
-                                >
-                                    {tag}
-                                </button>
-                            ))}
-                        </div>
+        <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 flex flex-col pb-16 sm:pb-20 md:pb-24">
+            
+            {/* --- HEADER --- */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-[1920px] mx-auto w-full mb-12 sm:mb-14 md:mb-16 border-b border-white/10 pb-6 sm:pb-8"
+            >
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 sm:gap-8">
+                    <div>
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="flex items-center gap-2 mb-3 sm:mb-4"
+                        >
+                            <Database size={14} className="text-brand-orange"/>
+                            <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Knowledge Base</span>
+                        </motion.div>
+                        <motion.h1
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white leading-[0.9]"
+                        >
+                            MKG <br/> İçgörüleri
+                        </motion.h1>
+                    </div>
+                    <div className="flex flex-col items-start md:items-end gap-3 sm:gap-4 w-full md:w-auto">
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="text-zinc-400 md:text-right max-w-md text-sm sm:text-base hidden md:block"
+                        >
+                            Endüstriyel otomasyon, dijital dönüşüm ve mühendislik dünyasından en son haberler ve teknik makaleler.
+                        </motion.p>
+                        {/* Tech Filter Tabs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="relative overflow-x-auto scrollbar-hide w-full md:w-auto"
+                        >
+                            <div className="flex flex-nowrap gap-1 bg-zinc-900/50 p-1 rounded-lg border border-white/10 min-w-max">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setFilter(cat)}
+                                        className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap tap-target ${
+                                            filter === cat
+                                            ? 'bg-brand-orange text-black font-bold shadow-[0_0_15px_rgba(255,59,0,0.3)]'
+                                            : 'text-zinc-500 hover:text-white hover:bg-white/5'
+                                        }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
+            </motion.div>
 
-                {/* Posts Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {filteredPosts.map((post) => (
-                        <NavLink
-                            key={post.id}
-                            to={`/blog/${post.slug}`}
-                            className="block"
-                        >
-                            <article
-                                className="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden group hover:border-brand-orange/50 hover:shadow-xl hover:shadow-brand-orange/5 transition-all duration-300 flex flex-col h-full cursor-pointer will-change-transform"
+            {/* --- GRID --- */}
+            <div className="max-w-[1920px] mx-auto w-full">
+                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                    <AnimatePresence>
+                        {filteredPosts.map((post) => (
+                            <motion.div
+                                layout
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.4 }}
+                                key={post.id}
+                                className={`group relative flex flex-col bg-zinc-950 border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors ${post.size === 'large' ? 'md:col-span-2 md:row-span-2' : 'col-span-1'}`}
                             >
-                                {/* Image - Clickable */}
-                                <div className="h-48 sm:h-52 overflow-hidden relative">
+                                {/* Image Area */}
+                                <NavLink to={`/blog/${post.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${post.size === 'large' ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
+                                    <div className="absolute inset-0 bg-zinc-900 z-0"></div>
                                     <img
                                         src={post.image}
                                         alt={post.title}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-50"
                                         loading="lazy"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity" />
-                                    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                                        {post.tags.slice(0, 2).map(tag => (
-                                            <span key={tag} className="text-[10px] font-bold bg-black/70 text-brand-orange px-2 py-1 rounded backdrop-blur-sm border border-white/10">
-                                                {tag.toUpperCase()}
-                                            </span>
-                                        ))}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                                    
+                                    {/* Overlay Badge */}
+                                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20">
+                                        <div className="px-2.5 sm:px-3 py-1 bg-black/50 backdrop-blur border border-white/10 text-[10px] font-mono text-brand-orange uppercase tracking-widest flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 bg-brand-orange rounded-full animate-pulse"></span>
+                                            {post.category || 'BLOG'}
+                                        </div>
                                     </div>
-                                    <div className="absolute bottom-3 right-3 text-xs font-mono text-white/70 bg-black/50 px-2 py-1 rounded backdrop-blur-sm">
-                                        {post.readTime}
+                                </NavLink>
+
+                                {/* Content Area */}
+                                <div className={`relative z-10 flex flex-col justify-between p-5 sm:p-6 ${post.size === 'large' ? 'md:absolute md:bottom-0 md:left-0 md:w-full md:bg-gradient-to-t md:from-black md:to-transparent md:pt-20 lg:pt-24' : 'bg-zinc-950 border-t border-white/10'}`}>
+                                    <div>
+                                        <NavLink to={`/blog/${post.slug}`}>
+                                            <h3 className={`font-display font-bold text-white mb-2 group-hover:text-brand-orange transition-colors ${post.size === 'large' ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-lg sm:text-xl'}`}>
+                                                {post.title}
+                                            </h3>
+                                        </NavLink>
+                                        <p className="text-zinc-400 text-sm mb-4 sm:mb-6 line-clamp-2">
+                                            {post.excerpt}
+                                        </p>
+                                    </div>
+
+                                    {/* Meta Info Grid */}
+                                    <div className="grid grid-cols-2 gap-y-3 sm:gap-y-4 gap-x-2 text-[10px] font-mono text-zinc-500 uppercase border-t border-white/10 pt-3 sm:pt-4">
+                                        <div className="flex items-center gap-2">
+                                            <Calendar size={12} className="text-zinc-600 shrink-0"/>
+                                            <span className="truncate">{post.date}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <User size={12} className="text-zinc-600 shrink-0"/>
+                                            <span className="truncate">{post.author}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 col-span-2">
+                                            <span className="truncate">{post.readTime} okuma</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Content */}
-                                <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                                    <div className="flex items-center gap-3 text-xs text-slate-500 mb-3 font-mono">
-                                        <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
-                                        <span className="w-1 h-1 bg-slate-600 rounded-full" />
-                                        <span className="flex items-center gap-1"><User size={12} /> {post.author}</span>
+                                {/* Corner Interaction */}
+                                <NavLink to={`/blog/${post.slug}`} className="absolute top-0 right-0 p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 bg-brand-orange text-black flex items-center justify-center tap-target">
+                                        <ArrowUpRight size={18} className="sm:w-5 sm:h-5" />
                                     </div>
+                                </NavLink>
 
-                                    <h2 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-brand-orange transition-colors line-clamp-2">
-                                        {post.title}
-                                    </h2>
-                                    <p className="text-slate-400 text-sm mb-4 line-clamp-3 leading-relaxed flex-grow">
-                                        {post.excerpt}
-                                    </p>
-
-                                    <div className="inline-flex items-center gap-2 text-sm font-bold text-brand-orange group-hover:translate-x-1 transition-transform mt-auto">
-                                        DEVAMINI OKU <ArrowRight size={16} />
-                                    </div>
-                                </div>
-                            </article>
-                        </NavLink>
-                    ))}
-                </div>
-
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+                
+                {/* Empty State */}
                 {filteredPosts.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-slate-500">Aradığınız kriterlere uygun makale bulunamadı.</p>
-                        <button
-                            onClick={() => { setSearchTerm(""); setSelectedTag(null); }}
-                            className="mt-4 text-brand-orange hover:underline"
-                        >
-                            Filtreleri Temizle
-                        </button>
+                    <div className="py-16 sm:py-20 text-center border border-dashed border-zinc-800 rounded-xl">
+                        <div className="text-zinc-500 font-mono mb-2 text-xs sm:text-sm">SYSTEM ALERT</div>
+                        <div className="text-white text-lg sm:text-xl font-display">Bu kategoride makale bulunamadı.</div>
                     </div>
                 )}
+
             </div>
 
-            {/* CTA Section - Newsletter */}
-            <section className="w-full py-16 bg-brand-orange relative overflow-hidden group rounded-3xl mb-12">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-multiply"></div>
-                <div className="relative z-10 text-center px-4">
-                    <h2 className="text-3xl font-bold text-white mb-4">E-Bültenimize Abone Olun</h2>
-                    <p className="text-black/70 max-w-lg mx-auto mb-8 font-medium">
-                        Teknoloji trendlerini ve mühendislik makalelerini doğrudan e-posta kutunuza alın.
-                    </p>
-                    
-                    {/* Success/Error Messages */}
-                    <AnimatePresence>
-                        {submitStatus === 'success' && (
-                            <motion.div
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                className="max-w-md mx-auto mb-4 p-3 bg-green-500/20 border border-green-500/40 rounded-lg flex items-center gap-2 text-white"
-                            >
-                                <CheckCircle size={18} />
-                                <p className="text-sm font-bold">Başarıyla abone oldunuz!</p>
-                            </motion.div>
-                        )}
-                        {submitStatus === 'error' && (
-                            <motion.div
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                className="max-w-md mx-auto mb-4 p-3 bg-red-500/20 border border-red-500/40 rounded-lg flex items-center gap-2 text-white"
-                            >
-                                <XCircle size={18} />
-                                <p className="text-sm font-bold">Bir hata oluştu, lütfen tekrar deneyin.</p>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+            {/* --- CTA --- */}
+            <CTASection />
 
-                    <form onSubmit={handleNewsletterSubmit} className="flex max-w-md mx-auto gap-2">
-                        <input
-                            type="email"
-                            value={newsletterEmail}
-                            onChange={(e) => setNewsletterEmail(e.target.value)}
-                            required
-                            placeholder="E-posta adresiniz"
-                            className="flex-grow bg-white border-0 rounded-lg px-4 py-3 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50"
-                            disabled={isSubmitting}
-                        />
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                        >
-                            {isSubmitting ? (
-                                <>
-                                    <Loader2 className="animate-spin" size={18} />
-                                    <span className="hidden sm:inline">KAYDEDILIYOR...</span>
-                                </>
-                            ) : (
-                                'KAYIT OL'
-                            )}
-                        </button>
-                    </form>
-                </div>
-            </section>
         </div>
     );
 };

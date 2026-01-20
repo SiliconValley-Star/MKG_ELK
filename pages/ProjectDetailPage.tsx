@@ -2,26 +2,26 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Share2, Printer, Bookmark, ArrowRight } from 'lucide-react';
-import { blogPosts } from '../data/blogPosts';
+import { PROJECTS } from '../data/projectsData';
 import CTASection from '../components/CTASection';
 
-const BlogPostPage: React.FC = () => {
+const ProjectDetailPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
 
-    const post = blogPosts.find(p => p.slug === slug);
+    const project = PROJECTS.find(p => p.slug === slug);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [slug]);
 
-    if (!post) {
-        navigate('/blog');
+    if (!project) {
+        navigate('/projects');
         return null;
     }
 
-    const relatedPosts = blogPosts
-        .filter(p => p.id !== post.id && p.tags.some(t => post.tags.includes(t)))
+    const relatedProjects = PROJECTS
+        .filter(p => p.id !== project.id && p.category === project.category)
         .slice(0, 3);
 
     return (
@@ -37,9 +37,9 @@ const BlogPostPage: React.FC = () => {
             {/* HERO SECTION */}
             <div className="relative w-full h-screen">
                 <img
-                    src={post.image}
+                    src={project.image}
                     className="w-full h-full object-cover opacity-60"
-                    alt={post.title}
+                    alt={project.title}
                     loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
@@ -55,10 +55,10 @@ const BlogPostPage: React.FC = () => {
                             className="flex flex-wrap gap-4 mb-6 sm:mb-8"
                         >
                             <span className="font-mono text-brand-orange text-[10px] sm:text-xs tracking-widest uppercase border border-brand-orange/30 px-2 py-1 rounded bg-brand-orange/10">
-                                {post.category}
+                                {project.category}
                             </span>
                             <span className="font-mono text-gray-400 text-[10px] sm:text-xs tracking-widest uppercase border border-white/10 px-2 py-1 rounded backdrop-blur-sm">
-                                {post.readTime}
+                                {project.id}
                             </span>
                         </motion.div>
                         
@@ -68,7 +68,7 @@ const BlogPostPage: React.FC = () => {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="text-5xl sm:text-[7vw] font-bold tracking-tighter leading-[0.95] mb-8 sm:mb-12 mix-blend-screen text-white break-words"
                         >
-                            {post.title}
+                            {project.title}
                         </motion.h1>
 
                         <motion.div
@@ -78,22 +78,22 @@ const BlogPostPage: React.FC = () => {
                             className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16 border-t border-white/10 pt-8"
                         >
                             <div>
-                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Yazar</span>
-                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange">{post.author}</span>
+                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Lokasyon</span>
+                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange">{project.location}</span>
                             </div>
                             <div>
-                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Tarih</span>
-                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange">{post.date}</span>
-                            </div>
-                            <div>
-                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Okuma</span>
-                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange">{post.readTime}</span>
+                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Yıl</span>
+                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange">{project.year}</span>
                             </div>
                             <div>
                                 <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Kategori</span>
+                                <span className="text-xl sm:text-2xl font-light font-mono text-brand-orange truncate block">{project.category}</span>
+                            </div>
+                            <div>
+                                <span className="block text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mb-1">Durum</span>
                                 <div className="flex items-center gap-2 mt-2">
-                                    <span className="w-2 h-2 rounded-full animate-pulse bg-brand-orange shadow-[0_0_10px_#ff3b00]"></span>
-                                    <span className="text-xs sm:text-sm font-bold tracking-wider">{post.category.toUpperCase()}</span>
+                                    <span className="w-2 h-2 rounded-full animate-pulse bg-green-500 shadow-[0_0_10px_#22c55e]"></span>
+                                    <span className="text-xs sm:text-sm font-bold tracking-wider">TAMAMLANDI</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -110,32 +110,57 @@ const BlogPostPage: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <span className="text-xs font-bold text-brand-orange uppercase tracking-widest mb-6 block">01 — Makale</span>
+                        <span className="text-xs font-bold text-brand-orange uppercase tracking-widest mb-6 block">01 — Proje Özeti</span>
                         <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-8 text-white leading-tight">
-                            {post.excerpt}
+                            {project.description}
                         </h2>
-                        <div
-                            className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed prose prose-invert max-w-none
-                                [&>p]:mb-6 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-12 [&>h2]:mb-6 [&>h2]:text-white
-                                [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-10 [&>h3]:mb-4 [&>h3]:text-white
-                                [&>ul]:my-6 [&>ul]:space-y-3 [&>ul]:pl-6
-                                [&>ol]:my-6 [&>ol]:space-y-3 [&>ol]:pl-6
-                                [&_li]:text-gray-300
-                                [&_li::marker]:text-brand-orange
-                                [&_strong]:text-white
-                                [&_a]:text-brand-orange hover:[&_a]:underline
-                                [&>blockquote]:border-l-4 [&>blockquote]:border-brand-orange [&>blockquote]:pl-6 [&>blockquote]:py-4 [&>blockquote]:my-8 [&>blockquote]:bg-zinc-900/50 [&>blockquote]:italic
-                                [&_code]:text-brand-orange [&_code]:bg-zinc-900 [&_code]:px-2 [&_code]:py-1 [&_code]:rounded [&_code]:text-sm"
-                            dangerouslySetInnerHTML={{ __html: post.content }}
-                        />
+                        <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed mb-12">
+                            {project.fullDescription}
+                        </p>
                     </motion.div>
                 </div>
             </div>
 
-            {/* ETIKETLER */}
-            <section className="py-20 px-6 md:px-12 lg:px-24 max-w-8xl mx-auto border-t border-white/5">
+            {/* PROJE KAPSAMI VE SİSTEMLER */}
+            <section className="bg-[#0A0A0A] py-20 border-t border-white/5">
+                <div className="px-6 md:px-12 lg:px-24 max-w-8xl mx-auto">
+                    <motion.h2
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl font-bold mb-12 flex items-center gap-4"
+                    >
+                        <span className="w-8 h-[2px] bg-brand-orange"></span>
+                        Proje Kapsamı
+                    </motion.h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {project.scope.map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: i * 0.1 }}
+                                className="p-6 bg-[#111] rounded-lg border border-white/5 hover:border-brand-orange/50 transition-colors group"
+                            >
+                                <div className="text-brand-orange mb-4 opacity-50 group-hover:opacity-100 transition-opacity font-mono text-xs">
+                                    0{i + 1}
+                                </div>
+                                <h3 className="text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
+                                    {item}
+                                </h3>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* KULLANILAN SİSTEMLER */}
+            <section className="py-20 px-6 md:px-12 lg:px-24 max-w-8xl mx-auto">
                 <div className="flex flex-wrap gap-4 justify-center">
-                    {post.tags.map((tag, i) => (
+                    {project.systems.map((system, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -144,7 +169,7 @@ const BlogPostPage: React.FC = () => {
                             transition={{ duration: 0.4, delay: i * 0.1 }}
                             className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-gray-300 font-mono text-sm hover:bg-white/10 transition-colors cursor-default"
                         >
-                            #{tag}
+                            {system}
                         </motion.div>
                     ))}
                 </div>
@@ -153,9 +178,9 @@ const BlogPostPage: React.FC = () => {
             {/* FULL WIDTH IMAGE */}
             <div className="w-full h-[50vh] md:h-[70vh] overflow-hidden relative">
                 <img
-                    src={post.image}
+                    src={project.image}
                     className="absolute inset-0 w-full h-full object-cover"
-                    alt={post.title}
+                    alt={project.title}
                     loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
@@ -170,17 +195,17 @@ const BlogPostPage: React.FC = () => {
             {/* FOOTER NAV */}
             <div className="border-t border-white/10 bg-black py-8 px-6 md:px-12 flex justify-between items-center">
                 <button
-                    onClick={() => navigate('/blog')}
+                    onClick={() => navigate('/projects')}
                     className="text-gray-500 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2"
                 >
-                    <span>←</span><span className="hidden sm:inline"> Tüm Makaleler</span>
+                    <span>←</span><span className="hidden sm:inline"> Tüm Projeler</span>
                 </button>
-                {relatedPosts.length > 0 && (
+                {relatedProjects.length > 0 && (
                     <NavLink
-                        to={`/blog/${relatedPosts[0].slug}`}
+                        to={`/projects/${relatedProjects[0].slug}`}
                         className="text-gray-500 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2"
                     >
-                        <span className="hidden sm:inline">Sonraki Makale </span><span>→</span>
+                        <span className="hidden sm:inline">Sonraki Proje </span><span>→</span>
                     </NavLink>
                 )}
             </div>
@@ -189,4 +214,4 @@ const BlogPostPage: React.FC = () => {
     );
 };
 
-export default BlogPostPage;
+export default ProjectDetailPage;
