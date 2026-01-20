@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -8,7 +8,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = memo(({ children }) => {
   const { pathname } = useLocation();
 
   useLayoutEffect(() => {
@@ -35,25 +35,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans antialiased bg-black text-white selection:bg-brand-orange selection:text-black relative">
-      {/* Skip to main content link for keyboard navigation */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[10001] focus:px-6 focus:py-3 focus:bg-brand-orange focus:text-black focus:font-semibold focus:rounded-lg focus:shadow-2xl focus:outline-none focus:ring-4 focus:ring-brand-orange/50"
-        aria-label="Ana içeriğe geç"
-      >
-        Ana İçeriğe Geç
-      </a>
-
       {/* 3D Animated Background - Rendered once, persists across routes */}
       <Background3D />
       
       <Navbar />
-      <main id="main-content" className="flex-grow w-full relative z-10" tabIndex={-1}>
+      <main className="flex-grow w-full relative z-10">
         {children}
       </main>
       <Footer />
     </div>
   );
-};
+});
+
+Layout.displayName = 'Layout';
 
 export default Layout;
