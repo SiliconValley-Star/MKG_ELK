@@ -37,7 +37,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Anahtar Teslim",
         deployment_time: "3-6 Ay",
         capacity_level: "Endüstriyel",
-        image: "/images/services/service-01.jpg"
+        image: "/images/services/service-01.jpg",
+        metaDescription: "Orta Gerilim trafo merkezi kurulumu: 1kV-36kV enerji temin, OG hücre montajı, kablo başlıkları, röle koordinasyonu. Endüstriyel tesisler için anahtar teslim çözümler.",
+        keywords: ["orta gerilim", "trafo merkezi", "OG hücre", "enerji temin", "kablo başlığı", "röle koordinasyonu", "elektrik taahhüt", "endüstriyel enerji"],
+        ogImage: "/images/services/service-01.jpg"
     },
     {
         id: "AG-02",
@@ -60,7 +63,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Tam Kurulum",
         deployment_time: "2-4 Ay",
         capacity_level: "Tüm Ölçekler",
-        image: "/images/services/service-02.jpg"
+        image: "/images/services/service-02.jpg",
+        metaDescription: "Alçak Gerilim dağıtım panoları: ADP/MCC motor kontrol, kompanzasyon sistemleri, kuvvetli akım tesisatı. Modüler ve genişletilebilir enerji dağıtımı.",
+        keywords: ["alçak gerilim", "dağıtım panosu", "MCC motor kontrol", "kompanzasyon", "kuvvetli akım", "ADP pano", "enerji dağıtımı", "elektrik panosu"],
+        ogImage: "/images/services/service-02.jpg"
     },
     {
         id: "JEN-03",
@@ -83,7 +89,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Anahtar Teslim",
         deployment_time: "1-3 Ay",
         capacity_level: "Kurumsal",
-        image: "/images/services/service-03.jpg"
+        image: "/images/services/service-03.jpg",
+        metaDescription: "Jeneratör ve UPS sistemleri: Dizel jeneratör grubu, kesintisiz güç kaynağı, ATS otomatik transfer, senkronizasyon panoları. 7/24 enerji sürekliliği.",
+        keywords: ["jeneratör", "UPS", "kesintisiz güç", "ATS transfer", "senkronizasyon", "dizel jeneratör", "yedekleme sistemi", "enerji sürekliliği"],
+        ogImage: "/images/services/service-03.jpg"
     },
     // GRUP 2: ALTYAPI
     {
@@ -107,7 +116,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Tam Kurulum",
         deployment_time: "2-4 Hafta",
         capacity_level: "Tüm Ölçekler",
-        image: "/images/services/service-04.jpg"
+        image: "/images/services/service-04.jpg",
+        metaDescription: "Topraklama ve yıldırımdan koruma: Temel topraklama, paratoner, faraday kafesi, eşpotansiyel dengeleme. Standartlara uygun can ve mal güvenliği.",
+        keywords: ["topraklama", "yıldırımdan koruma", "paratoner", "faraday kafesi", "temel topraklama", "eşpotansiyel", "aktif paratoner", "güvenlik sistemleri"],
+        ogImage: "/images/services/service-04.jpg"
     },
     {
         id: "KBL-05",
@@ -130,7 +142,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Tam Kurulum",
         deployment_time: "1-2 Ay",
         capacity_level: "Tüm Ölçekler",
-        image: "/images/services/service-05.jpg"
+        image: "/images/services/service-05.jpg",
+        metaDescription: "Kablo taşıma ve aydınlatma: Bus-bar enerji dağıtımı, tava/merdiven kablo sistemleri, dahili/harici aydınlatma, priz tesisatı. Enerji verimliliği odaklı.",
+        keywords: ["bus-bar", "kablo taşıma", "aydınlatma sistemleri", "tava sistemi", "kablo merdiveni", "priz tesisatı", "çevre aydınlatma", "LED aydınlatma"],
+        ogImage: "/images/services/service-05.jpg"
     },
     {
         id: "OTO-06",
@@ -153,7 +168,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Yazılım + Donanım",
         deployment_time: "2-4 Ay",
         capacity_level: "Kurumsal",
-        image: "/images/services/service-06.jpg"
+        image: "/images/services/service-06.jpg",
+        metaDescription: "Bina ve mekanik otomasyon: BMS sistem, enerji takibi, DALI/KNX aydınlatma kontrolü, akıllı sayaç. Enerji verimliliği ve merkezi yönetim.",
+        keywords: ["BMS otomasyon", "mekanik otomasyon", "enerji takibi", "DALI", "KNX", "akıllı sayaç", "aydınlatma kontrolü", "enerji yönetimi"],
+        ogImage: "/images/services/service-06.jpg"
     },
     // GRUP 3: ZAYIF AKIM
     {
@@ -178,7 +196,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Entegre Sistem",
         deployment_time: "1-2 Ay",
         capacity_level: "Tüm Ölçekler",
-        image: "/images/services/service-07.jpg"
+        image: "/images/services/service-07.jpg",
+        metaDescription: "Güvenlik ve zayıf akım sistemleri: Yangın ihbar, CCTV kamera, kartlı geçiş, gazlı söndürme, hırsız alarm. Entegre güvenlik çözümleri.",
+        keywords: ["yangın ihbar", "CCTV", "kartlı geçiş", "zayıf akım", "gazlı söndürme", "hırsız alarm", "güvenlik sistemi", "yangın algılama"],
+        ogImage: "/images/services/service-07.jpg"
     },
     {
         id: "ILT-08",
@@ -201,7 +222,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Tam Entegrasyon",
         deployment_time: "1-2 Ay",
         capacity_level: "Tüm Ölçekler",
-        image: "/images/services/service-08.jpg"
+        image: "/images/services/service-08.jpg",
+        metaDescription: "İletişim ve data altyapısı: Telefon santrali, yapısal kablolama Cat6/Cat7/Fiber, data dağıtım, merkezi saat, rack kabinet düzenlemesi.",
+        keywords: ["telefon santrali", "data altyapısı", "yapısal kablolama", "fiber optik", "Cat6", "Cat7", "network altyapısı", "merkezi saat"],
+        ogImage: "/images/services/service-08.jpg"
     },
     {
         id: "AV-09",
@@ -226,7 +250,10 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Profesyonel Kurulum",
         deployment_time: "1-2 Ay",
         capacity_level: "Ticari",
-        image: "/images/services/service-09.jpg"
+        image: "/images/services/service-09.jpg",
+        metaDescription: "Profesyonel ses ve görüntü sistemleri: Seslendirme, acil anons, SMATV/IPTV, simultane tercüme, konferans, projeksiyon. AV entegrasyonu.",
+        keywords: ["seslendirme", "acil anons", "SMATV", "IPTV", "simultane tercüme", "konferans sistemi", "projeksiyon", "AV sistem"],
+        ogImage: "/images/services/service-09.jpg"
     },
     {
         id: "OZL-10",
@@ -249,6 +276,9 @@ export const SERVICES_DATA: ServiceItem[] = [
         scope: "Özel Tasarım",
         deployment_time: "1-2 Ay",
         capacity_level: "Sektörel",
-        image: "/images/services/service-10.jpg"
+        image: "/images/services/service-10.jpg",
+        metaDescription: "Özel çağrı ve interkom sistemleri: Hemşire çağrı, görüntülü kapı görüşme, sıramatik, bina giriş kontrol. Sektörel özel çözümler.",
+        keywords: ["hemşire çağrı", "görüntülü interkom", "kapı görüşme", "sıramatik", "bina kontrol", "acil çağrı", "diyafon", "sağlık tesisi"],
+        ogImage: "/images/services/service-10.jpg"
     }
 ];

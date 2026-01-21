@@ -43,7 +43,10 @@ export const PROJECTS: Project[] = [
             { label: "Şube", value: "30+ Lokasyon" },
             { label: "Sektör", value: "Finans" },
             { label: "Güven", value: "Çözüm Ortağı" }
-        ]
+        ],
+        metaDescription: "VakıfBank Türkiye geneli 30+ şube elektrik altyapısı: UPS, ATM güç sistemleri, data center, yangın algılama ve banka güvenlik çözümleri. 8 yıllık başarılı ortaklık.",
+        keywords: ["vakıfbank elektrik", "banka güvenlik sistemleri", "ATM altyapısı", "UPS sistemleri", "data center", "banka elektrik taahhüt", "yangın algılama", "finansal güvenlik"],
+        ogImage: "/images/projects/vakifbank-hq.jpg"
     },
     {
         id: "PRJ-2016-FBA",
@@ -75,7 +78,10 @@ export const PROJECTS: Project[] = [
             { label: "İklim", value: "Pano Soğutma" },
             { label: "Lokasyon", value: "Antalya" },
             { label: "Altyapı", value: "Kesintisiz" }
-        ]
+        ],
+        metaDescription: "Fibabanka Antalya dijital şube: Kiosk altyapısı, pano soğutma, UPS, dinamik aydınlatma. Sıcak iklim koşullarına özel elektrik ve güvenlik sistemleri.",
+        keywords: ["fibabanka", "dijital bankacılık", "kiosk altyapısı", "pano soğutma", "antalya banka", "UPS sistemleri", "güvenlik kamera", "tablet bankacılık"],
+        ogImage: "/images/projects/fibabanka-antalya.jpg"
     },
     {
         id: "PRJ-2017-HLK",
@@ -107,7 +113,10 @@ export const PROJECTS: Project[] = [
             { label: "Enerji", value: "Regüleli" },
             { label: "Lokasyon", value: "Muş" },
             { label: "Güvenlik", value: "Maksimum" }
-        ]
+        ],
+        metaDescription: "Halkbank Malazgirt Muş: Ağır iklim koşullarına dayanıklı elektrik altyapısı, voltaj regülatörü, jeneratör, ATM ısıtma ve maksimum güvenlik sistemleri.",
+        keywords: ["halkbank malazgirt", "ağır iklim elektrik", "voltaj regülatörü", "jeneratör sistemi", "ATM ısıtma", "banka güvenlik", "zorlu iklim", "muş elektrik"],
+        ogImage: "/images/projects/halkbank-malazgirt.jpg"
     },
     {
         id: "PRJ-2024-001",
@@ -139,7 +148,10 @@ export const PROJECTS: Project[] = [
             { label: "Kapalı Alan", value: "12.000 m²" },
             { label: "Proje Süresi", value: "6 Ay" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Okyanus Alüminyum 12.000 m² üretim tesisi: 2500 kVA OG/AG sistemleri, busbar enerji dağıtımı, trafo merkezi ve LED otomasyon. IEC standartlarında anahtar teslim proje.",
+        keywords: ["alüminyum fabrika elektrik", "OG hücre", "AG dağıtım", "busbar sistemi", "trafo merkezi", "endüstriyel otomasyon", "fabrika elektrik", "esenyurt sanayi"],
+        ogImage: "/images/projects/okyanus-aluminyum.jpg"
     },
     {
         id: "PRJ-2023-084",
@@ -171,7 +183,10 @@ export const PROJECTS: Project[] = [
             { label: "Tesis Alanı", value: "8.500 m²" },
             { label: "CNC Hattı", value: "Enerji Besleme" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Yelken Kalıp 8.500 m² metal tesis: CNC makine parkı beslemesi, harmonik filtreli kompanzasyon, busbar modüler dağıtım. 1600 kVA güç altyapısı ve akıllı bina sistemleri.",
+        keywords: ["CNC makine elektrik", "harmonik filtreleme", "metal fabrika", "kalıp sanayi", "busbar dağıtım", "OG hücre", "enjeksiyon makinesi", "akıllı bina"],
+        ogImage: "/images/projects/yelken-kalip.jpg"
     },
     {
         id: "PRJ-2023-012",
@@ -203,7 +218,10 @@ export const PROJECTS: Project[] = [
             { label: "Kapalı Alan", value: "15.000 m²" },
             { label: "Makine Parkı", value: "Entegre" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Celal Tekstil 15.000 m² entegre tesis: 2500 kVA trafo, senkron jeneratör, DALI LED otomasyon. Tekstil makineleri özel pano tasarımı ve busbar enerji hattı.",
+        keywords: ["tekstil fabrika elektrik", "senkron jeneratör", "DALI aydınlatma", "tekstil makine", "busbar enerji", "trafo merkezi", "entegre tesis", "hadımköy"],
+        ogImage: "/images/projects/celal-tekstil.jpg"
     },
     {
         id: "PRJ-2022-045",
@@ -235,7 +253,10 @@ export const PROJECTS: Project[] = [
             { label: "Motor Gücü", value: "850 kW" },
             { label: "Otomasyon", value: "SCADA" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Enviropet geri dönüşüm tesisi: MCC motor kontrol panoları IP54, SCADA enerji izleme, 850 kW motor sürücüleri. Soft starter ve reaktif güç kompanzasyonu ile enerji verimliliği.",
+        keywords: ["MCC panolar", "motor kontrol", "SCADA sistemi", "geri dönüşüm tesis", "soft starter", "enerji verimliliği", "motor sürücü", "reaktif güç"],
+        ogImage: "/images/projects/enviropet.jpg"
     },
     {
         id: "PRJ-2022-018",
@@ -267,7 +288,10 @@ export const PROJECTS: Project[] = [
             { label: "Kurulu Güç", value: "800 kVA" },
             { label: "Soğuk Oda", value: "Otomasyon" },
             { label: "Lokasyon", value: "Ardahan" }
-        ]
+        ],
+        metaDescription: "Ardahan Et 10.000 m² entegre tesis: Soğuk hava depo otomasyonu, HACCP hijyenik aydınlatma IP65, 500 kVA jeneratör. Gıda güvenliği standartlarında kesintisiz enerji.",
+        keywords: ["soğuk hava deposu", "gıda tesisi elektrik", "HACCP aydınlatma", "hijyenik alan", "et entegre", "jeneratör sistemi", "soğuk zincir", "ardahan"],
+        ogImage: "/images/projects/ardahan-et.jpg"
     },
     {
         id: "PRJ-2022-092",
@@ -299,7 +323,10 @@ export const PROJECTS: Project[] = [
             { label: "Otomasyon", value: "KNX" },
             { label: "Mimari", value: "YAF Mimarlık" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Florya lüks villalar KNX akıllı ev: Aydınlatma/perde/ısıtma otomasyonu, gizli LED tasarım, CCTV güvenlik, görüntülü interkom. YAF Mimarlık işbirliği ile 3 prestij villa.",
+        keywords: ["KNX akıllı ev", "lüks villa otomasyon", "florya villa", "akıllı aydınlatma", "gizli LED", "villa güvenlik", "görüntülü interkom", "prestij konut"],
+        ogImage: "/images/projects/florya-villalari.jpg"
     },
     {
         id: "PRJ-2021-067",
@@ -331,7 +358,10 @@ export const PROJECTS: Project[] = [
             { label: "Şarj İstasyonu", value: "AC/DC" },
             { label: "Aydınlatma", value: "Yüksek CRI" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "General Oto Maslak 5.000 m² plaza: Showroom yüksek CRI aydınlatma, EV şarj istasyonları AC/DC, servis güç dağıtımı. Peugeot & Citroen için modern otomotiv altyapısı.",
+        keywords: ["EV şarj istasyonu", "showroom aydınlatma", "otomotiv plaza", "yüksek CRI", "elektrikli araç", "servis elektrik", "peugeot citroen", "maslak"],
+        ogImage: "/images/projects/general-oto.jpg"
     },
     {
         id: "PRJ-2021-033",
@@ -363,7 +393,10 @@ export const PROJECTS: Project[] = [
             { label: "Data Uç", value: "850+" },
             { label: "Ürün Grubu", value: "Legrand" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Legrand Ümraniye 3.500 m² ofis: Yapısal kablolama Cat6A, döşeme altı dağıtım, modüler UPS 120 kVA, 850+ data ucu. Legrand premium ürünlerle kurumsal otomasyon.",
+        keywords: ["legrand ofis", "yapısal kablolama", "modüler UPS", "döşeme altı dağıtım", "cat6a", "ofis otomasyonu", "kartlı geçiş", "ümraniye"],
+        ogImage: "/images/projects/legrand.jpg"
     },
     {
         id: "PRJ-2021-098",
@@ -395,7 +428,10 @@ export const PROJECTS: Project[] = [
             { label: "Altyapı", value: "Fiber Optik" },
             { label: "Teknoloji", value: "Akıllı Sınıf" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "İKÜ Ataköy kampüs: Fiber optik backbone, akıllı amfi ses/görüntü, laboratuvar regüleli güç, DALI aydınlatma otomasyonu, 600 kVA UPS. Modern eğitim teknoloji altyapısı.",
+        keywords: ["üniversite kampüs elektrik", "fiber optik", "akıllı sınıf", "laboratuvar güç", "DALI otomasyon", "kampüs network", "amfi ses sistemi", "ataköy"],
+        ogImage: "/images/projects/kultur-universitesi.jpg"
     },
     {
         id: "PRJ-2020-054",
@@ -427,7 +463,10 @@ export const PROJECTS: Project[] = [
             { label: "Güvenlik", value: "Tam Kapsam" },
             { label: "Eğitim", value: "Akıllı" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Kültür Koleji Ataköy 1000+ öğrenci: Akıllı tahta interaktif eğitim, CCTV güvenlik, konferans ses/ışık, spor salonu otomasyon. LED acil aydınlatma ve yemekhane altyapısı.",
+        keywords: ["okul elektrik", "akıllı tahta", "interaktif eğitim", "okul güvenlik", "CCTV kamera", "konferans ses", "spor salonu", "acil aydınlatma"],
+        ogImage: "/images/projects/kultur-koleji.jpg"
     },
     {
         id: "PRJ-2020-041",
@@ -459,7 +498,10 @@ export const PROJECTS: Project[] = [
             { label: "Laboratuvar", value: "Tam Donanım" },
             { label: "Network", value: "Cat6/Fiber" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "İKÜ İncirli MYO: Bilgisayar lab güç/data, atölye enerji dağıtımı, Wi-Fi 6 kampüs network, IP CCTV güvenlik, geçiş kontrol. Cat6/Fiber altyapısı ve pano revizyonu.",
+        keywords: ["meslek yüksekokulu", "laboratuvar altyapı", "Wi-Fi 6", "atölye elektrik", "IP CCTV", "geçiş kontrol", "kampüs network", "bahçelievler"],
+        ogImage: "/images/projects/incirli-myo.jpg"
     },
     {
         id: "PRJ-2020-015",
@@ -491,7 +533,10 @@ export const PROJECTS: Project[] = [
             { label: "Revizyon", value: "Tam Kapsam" },
             { label: "Aydınlatma", value: "LED" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Alkent 2000 villa sitesi: LED çevre aydınlatma, OG ring şebeke bakımı, havuz otomasyonu IP65, plaka tanıma güvenlik. Sosyal tesis ve spor alanları pano revizyonu.",
+        keywords: ["villa site elektrik", "çevre aydınlatma", "OG ring şebeke", "havuz otomasyonu", "plaka tanıma", "LED dönüşüm", "site güvenlik", "büyükçekmece"],
+        ogImage: "/images/projects/alkent-2000.jpg"
     },
     {
         id: "PRJ-2020-008",
@@ -523,7 +568,10 @@ export const PROJECTS: Project[] = [
             { label: "Otomasyon", value: "Full KNX" },
             { label: "Ses", value: "Multi-Room" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Pelican Hill özel villa: Full KNX akıllı ev, Dolby Atmos ev sineması, multi-room ses dağıtımı, RGB havuz aydınlatması. Parmak izi güvenlik ve VRF entegrasyonu.",
+        keywords: ["KNX akıllı villa", "ev sineması Dolby Atmos", "multi-room ses", "lüks villa otomasyon", "RGB havuz", "parmak izi güvenlik", "VRF klima", "pelican hill"],
+        ogImage: "/images/projects/pelican-hill.jpg"
     },
     {
         id: "PRJ-2020-003",
@@ -555,7 +603,10 @@ export const PROJECTS: Project[] = [
             { label: "Kritik", value: "Soğuk Zincir" },
             { label: "Güvenlik", value: "7/24" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Aksa Et Mega Center: Soğuk zincir yedekli enerji, ATS jeneratör, market LED aydınlatma, 7/24 CCTV, yangın algılama. Gıda güvenliği için kesintisiz elektrik altyapısı.",
+        keywords: ["soğuk zincir elektrik", "gıda market", "ATS jeneratör", "soğuk hava", "market aydınlatma", "CCTV güvenlik", "mega center", "bayrampaşa"],
+        ogImage: "/images/projects/aksa-gida.jpg"
     },
     {
         id: "PRJ-2019-077",
@@ -587,7 +638,10 @@ export const PROJECTS: Project[] = [
             { label: "Güvenlik", value: "Üst Düzey" },
             { label: "Kablolama", value: "HFFR" },
             { label: "Standart", value: "Uluslararası" }
-        ]
+        ],
+        metaDescription: "Cups & Clouds İstanbul Havalimanı: HFFR halogen-free kablolama, IGA teknik şartname uyumu, dekoratif aydınlatma, yangın güvenliği, mutfak ekipman güç beslemesi.",
+        keywords: ["havalimanı elektrik", "HFFR kablo", "IGA standart", "cafe elektrik", "yangın güvenliği", "dekoratif aydınlatma", "mutfak güç", "istanbul havalimanı"],
+        ogImage: "/images/projects/cups-clouds.jpg"
     },
     {
         id: "PRJ-2019-021",
@@ -619,7 +673,10 @@ export const PROJECTS: Project[] = [
             { label: "Aydınlatma", value: "DALI Dim" },
             { label: "Kalite", value: "Premium" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Roche Bobois Skyland showroom: DALI dimlenebilir ray spot CRI>95, mimari gizli LED, yangın algılama, trifaze ray sistem. Premium mobilya için profesyonel aydınlatma.",
+        keywords: ["showroom aydınlatma", "DALI dim", "yüksek CRI", "roche bobois", "ray spot", "mobilya showroom", "skyland", "gizli LED"],
+        ogImage: "/images/projects/roche-bobois.jpg"
     },
     {
         id: "PRJ-2018-055",
@@ -651,7 +708,10 @@ export const PROJECTS: Project[] = [
             { label: "Otomasyon", value: "GRMS" },
             { label: "Enerji", value: "Saver" },
             { label: "Lokasyon", value: "Tarihi Yarımada" }
-        ]
+        ],
+        metaDescription: "Biancho Hotel Old City Fatih: GRMS oda otomasyonu, kartlı energy saver, DND/MUR paneller, yangın algılama, cephe aydınlatma. Butik otel jeneratör ve UPS altyapısı.",
+        keywords: ["otel otomasyonu", "GRMS sistem", "energy saver", "DND MUR", "butik otel", "kartlı sistem", "tarihi yarımada", "fatih otel"],
+        ogImage: "/images/projects/biancho-hotel.jpg"
     },
     {
         id: "PRJ-2018-089",
@@ -683,7 +743,10 @@ export const PROJECTS: Project[] = [
             { label: "Manzara", value: "Teras Aydınlatma" },
             { label: "Bağlantı", value: "Yüksek Hız" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Biancho Hotel Pera Beyoğlu: Teras restoran ambiyans aydınlatma, yüksek hızlı Wi-Fi, IP CCTV güvenlik, oda multimedya, yangın algılama. İstanbul manzaralı otel altyapısı.",
+        keywords: ["pera otel", "teras aydınlatma", "otel Wi-Fi", "IP CCTV", "restoran aydınlatma", "multimedya", "beyoğlu otel", "istanbul manzara"],
+        ogImage: "/images/projects/biancho-pera.jpg"
     },
     {
         id: "PRJ-2019-112",
@@ -715,7 +778,10 @@ export const PROJECTS: Project[] = [
             { label: "Standart", value: "IEC 61439" },
             { label: "Verimlilik", value: "İzlenebilir" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Mövenpick Hotel Boğaz: Ana dağıtım panosu revizyonu IEC 61439, termal analiz, enerji analizörleri, kompanzasyon iyileştirme, ATS bakımı. 5 yıldız otel pano modernizasyonu.",
+        keywords: ["otel pano revizyonu", "IEC 61439", "termal analiz", "enerji analizör", "kompanzasyon", "ATS sistemi", "mövenpick", "boğaz otel"],
+        ogImage: "/images/projects/movenpick-bosphorus.jpg"
     },
     {
         id: "PRJ-2018-042",
@@ -747,7 +813,10 @@ export const PROJECTS: Project[] = [
             { label: "Medikal", value: "İzole Güç" },
             { label: "Standart", value: "JCI" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Vera Clinic 30.000 m² sağlık: Medikal IT izole güç, ameliyathane steril aydınlatma, BMS otomasyon, 800 kVA UPS, hasta çağrı sistemi. JCI standartlarında tıbbi altyapı.",
+        keywords: ["medikal elektrik", "IT izole güç", "ameliyathane aydınlatma", "BMS otomasyon", "JCI standart", "hasta çağrı", "sağlık tesisi", "kartal"],
+        ogImage: "/images/projects/vera-clinic.jpg"
     },
     {
         id: "PRJ-2018-019",
@@ -779,7 +848,10 @@ export const PROJECTS: Project[] = [
             { label: "Aydınlatma", value: "Medikal" },
             { label: "Konfor", value: "Hasta Odaklı" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Estevera Şişli estetik klinik: Medikal operasyon aydınlatması, UPS hassas cihaz hattı, regüleli priz, dekoratif bekleme alanı, network ve IP telefon santrali.",
+        keywords: ["estetik klinik elektrik", "medikal aydınlatma", "UPS hassas cihaz", "regüleli priz", "saç ekim", "klinik otomasyon", "şişli", "esentepe"],
+        ogImage: "/images/projects/estevera-saglik.jpg"
     },
     {
         id: "PRJ-2017-063",
@@ -811,7 +883,10 @@ export const PROJECTS: Project[] = [
             { label: "Manzara", value: "Deniz" },
             { label: "Altyapı", value: "Modüler" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Yalı Ataköy deniz manzaralı ofis: Döşeme altı busbar, KNX oda otomasyonu, lineer LED, biyometrik geçiş, toplantı ses/görüntü sistemi. A+ premium ofis modüler altyapı.",
+        keywords: ["premium ofis elektrik", "döşeme altı busbar", "KNX otomasyon", "biyometrik geçiş", "toplantı odası", "lineer LED", "ataköy ofis", "deniz manzara"],
+        ogImage: "/images/projects/yali-atakoy.jpg"
     },
     {
         id: "PRJ-2016-092",
@@ -843,6 +918,9 @@ export const PROJECTS: Project[] = [
             { label: "Dağıtım", value: "Busbar" },
             { label: "Otopark", value: "Jet Fan" },
             { label: "Lokasyon", value: "İstanbul" }
-        ]
+        ],
+        metaDescription: "Otto Ataşehir Lankon mixed-use: Dikey busbar enerji, akıllı ev altyapı, CO algılama jet fan, görüntülü interkom, ticari shell & core. 3-4 kat karma kullanım projesi.",
+        keywords: ["karma proje elektrik", "busbar dağıtım", "jet fan CO", "akıllı ev", "görüntülü interkom", "shell core", "ataşehir", "finans merkezi"],
+        ogImage: "/images/projects/otto-atasehir.jpg"
     }
 ];

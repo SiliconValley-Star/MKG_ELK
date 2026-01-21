@@ -8,6 +8,9 @@ export const blogPosts: BlogPost[] = [
         size: "large",
         category: "Endüstri",
         excerpt: "Robotların insanların yerini aldığı değil, insanlarla işbirliği yaptığı yeni bir çağ başlıyor. Endüstri 5.0'ın üretim süreçlerine etkisini inceliyoruz.",
+        metaDescription: "Endüstri 5.0 ile insan-makine işbirliği: Cobot teknolojileri, kişiselleştirilmiş üretim ve sürdürülebilir otomasyon çözümleri. MKG Elektromekanik'in uzman görüşleri.",
+        keywords: ["Endüstri 5.0", "Cobot", "İnovasyon", "İnsan-Makine İşbirliği", "Sürdürülebilir Üretim", "Akıllı Fabrika"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/endustriyel-otomasyon.jpg",
         content: `
             <p>Endüstri 4.0, fabrikalarımızı akıllı hale getirdi, verileri birbirine bağladı ve IoT devrimini başlattı. Ancak şimdi, ufukta yeni bir paradigma var: <strong>Endüstri 5.0</strong>.</p>
             
@@ -35,6 +38,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Endüstri",
         excerpt: "Fiziksel yatırım yapmadan önce fabrikanızı sanal ortamda çalıştırın. Hataları sıfıra indiren simülasyon teknolojileri.",
+        metaDescription: "Dijital İkiz (Digital Twin) teknolojisi ile sanal devreye alma, risk yönetimi ve simülasyon. PLC kodlarını test edin, darboğazları önceden tespit edin.",
+        keywords: ["Dijital İkiz", "Digital Twin", "Simülasyon", "Sanal Devreye Alma", "PLC Test", "Risk Yönetimi", "Siemens NX MCD"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/dijital-ikiz.jpg",
         content: `
             <p>Bir montaj hattını kurmak milyonlarca dolarlık bir yatırımdır. Peki ya bu hattı kurmadan önce, sanal bir ortamda 1 yıl boyunca çalıştırabilseydiniz?</p>
             
@@ -63,6 +69,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Energy",
         excerpt: "Artan enerji maliyetlerine karşı en güçlü silahınız: Gerçek zamanlı izleme ve yapay zeka destekli analiz.",
+        metaDescription: "SCADA sistemleri ile enerji verimliliği: Gerçek zamanlı izleme, pik yük analizi, kestirimci bakım ve ISO 50001 uyumlu enerji yönetimi çözümleri.",
+        keywords: ["Enerji Verimliliği", "SCADA", "Enerji Yönetimi", "ISO 50001", "Kestirimci Bakım", "Güç Faktörü"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/enerji-scada.jpg",
         content: `
             <p>Enerji maliyetleri, endüstriyel tesislerin en büyük operasyonel giderlerinden biridir. Geleneksel sayaç okuma yöntemleri artık yeterli değil.</p>
             
@@ -90,6 +99,9 @@ export const blogPosts: BlogPost[] = [
         size: "large",
         category: "Güvenlik",
         excerpt: "Fabrika ağlarınızın internete açılması büyük fırsatlar sunarken, yeni tehditleri de beraberinde getiriyor. IEC 62443 standardı nedir?",
+        metaDescription: "OT/IT yakınsaması ve endüstriyel siber güvenlik: IEC 62443 standardı, derinlemesine savunma, ağ segmentasyonu ve endüstriyel güvenlik duvarları.",
+        keywords: ["Siber Güvenlik", "OT/IT Yakınsaması", "IEC 62443", "Endüstriyel Güvenlik", "SCADA Güvenlik", "Network Segmentation"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/siber-guvenlik.jpg",
         content: `
             <p>Operasyonel Teknoloji (OT) ve Bilgi Teknolojisi (IT) arasındaki duvarlar yıkılıyor. Bu yakınsama, <strong>gerçek zamanlı veri analizi</strong>, uzaktan izleme ve kestirimci bakım gibi muazzam fırsatlar sunarken, aynı zamanda üretim hatlarını siber saldırılara karşı savunmasız bırakabiliyor.</p>
             
@@ -126,6 +138,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Robotik",
         excerpt: "Yazılımsal robotlar ve fiziksel robotların entegrasyonu. Uçtan uca siparişten üretime otomasyon.",
+        metaDescription: "RPA (Robotik Proses Otomasyonu) ve Hyperautomation: ERP entegrasyonu, fiziksel robotlarla entegrasyon, yapay zeka destekli süreç otomasyonu çözümleri.",
+        keywords: ["RPA", "Robotik Proses Otomasyonu", "Hyperautomation", "ERP Entegrasyonu", "Dijital Dönüşüm", "Yazılım Robotları"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/robotik-rpa.jpg",
         content: `
             <p>Siparişin ERP'ye düşmesinden robot kolunun ürünü paletlemesine kadar geçen süreç artık tek bir kesintisiz akış haline geliyor. Bu dönüşümün merkezinde <strong>Robotik Proses Otomasyonu (RPA)</strong> yer alıyor.</p>
             
@@ -161,6 +176,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Energy",
         excerpt: "Sürdürülebilirlik hedeflerine ulaşmak için akıllı sensörler ve optimize edilmiş algoritmalar nasıl kullanılır?",
+        metaDescription: "Yeşil üretim ve karbon ayak izi azaltma: Enerji optimizasyonu, malzeme israfını önleme, su kullanımı izleme ve net sıfır fabrika çözümleri.",
+        keywords: ["Yeşil Üretim", "Karbon Ayak İzi", "Sürdürülebilirlik", "Enerji Optimizasyonu", "Net Sıfır", "Çevre Dostu Otomasyon"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/yesil-enerji.jpg",
         content: `
             <p>İklim krizi, küresel ısınma ve artan çevre düzenlemeleri karşısında endüstriyel tesisler artık sadece kârlılık değil, aynı zamanda <strong>çevresel sürdürülebilirlik</strong> ile de değerlendiriliyor. Yeşil üretim, bu iki hedefi uzlaştırmanın yolu olarak öne çıkıyor.</p>
             
@@ -252,6 +270,9 @@ export const blogPosts: BlogPost[] = [
         size: "large",
         category: "Yazılım",
         excerpt: "Arıza oluşmadan önce müdahale edin. Titreşim ve sıcaklık verilerinin AI ile analizi.",
+        metaDescription: "Kestirimci bakım (Predictive Maintenance) ve makine öğrenmesi: Titreşim analizi, sıcaklık izleme, arıza tahmini ve %70 duruş süresi azaltma.",
+        keywords: ["Kestirimci Bakım", "Predictive Maintenance", "Makine Öğrenmesi", "AI", "Titreşim Analizi", "Yapay Zeka"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/dijital-ikiz.jpg",
         content: `
             <p>Geleneksel bakım stratejileri artık yetersiz kalıyor. <strong>Reaktif bakım</strong> (arıza olunca müdahale) maliyetli, <strong>periyodik bakım</strong> ise gereksiz duruşlara neden oluyor. Cevap: <em>Kestirimci Bakım (Predictive Maintenance)</em>.</p>
             
@@ -298,6 +319,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Yazılım",
         excerpt: "Verilerinize dünyanın her yerinden güvenli erişim. On-premise vs Cloud SCADA karşılaştırması.",
+        metaDescription: "Bulut SCADA sistemleri: AWS, Azure entegrasyonu, uzaktan izleme, çoklu tesis yönetimi, hibrit mimari ve edge computing çözümleri.",
+        keywords: ["Bulut SCADA", "Cloud SCADA", "AWS IoT", "Azure", "Uzaktan İzleme", "Edge Computing", "IIoT"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/bulut-scada.jpg",
         content: `
             <p>Geleneksel SCADA (Supervisory Control and Data Acquisition) sistemleri, genellikle fabrika içindeki yerel sunucularda (on-premise) çalışır. Ancak dijital dönüşüm çağında, <strong>bulut tabanlı SCADA</strong> mimarisi giderek daha fazla tercih ediliyor.</p>
             
@@ -403,6 +427,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Endüstri",
         excerpt: "Gigafactory'ler için yüksek hızlı montaj hatları ve temiz oda otomasyonu gereklilikleri.",
+        metaDescription: "Lityum-iyon batarya üretimi: Gigafactory otomasyonu, temiz oda gereklilikleri, elektrot üretimi, MBR/RO sistemleri ve solid-state batarya teknolojileri.",
+        keywords: ["Batarya Üretimi", "Elektrikli Araç", "Lityum-iyon", "Gigafactory", "Temiz Oda", "Solid-State", "EV Battery"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/batarya-uretim.jpg",
         content: `
             <p>Elektrikli araç (EV) pazarı patlamaya hazırlanıyor. 2026 yılında küresel EV satışlarının 25 milyonu aşması bekleniyor. Bu devrimin kalbinde ise <strong>lityum-iyon bataryalar</strong> yer alıyor. Ancak batarya üretimi, otomotiv sektöründeki en karmaşık ve hassas süreçlerden biridir.</p>
             
@@ -503,6 +530,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Endüstri",
         excerpt: "Çiftlikten çatala tam izlenebilirlik. Barkod, RFID ve görüntü işleme sistemleri.",
+        metaDescription: "Gıda güvenliği ve izlenebilirlik: RFID, barkod sistemleri, blockchain entegrasyonu, soğuk zincir izleme ve HACCP uyumlu otomasyon çözümleri.",
+        keywords: ["Gıda Güvenliği", "İzlenebilirlik", "RFID", "Blockchain", "HACCP", "ISO 22000", "Soğuk Zincir"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/gida-guvenligi.jpg",
         content: `
             <p>Gıda güvenliği, tüketici sağlığını korumak ve marka itibarını sürdürmek açısından kritik önem taşır. Bir gıda ürününün çiftlikten sofraya kadar olan yolculuğunu izlemek, <strong>izlenebilirlik (traceability)</strong> ile mümkündür. 2026'da AB ve Türk gıda mevzuatı, tam izlenebilirliği zorunlu kılıyor.</p>
             
@@ -622,6 +652,9 @@ export const blogPosts: BlogPost[] = [
         size: "large",
         category: "Energy",
         excerpt: "Geleceğin yakıtı hidrojenin üretimi, depolanması ve dağıtımı için otomasyon altyapısı.",
+        metaDescription: "Yeşil hidrojen üretimi: PEM elektrolizör, alkalin elektroliz, güvenlik otomasyonu, yüksek basınçlı depolama ve hidrojen ekonomisi altyapısı.",
+        keywords: ["Hidrojen Ekonomisi", "Yeşil Hidrojen", "PEM Elektrolizör", "Elektroliz", "Hidrojen Depolama", "Yenilenebilir Enerji"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/hidrojen-ekonomi.jpg",
         content: `
             <p>Küresel enerji dönüşümünde <strong>hidrojen</strong>, fosil yakıtlara alternatif olarak öne çıkıyor. Özellikle yeşil hidrojen (yenilenebilir enerji ile üretilen), 2050 net sıfır hedeflerine ulaşmada kilit rol oynayacak. Ancak hidrojen üretimi, depolanması ve dağıtımı karmaşık mühendislik problemleri içeriyor.</p>
             
@@ -749,6 +782,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Robotik",
         excerpt: "Karanlık depolar ve otonom yönlendirmeli araçlar (AGV) ile lojistik verimliliği.",
+        metaDescription: "AS/RS sistemleri ve AGV: Karanlık depolar, otonom araçlar, WMS entegrasyonu, pick-to-light sistemleri ve akıllı depo yönetimi çözümleri.",
+        keywords: ["AS/RS", "AGV", "Akıllı Depo", "Karanlık Depo", "WMS", "Lojistik Otomasyonu", "Otonom Araçlar"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/akilli-depo.jpg",
         content: `
             <p>E-ticaretin patlaması ve just-in-time üretim modelleri, depoculuğu darboğaz haline getirdi. Geleneksel forklift ve manuel toplama (picking) yöntemleri artık yeterli değil. <strong>Akıllı Depo Yönetimi (AS/RS - Automated Storage and Retrieval Systems)</strong>, bu soruna çözüm sunuyor.</p>
             
@@ -874,6 +910,9 @@ export const blogPosts: BlogPost[] = [
         size: "standard",
         category: "Yazılım",
         excerpt: "Spaghetti koddan modüler ve yeniden kullanılabilir yazılım mimarisine geçiş.",
+        metaDescription: "IEC 61131-3 PLC programlama standartları: Ladder Diagram, Structured Text, Function Block, SFC ve modüler kod yapısı best practices.",
+        keywords: ["PLC Programlama", "IEC 61131-3", "Structured Text", "Ladder Diagram", "Function Block", "Siemens TIA Portal"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/plc-programlama.jpg",
         content: `
             <p>PLC programlama, endüstriyel otomasyonun merkezinde yer alır. Ancak birçok fabrikada hala <em>"spaghetti kod"</em> olarak bilinen, karmaşık ve bakımı zor yazılımlar kullanılıyor. <strong>IEC 61131-3 standardı</strong>, bu soruna küresel bir çözüm getiriyor.</p>
             
@@ -1039,6 +1078,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Endüstri",
         excerpt: "Elektromanyetik uyumluluk (EMC) için topraklama ve kablolama teknikleri.",
+        metaDescription: "EMC pano tasarımı: Elektromanyetik uyumluluk, EN 61000 standardı, topraklama teknikleri, kablolama ve ekranlama metodları.",
+        keywords: ["EMC", "Elektromanyetik Uyumluluk", "Pano Tasarımı", "EN 61000", "Topraklama", "Kablolama", "CE İşareti"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/pano-tasarimi.jpg",
         content: `
             <p>Endüstriyel otomasyonda en sık karşılaşılan sorunlardan biri <strong>elektromanyetik girişim (EMI)</strong>dir. PLC'ler yanlış komutlar gönderir, sensörler hatalı okumalar yapar, HMI ekranları kilitlenir. Bunların çoğu, zayıf <strong>EMC (Electromagnetic Compatibility - Elektromanyetik Uyumluluk)</strong> tasarımından kaynaklanır.</p>
             
@@ -1187,6 +1229,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "large",
         category: "Endüstri",
         excerpt: "Sensörlerden buluta veri akışı. MQTT ve OPC-UA protokollerinin karşılaştırması.",
+        metaDescription: "IIoT (Industrial Internet of Things): MQTT vs OPC-UA, edge computing, sensör entegrasyonu, bulut platformları ve endüstriyel veri güvenliği.",
+        keywords: ["IIoT", "Industrial IoT", "MQTT", "OPC-UA", "Edge Computing", "Sensör Entegrasyonu", "Endüstri 4.0"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/iiot.jpg",
         content: `
             <p><strong>IIoT (Industrial Internet of Things)</strong>, fabrikaların dijital dönüşümünün merkezinde yer alır. Makineler, sensörler ve sistemler artık sadece çalışmıyor, aynı zamanda sürekli veri üretiyor ve birbirleriyle konuşuyor.</p>
             
@@ -1307,6 +1352,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Endüstri",
         excerpt: "Kritik altyapı tesislerinde kesintisiz ve güvenli operasyon için otomasyon çözümleri.",
+        metaDescription: "Su arıtma otomasyonu: Kimyasal dozajlama, pompa istasyonları, membran filtrasyon, SCADA sistemleri ve kritik altyapı güvenliği.",
+        keywords: ["Su Arıtma", "SCADA", "Pompa Otomasyonu", "Kimyasal Dozaj", "Membran Filtrasyon", "Kritik Altyapı"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/su-aritma.jpg",
         content: `
             <p>Temiz su erişimi, modern toplumların en temel ihtiyaçlarından biridir. Ancak artan nüfus ve iklim değişikliği, su kaynaklarını baskı altına alıyor. <strong>Akıllı su yönetimi</strong> ve <strong>otomasyon</strong>, bu zorluklarla başa çıkmanın anahtarıdır.</p>
             
@@ -1409,6 +1457,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Robotik",
         excerpt: "Daha hassas, daha hızlı, daha küçük. Yeni nesil servo sürücülerin yetenekleri.",
+        metaDescription: "Servo motor teknolojileri: AC servo, doğrudan tahrikli sistemler, EtherCAT haberleşme, hassas pozisyon kontrolü ve yeni nesil sürücü sistemleri.",
+        keywords: ["Servo Motor", "AC Servo", "Direct Drive", "EtherCAT", "Hareket Kontrolü", "Robotik", "CNC"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/servo-motor.jpg",
         content: `
             <p>Hareket kontrolü, modern otomasyonun kalbinde yer alır. Robot kollarından CNC tezgahlara, paketleme makinelerinden pick-and-place sistemlerine kadar her yerde <strong>servo motorlar</strong> kullanılır. 2026'da servo teknolojisi hem daha güçlü hem de daha kompakt hale geliyor.</p>
             
@@ -1518,6 +1569,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Yazılım",
         excerpt: "Dışa bağımlılığı azaltan yerli Ar-Ge projeleri ve MKG'nin katkıları.",
+        metaDescription: "Yerli otomasyon yazılımları: Milli PLC, SCADA sistemleri, servo sürücüler ve Türkiye'nin teknoloji bağımsızlığı için Ar-Ge projeleri.",
+        keywords: ["Yerli Yazılım", "Milli Teknoloji", "Yerli PLC", "ASELSAN", "Türk Otomasyonu", "Teknoloji Bağımsızlığı"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/yerli-yazilim.jpg",
         content: `
             <p>Türkiye'nin otomasyon sektörü son 20 yılda büyük ilerleme kaydetti. Ancak kritik yazılım ve donanımlarda hala ithalata bağımlıyız. <strong>Yerli ve milli teknoloji</strong> hamlesi, bu bağımlılığı azaltmayı hedefliyor. MKG olarak, bu dönüşümün bir parçasıyız.</p>
             
@@ -1630,6 +1684,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Endüstri",
         excerpt: "Hat verimliliğini %20 artırmanın matematiksel yöntemleri.",
+        metaDescription: "Üretim hattı dengelleme (line balancing): Darboğaz analizi, takt time, cycle time, VSM (Value Stream Mapping) ve Yalın Üretim metodları.",
+        keywords: ["Hat Dengelleme", "Darboğaz Analizi", "Takt Time", "Yalın Üretim", "VSM", "Verimlilik", "Kaizen"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/uretim-hatti.jpg",
         content: `
             <p>Bir üretim hattının verimliliği, en yavaş istasyonla sınırlıdır. Darboğaz (bottleneck) istasyon, tüm hattı yavaşlatır. <strong>Hat dengelleme (line balancing)</strong>, işçilik ve ekipman yükünü eşitleyerek verimliliği maksimize eder.</p>
             
@@ -1738,6 +1795,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "large",
         category: "Endüstri",
         excerpt: "İnsan gözünün kaçırdığı detayları yakalayan 0 hata toleranslı sistemler.",
+        metaDescription: "AI kalite kontrol: Deep learning, CNN, görüntü işleme, çizik-leke tespiti, montaj hatası kontrolü ve %99.9+ doğruluk oranı.",
+        keywords: ["Yapay Zeka", "Kalite Kontrol", "Görüntü İşleme", "Deep Learning", "CNN", "Machine Vision", "AI Quality"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/ai-vision.jpg",
         content: `
             <p>İnsan gözü yorulur, dikkati dağılır ve subjektiftir. Otomotiv, elektronik ve ilaç gibi sektörlerde %100 kalite kontrolü gerekir. <strong>Yapay zeka destekli görüntü işleme</strong>, bu ihtiyacı karşılıyor.</p>
             
@@ -1870,6 +1930,9 @@ END_FUNCTION_BLOCK</code></pre>
         size: "standard",
         category: "Yazılım",
         excerpt: "Otomasyon sektöründe başarılı olmak isteyen öğrenciler ve yeni mezunlar için yol haritası.",
+        metaDescription: "Otomasyon mühendisliği kariyer rehberi: Temel yetkinlikler, PLC programlama, sertifikalar, staj fırsatları ve sektörde başarılı olma yolları.",
+        keywords: ["Kariyer", "Otomasyon Mühendisliği", "PLC Eğitimi", "Mekatronik", "İş Fırsatları", "Staj", "Mühendislik Kariyeri"],
+        ogImage: "https://mkgelektromekanik.com/images/blog/kariyer.jpg",
         content: `
             <p>Otomasyon mühendisliği, geleceğin en talep edilen mesleklerinden biri. Endüstri 4.0, yapay zeka ve robotik devrimi, nitelikli mühendislere olan ihtiyacı artırıyor. Peki bu sektörde başarılı olmak için neler yapmalısınız?</p>
             

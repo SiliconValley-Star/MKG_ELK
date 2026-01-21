@@ -10,7 +10,8 @@ export interface ContactFormData {
   name: string;
   company?: string;
   email: string;
-  department?: string;
+  phone?: string;
+  title: string;
   message: string;
 }
 
@@ -29,12 +30,12 @@ export const sendContactEmail = async (data: ContactFormData): Promise<void> => 
 
   try {
     const templateParams = {
-      from_name: data.name,
-      from_company: data.company || 'Belirtilmedi',
-      from_email: data.email,
-      department: data.department || 'Genel',
+      title: data.title,
+      name: data.name,
+      email: data.email,
+      phone: data.phone || 'Belirtilmedi',
+      company: data.company || 'Belirtilmedi',
       message: data.message,
-      to_name: 'MKG Elektromekanik',
     };
 
     await emailjs.send(
