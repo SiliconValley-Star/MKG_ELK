@@ -30,6 +30,9 @@ export interface ServiceItem {
   deployment_time: string;
   capacity_level: string;
   image: string;
+  metaDescription?: string;
+  keywords?: string[];
+  ogImage?: string;
 }
 
 export interface ProjectItem {
@@ -53,6 +56,9 @@ export interface BlogPost {
     image: string;
     size?: 'large' | 'standard';
     category?: string;
+    metaDescription?: string;
+    keywords?: string[];
+    ogImage?: string;
 }
 
 export interface Project {
@@ -68,4 +74,7 @@ export interface Project {
     scope: string[];
     systems: string[];
     metrics: { label: string; value: string }[];
+    metaDescription?: string;
+    keywords?: string[];
+    ogImage?: string;
 }

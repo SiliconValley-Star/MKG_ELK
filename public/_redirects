@@ -1,0 +1,33 @@
+# MKG Elektromekanik Otomasyon - SPA Redirects
+# Netlify/Vercel için SPA routing yapılandırması
+
+# Tüm yollar index.html'e yönlendirilir (client-side routing için)
+/*    /index.html   200
+
+# Özel yönlendirmeler (eski hash URL'lerden yeni clean URL'lere)
+/#/corporate         /corporate         301
+/#/hizmetler         /services          301
+/#/services          /services          301
+/#/services/*        /services/:splat   301
+/#/projeler          /projects          301
+/#/projects          /projects          301
+/#/projects/*        /projects/:splat   301
+/#/iletisim          /contact           301
+/#/contact           /contact           301
+/#/blog              /blog              301
+/#/blog/*            /blog/:splat       301
+/#/faq               /faq               301
+/#/security          /security          301
+/#/guvenlik          /security          301
+/#/privacy           /privacy           301
+/#/gizlilik          /privacy           301
+/#/terms             /terms             301
+/#/kosullar          /terms             301
+/#/cookies           /cookies           301
+/#/cerezler          /cookies           301
+
+# API yönlendirmeleri (gerekirse)
+# /api/*  https://api.mkgelektromekanik.com/:splat  200
+
+# 404 sayfası için fallback
+/404.html  /  404

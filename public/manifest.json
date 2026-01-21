@@ -1,58 +1,88 @@
 {
   "name": "MKG Elektromekanik Otomasyon",
-  "short_name": "MKG Otomasyon",
-  "description": "Elektromekanik otomasyon sistemleri, endüstriyel çözümler ve mühendislik hizmetleri",
+  "short_name": "MKG",
+  "description": "Endüstriyel otomasyon, elektrik tesisatı ve mühendislik hizmetlerinde 15+ yıllık deneyim. Yüksek gerilim, alçak gerilim, jeneratör, otomasyon ve teknik destek.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#FF3B00",
   "orientation": "portrait-primary",
+  "theme_color": "#FF3B00",
+  "background_color": "#000000",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "tr",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/favicon.png",
-      "sizes": "32x32",
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
     }
   ],
-  "categories": [
-    "business",
-    "productivity",
-    "utilities"
+  "screenshots": [
+    {
+      "src": "/images/corporate/endustrielmukemmelik.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "MKG Elektromekanik Ana Sayfa"
+    }
   ],
-  "lang": "tr-TR",
-  "dir": "ltr",
-  "scope": "/",
-  "prefer_related_applications": false,
-  "screenshots": [],
   "shortcuts": [
     {
       "name": "Hizmetler",
       "short_name": "Hizmetler",
-      "description": "Endüstriyel otomasyon hizmetlerimiz",
-      "url": "/#/services",
+      "description": "Tüm elektrik ve otomasyon hizmetlerimiz",
+      "url": "/services",
       "icons": [
         {
-          "src": "/logo.png",
-          "sizes": "96x96"
+          "src": "/favicon-192.png",
+          "sizes": "192x192"
         }
       ]
     },
     {
       "name": "Projeler",
       "short_name": "Projeler",
-      "description": "Tamamlanan projelerimiz",
-      "url": "/#/projects",
+      "description": "Tamamlanmış proje portföyümüz",
+      "url": "/projects",
       "icons": [
         {
-          "src": "/logo.png",
-          "sizes": "96x96"
+          "src": "/favicon-192.png",
+          "sizes": "192x192"
         }
       ]
     },
@@ -60,13 +90,38 @@
       "name": "İletişim",
       "short_name": "İletişim",
       "description": "Bizimle iletişime geçin",
-      "url": "/#/contact",
+      "url": "/contact",
       "icons": [
         {
-          "src": "/logo.png",
-          "sizes": "96x96"
+          "src": "/favicon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Teknik makaleler ve endüstri haberleri",
+      "url": "/blog",
+      "icons": [
+        {
+          "src": "/favicon-192.png",
+          "sizes": "192x192"
         }
       ]
     }
-  ]
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }

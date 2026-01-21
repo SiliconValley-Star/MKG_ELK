@@ -1,6 +1,62 @@
-# robots.txt for MKG Elektromekanik
+# MKG Elektromekanik Otomasyon - robots.txt
+# https://mkgelektromekanik.com/
+
+# Tüm arama motorlarına izin ver
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://mkg-engineering.com/sitemap.xml
+# Sitemap konumu
+Sitemap: https://mkgelektromekanik.com/sitemap.xml
+
+# Crawl gecikmeleri (isteğe bağlı - sunucu yükünü azaltır)
+Crawl-delay: 10
+
+# Belirli yolları engelle (eğer varsa)
+# Disallow: /admin/
+# Disallow: /private/
+
+# İzin verilen özel dizinler (SEO için önemli)
+Allow: /images/
+Allow: /public/
+Allow: /*.css$
+Allow: /*.js$
+
+# Meta dosyalar
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /manifest.json
+Allow: /.htaccess
+
+# Özel arama motorları için kurallar
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+
+# Yandex Bot
+User-agent: Yandex
+Allow: /
+
+# DuckDuckGo Bot
+User-agent: DuckDuckBot
+Allow: /
+
+# Kötü niyetli botları engelle
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
