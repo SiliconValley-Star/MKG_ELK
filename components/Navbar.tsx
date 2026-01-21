@@ -110,16 +110,19 @@ const Navbar: React.FC = memo(() => {
             </div>
             <div className="col-span-9 grid grid-cols-3 gap-6">
               {topServices.map((service, idx) => (
-                <Link 
+                <Link
                   key={idx}
-                  to={`/services/${service.slug}`} 
-                  onClick={() => setHoveredItem(null)} 
+                  to={`/services/${service.slug}`}
+                  onClick={() => setHoveredItem(null)}
                   className="group bg-white rounded-xl p-6 border border-black/5 hover:border-brand-orange/50 transition-all cursor-pointer shadow-sm"
                 >
-                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-4 overflow-hidden relative flex items-center justify-center">
-                    <span className="text-4xl font-bold text-gray-300 group-hover:text-brand-orange transition-colors">
-                      {service.id.split('-')[0]}
-                    </span>
+                  <div className="aspect-video bg-gray-200 rounded-lg mb-4 overflow-hidden relative">
+                    <img
+                      src={service.image}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
+                      alt={service.title}
+                      loading="lazy"
+                    />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-500 group-hover:text-black transition-colors line-clamp-2">
                     {service.title}
@@ -249,8 +252,8 @@ const Navbar: React.FC = memo(() => {
       <header
         role="banner"
         className={`fixed top-0 left-0 w-full h-[80px] z-[900] transition-all duration-500 ${
-          scrolled || isMobileMenuOpen 
-            ? 'bg-white/80 backdrop-blur-xl border-b border-black/5' 
+          scrolled || isMobileMenuOpen
+            ? 'bg-black/80 backdrop-blur-xl border-b border-white/10'
             : 'bg-transparent border-b border-transparent'
         }`}
       >
@@ -266,10 +269,10 @@ const Navbar: React.FC = memo(() => {
             }}
           >
             <div className={`py-1.5 px-2 sm:px-3 rounded-lg transition-colors duration-300 ${
-              isMobileMenuOpen ? 'bg-white/5' : scrolled ? 'hover:bg-black/5' : 'hover:bg-white/5'
+              isMobileMenuOpen ? 'bg-white/5' : scrolled ? 'hover:bg-white/5' : 'hover:bg-white/5'
             }`}>
               <Logo
-                variant={isMobileMenuOpen ? "light" : scrolled ? "dark" : "light"}
+                variant={isMobileMenuOpen ? "light" : scrolled ? "light" : "light"}
                 showText={true}
                 className="h-10 md:h-12"
               />
@@ -290,13 +293,13 @@ const Navbar: React.FC = memo(() => {
                   onClick={() => setHoveredItem(null)}
                   className={`text-[11px] font-bold tracking-widest uppercase transition-colors duration-300 py-2 relative ${
                     scrolled
-                      ? (location.pathname === item.href ? 'text-black' : 'text-gray-500 hover:text-black')
+                      ? (location.pathname === item.href ? 'text-white' : 'text-gray-300 hover:text-white')
                       : (location.pathname === item.href ? 'text-white' : 'text-gray-300 hover:text-white')
                   }`}
                 >
                   {item.label}
                   <span className={`absolute bottom-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                    scrolled ? 'bg-black' : 'bg-white'
+                    scrolled ? 'bg-white' : 'bg-white'
                   } ${location.pathname === item.href ? 'scale-x-100' : ''}`}></span>
                 </Link>
               </div>
@@ -309,7 +312,7 @@ const Navbar: React.FC = memo(() => {
               to="/contact"
               className={`hidden md:block border px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
                 scrolled
-                  ? 'border-black/10 text-black hover:bg-black hover:text-white'
+                  ? 'border-white/20 text-white hover:bg-white hover:text-black'
                   : 'border-white/20 text-white hover:bg-white hover:text-black'
               }`}
             >
@@ -326,21 +329,21 @@ const Navbar: React.FC = memo(() => {
                 isMobileMenuOpen
                   ? 'w-6 rotate-45 translate-y-2 bg-white'
                   : scrolled
-                    ? 'w-6 bg-black group-hover:w-8'
+                    ? 'w-6 bg-white group-hover:w-8'
                     : 'w-6 bg-white group-hover:w-8'
               }`}></span>
               <span className={`block h-[2px] bg-current transition-all duration-300 ${
                 isMobileMenuOpen
                   ? 'opacity-0'
                   : scrolled
-                    ? 'w-4 bg-black group-hover:w-8'
+                    ? 'w-4 bg-white group-hover:w-8'
                     : 'w-4 bg-white group-hover:w-8'
               }`}></span>
               <span className={`block h-[2px] bg-current transition-all duration-300 ${
                 isMobileMenuOpen
                   ? 'w-6 -rotate-45 -translate-y-2 bg-white'
                   : scrolled
-                    ? 'w-5 bg-black group-hover:w-8'
+                    ? 'w-5 bg-white group-hover:w-8'
                     : 'w-5 bg-white group-hover:w-8'
               }`}></span>
             </button>

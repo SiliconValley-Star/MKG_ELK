@@ -12,7 +12,7 @@ const GLOBAL_STATS = [
     { label: "Şebeke", value: "50.00Hz" },
     { label: "Aktif Proje", value: PROJECTS.length.toString() },
     { label: "Hizmet Kapasitesi", value: SERVICES_DATA.length.toString() + " Alan" },
-    { label: "Lokasyon", value: "Bursa / TR" },
+    { label: "Lokasyon", value: "İstanbul / TR" },
     { label: "Uptime", value: "99.99%" },
     { label: "Sistem Durumu", value: "Optimal" },
 ];
@@ -119,7 +119,7 @@ const Footer: React.FC = memo(() => {
                 { label: "Bize Ulaşın", path: "/contact" },
                 { label: "Teklif Talep Et", path: "/contact" },
                 { label: "Kariyer Fırsatları", path: "/contact" },
-                { label: "E-Posta", path: "mailto:hello@mkg-engineering.com" },
+                { label: "E-Posta", path: "mailto:info@mkgelektromekanik.com" },
             ]
         }
     ];
@@ -155,13 +155,19 @@ const Footer: React.FC = memo(() => {
                                 akıllı binalardan Endüstri 5.0'a kadar uçtan uca mühendislik çözümleri.
                             </p>
                         </div>
-                        <div className="mt-12">
-                            <span className="font-mono text-[10px] text-brand-orange tracking-widest uppercase block mb-2">MERKEZ OFİS</span>
-                            <p className="text-sm font-mono text-gray-500">
-                                Nilüfer Organize Sanayi Bölgesi<br />
-                                123 Otomasyon Cad. Bursa / TÜRKİYE 16000
+                        <a
+                            href="https://www.google.com/maps/search/MKG+Elektromekanik+ve+Otomasyon+DAP+Vadisi+Merkez+A+Blok+Ofis+No+49+34406+Kağıthane+İstanbul"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-12 block group cursor-pointer hover:scale-[1.02] transition-transform"
+                            aria-label="Google Maps'te Adresimizi Görüntüle"
+                        >
+                            <span className="font-mono text-[10px] text-brand-orange tracking-widest uppercase block mb-2 group-hover:text-white transition-colors">MERKEZ OFİS</span>
+                            <p className="text-sm font-mono text-gray-500 group-hover:text-gray-300 transition-colors">
+                                DAP Vadisi A Blok, Ofis No: 49<br />
+                                Kağıthane / İstanbul / TÜRKİYE
                             </p>
-                        </div>
+                        </a>
                     </div>
 
                     {/* Newsletter Area */}
@@ -213,7 +219,7 @@ const Footer: React.FC = memo(() => {
                                     <p className="text-red-500 text-xs mt-2 font-mono">{error}</p>
                                 )}
                                 <p className="text-xs text-gray-600 mt-4 max-w-lg">
-                                    2.000+ mühendis bize güveniyor. Bültenimize abone olarak KVKK kapsamında verilerinizin işlenmesini kabul etmiş olursunuz.
+                                    Bültenimize abone olarak KVKK kapsamında verilerinizin işlenmesini kabul etmiş olursunuz.
                                 </p>
                             </form>
                         )}

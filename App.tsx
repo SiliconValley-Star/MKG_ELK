@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import Layout from './components/Layout';
 import LoadingScreen from './components/LoadingScreen';
@@ -22,6 +22,7 @@ const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
 const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Wrapper to handle AnimatePresence logic
 const AnimatedRoutes: React.FC = () => {
@@ -51,7 +52,8 @@ const AnimatedRoutes: React.FC = () => {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-            <Route path="*" element={<HomePage />} />
+            {/* 404 Page */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </div>
@@ -122,11 +124,11 @@ const App: React.FC = () => {
         </AnimatePresence>
 
         {!isLoading && (
-          <HashRouter>
+          <BrowserRouter>
             <Layout>
               <AnimatedRoutes />
             </Layout>
-          </HashRouter>
+          </BrowserRouter>
         )}
       </MotionConfig>
     </ErrorBoundary>
