@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Share2, Printer, Bookmark, ArrowRight } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const BlogPostPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
 
     const post = blogPosts.find(p => p.slug === slug);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [slug]);
 
     if (!post) {
         navigate('/blog');
@@ -24,7 +21,59 @@ const BlogPostPage: React.FC = () => {
         .filter(p => p.id !== post.id && p.tags.some(t => post.tags.includes(t)))
         .slice(0, 3);
 
+    // SEO için tarih formatını ISO 8601'e çevir (dd.mm.yyyy -> yyyy-mm-dd)
+    const formatDateToISO = (dateStr: string): string => {
+        const [day, month, year] = dateStr.split('.');
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    };
+
+    // Article Schema.org JSON-LD
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": post.metaDescription || post.excerpt,
+        "image": post.ogImage || post.image,
+        "datePublished": formatDateToISO(post.date),
+        "dateModified": formatDateToISO(post.date),
+        "author": {
+            "@type": "Person",
+            "name": post.author,
+            "url": "https://mkgelektromekanik.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MKG Elektromekanik Otomasyon",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mkgelektromekanik.com/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://mkgelektromekanik.com/blog/${post.slug}`
+        },
+        "keywords": post.keywords?.join(', ') || post.tags.join(', '),
+        "articleSection": post.category || "Teknoloji",
+        "wordCount": post.content.split(' ').length,
+        "inLanguage": "tr-TR"
+    };
+
     return (
+        <>
+            {/* SEO Meta Tags */}
+            <SEOHead
+                title={`${post.title} | MKG Elektromekanik Blog`}
+                description={post.metaDescription || post.excerpt}
+                keywords={post.keywords?.join(', ') || post.tags.join(', ')}
+                image={post.ogImage || post.image}
+                type="article"
+                author={post.author}
+                publishedTime={formatDateToISO(post.date)}
+                modifiedTime={formatDateToISO(post.date)}
+                canonical={`/blog/${post.slug}`}
+                schema={articleSchema}
+            />
         <div className="w-full bg-[#050505] min-h-screen relative z-[999] text-white">
             {/* CLOSE BUTTON */}
             <button
@@ -186,6 +235,7 @@ const BlogPostPage: React.FC = () => {
             </div>
 
         </div>
+        </>
     );
 };
 

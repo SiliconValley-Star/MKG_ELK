@@ -1,21 +1,107 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronRight, ChevronLeft, ArrowUpRight, Cpu, Globe, Zap, Layers, Activity, Lock } from 'lucide-react';
+import { ArrowRight, ChevronRight, ChevronLeft, ArrowUpRight, Cpu, Globe, Zap, Layers, Activity, Lock, Play, Clock, ShieldCheck, BarChart3, Radio, Server, Network } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const HomePage: React.FC = () => {
     const isMobile = useIsMobile();
 
+    // Organization Schema
+    const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MKG Elektromekanik Otomasyon",
+        "alternateName": "MKG Elektromekanik",
+        "url": "https://mkgelektromekanik.com",
+        "logo": "https://mkgelektromekanik.com/logo.png",
+        "description": "Endüstriyel otomasyon, elektrik mühendisliği ve akıllı bina sistemleri konusunda uzman. 2008'den beri Türkiye genelinde orta gerilim, alçak gerilim, BMS, SCADA ve güvenlik sistemleri kuruyoruz.",
+        "foundingDate": "2008",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TR",
+            "addressLocality": "İstanbul"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "areaServed": "TR",
+            "availableLanguage": ["Turkish", "English"]
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/mkg-elektromekanik"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "28"
+        }
+    };
+
+    // LocalBusiness Schema
+    const localBusinessSchema = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "MKG Elektromekanik Otomasyon",
+        "image": "https://mkgelektromekanik.com/logo.png",
+        "url": "https://mkgelektromekanik.com",
+        "description": "Türkiye'nin önde gelen endüstriyel elektrik ve otomasyon çözümleri firması. Trafo merkezi, BMS, SCADA, güvenlik sistemleri ve akıllı bina otomasyonu alanlarında uzman kadro.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TR",
+            "addressLocality": "İstanbul"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "40.1828",
+            "longitude": "29.0665"
+        },
+        "priceRange": "$$$$",
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "28"
+        }
+    };
+
+    // WebSite Schema with SearchAction
+    const websiteSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MKG Elektromekanik Otomasyon",
+        "url": "https://mkgelektromekanik.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://mkgelektromekanik.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    };
+
+    // Combine all schemas
+    const combinedSchema = {
+        "@context": "https://schema.org",
+        "@graph": [organizationSchema, localBusinessSchema, websiteSchema]
+    };
+
     return (
         <div className="bg-transparent text-white overflow-x-hidden">
+            <SEOHead
+                title="MKG Elektromekanik Otomasyon | Endüstriyel Elektrik & Otomasyon Çözümleri"
+                description="2008'den beri Türkiye genelinde endüstriyel otomasyon, orta-alçak gerilim sistemleri, BMS, SCADA, trafo merkezi ve akıllı bina çözümleri. 28+ başarılı proje, 10 yıl tecrübe."
+                keywords="endüstriyel otomasyon, elektrik mühendisliği, trafo merkezi, BMS, SCADA, orta gerilim, alçak gerilim, akıllı bina, güvenlik sistemleri, enerji yönetimi"
+                type="website"
+                schema={combinedSchema}
+            />
             <HeroSection />
             <BrandTicker isMobile={isMobile} />
-            <ManifestoSection isMobile={isMobile} />
+            <CorporateIntro isMobile={isMobile} />
             <EcosystemGrid isMobile={isMobile} />
-            <BlueprintSlider />
-            <GlobalImpact isMobile={isMobile} />
+            <StrategicValues />
+            <InfiniteGallery />
+            <LiveTelemetry />
             <CTASection />
         </div>
     );
@@ -25,24 +111,24 @@ const HomePage: React.FC = () => {
 const heroSlides = [
     {
         id: "01",
-        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2600",
-        title: "AKILLI\nOTOMASYON",
-        subtitle: "SİSTEM MİMARİSİ",
-        desc: "Endüstri 4.0 çağı için kendi kendini optimize eden robotik hücreler kuruyoruz."
+        img: "/images/projects/vakifbank-hq.jpg",
+        title: "KURUMSAL\nALTYAPI",
+        subtitle: "FİNANS SEKTÖRÜ ÇÖZÜM ORTAKLIĞI",
+        desc: "VakıfBank ile 2015'ten beri 30+ lokasyonda kesintisiz enerji ve data altyapısı kuruyoruz."
     },
     {
         id: "02",
-        img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2600",
-        title: "ENERJİ\nDAYANIKLILIĞI",
-        subtitle: "YÜKSEK GERİLİM ALTYAPISI",
-        desc: "Sıfır hata toleranslı şebeke ölçeğinde güç dağıtımı tasarlıyoruz."
+        img: "/images/projects/okyanus-aluminyum.jpg",
+        title: "ENDÜSTRİYEL\nGÜÇ",
+        subtitle: "OG/AG SİSTEMLERİ & BUSBAR",
+        desc: "2500 kVA trafo merkezleri ve busbar enerji dağıtımı ile modern üretim tesisleri inşa ediyoruz."
     },
     {
         id: "03",
-        img: "https://images.unsplash.com/photo-1517420879524-86d64ac2f339?q=80&w=2600",
-        title: "DİJİTAL\nİKİZLER",
-        subtitle: "SANAL DEVREYE ALMA",
-        desc: "Fiziksel kurulumdan önce fizik tabanlı fabrika ortamlarını simüle ediyoruz."
+        img: "/images/projects/celal-tekstil.jpg",
+        title: "AKILLI\nOTOMASYON",
+        subtitle: "BMS & ENERJI YÖNETİMİ",
+        desc: "DALI/KNX tabanlı akıllı aydınlatma ve enerji takip sistemleri ile verimliliği maksimize ediyoruz."
     }
 ];
 
@@ -62,30 +148,26 @@ const HeroSection = () => {
 
     return (
         <section className="relative h-screen w-full overflow-hidden bg-transparent">
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={heroSlides[current].id}
-                    className="absolute inset-0 z-0"
-                    initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={isMobile ? { opacity: 1 } : { opacity: 0 }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.7 }}
-                >
-                    <img
-                        src={heroSlides[current].img}
-                        alt="Hero"
-                        className="w-full h-full object-cover opacity-60"
-                        loading="eager"
-                        decoding="async"
-                    />
-                    {/* Gradient Overlays for readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-
-                    {/* Grid Overlay Texture */}
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
-                </motion.div>
-            </AnimatePresence>
+            <div className="absolute inset-0 z-0">
+                {heroSlides.map((slide, index) => (
+                    <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transform transition-transform duration-[6000ms] ease-out"
+                            style={{
+                                backgroundImage: `url(${slide.img})`,
+                                transform: !isMobile && index === current ? 'scale(1.1)' : 'scale(1.0)'
+                            }}
+                        ></div>
+                        <div className="absolute inset-0 bg-black/40"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
+                    </div>
+                ))}
+            </div>
 
             <div className="absolute inset-0 z-10 flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-20">
                 <div className="max-w-5xl border-l-2 border-brand-orange/50 pl-4 sm:pl-6 md:pl-12 lg:pl-16 relative">
@@ -169,7 +251,7 @@ const BrandTicker: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
             <div className="mb-4 sm:mb-5 md:mb-6 z-20 bg-black px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 border border-white/10 rounded-full shadow-lg">
                 <span className="text-[9px] sm:text-[10px] font-mono text-brand-orange tracking-widest uppercase flex items-center gap-1.5 sm:gap-2">
                     <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-brand-orange rounded-full animate-pulse"></div>
-                    Teknoloji Ekosistemi
+                    Teknoloji Ortaklarımız
                 </span>
             </div>
 
@@ -196,202 +278,328 @@ const BrandTicker: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     )
 }
 
-// --- 3. MANIFESTO (TEXT HEAVY) ---
-const ManifestoSection: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+// --- 3. CORPORATE INTRO (2 COLUMN LAYOUT) ---
+const CorporateIntro: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     return (
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-6 bg-slate-950/80 backdrop-blur-sm relative overflow-hidden">
-            <div className="max-w-6xl mx-auto text-center relative z-10">
+        <section className="py-20 sm:py-24 md:py-32 bg-zinc-950 border-b border-white/10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start">
                 <motion.div
                     initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={isMobile ? { duration: 0.01 } : { duration: 0.4 }}
                 >
-                    <h2 className="text-[10px] sm:text-xs md:text-sm font-mono text-brand-orange tracking-[0.3em] sm:tracking-[0.5em] uppercase mb-6 sm:mb-8">
-                        MKG Metodolojisi
+                    <div className="flex items-center gap-2 mb-6">
+                        <div className="w-2 h-2 bg-brand-orange rounded-full"></div>
+                        <span className="font-mono text-xs text-brand-orange uppercase tracking-widest">MKG Elektromekanik Hakkında</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 sm:mb-8 leading-tight">
+                        Modern üretimin <br/> nabzını belirliyoruz.
                     </h2>
-                    <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-display font-bold text-white leading-tight mb-8 sm:mb-10 md:mb-12 px-2 sm:px-0">
-                        <span className="text-slate-600">Mekanik kısıtlamalar</span> ile <span className="text-white border-b-2 border-brand-orange">dijital olanaklar</span> arasındaki boşluğu kapatıyoruz.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 text-left mt-12 sm:mt-16 md:mt-20">
-                        <div className="border-l border-slate-800 pl-4 sm:pl-5 md:pl-6">
-                            <Layers className="text-brand-orange mb-3 sm:mb-4" size={24} />
-                            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Ölçeklenebilir Sistemler</h3>
-                            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed"> Üretim kapasitenizle birlikte büyüyen modüler mimariler.</p>
+                    <div className="flex flex-col gap-6">
+                        <div className="pl-6 border-l-2 border-white/20">
+                            <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                                2008'den beri, MKG elektrik mühendisliği ile dijital zeka arasındaki köprüde yer alıyor. Sadece komponent tedarik etmiyoruz; fabrikaların, veri merkezlerinin ve enerji santrallerinin sinir sistemlerini tasarlıyoruz.
+                            </p>
                         </div>
-                        <div className="border-l border-slate-800 pl-4 sm:pl-5 md:pl-6">
-                            <Activity className="text-brand-orange mb-3 sm:mb-4" size={24} />
-                            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Gerçek Zamanlı Veri</h3>
-                            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed"> Ham sensör verilerini anında işlenebilir iş zekasına dönüştürüyoruz.</p>
-                        </div>
-                        <div className="border-l border-slate-800 pl-4 sm:pl-5 md:pl-6">
-                            <Lock className="text-brand-orange mb-3 sm:mb-4" size={24} />
-                            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Siber-Fiziksel Güvenlik</h3>
-                            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed"> OT ağının her katmanına entegre edilmiş IEC 62443 uyumlu güvenlik protokolleri.</p>
+                        <div className="pl-6 border-l-2 border-brand-orange">
+                            <p className="text-white text-base sm:text-lg leading-relaxed font-medium">
+                                Misyonumuz, sıkı kod, sağlam donanım ve öngörülü analizlerle duruş sürelerini ortadan kaldırmak ve verimliliği maksimize etmek.
+                            </p>
                         </div>
                     </div>
+                    
+                    <div className="mt-12 flex items-center gap-8">
+                        <div className="flex flex-col">
+                            <span className="text-3xl font-display font-bold text-white">10+</span>
+                            <span className="text-xs font-mono text-zinc-500 uppercase mt-1">Yıl Tecrübe</span>
+                        </div>
+                        <div className="w-px h-12 bg-white/10"></div>
+                        <div className="flex flex-col">
+                            <span className="text-3xl font-display font-bold text-white">Türkiye</span>
+                            <span className="text-xs font-mono text-zinc-500 uppercase mt-1">Çapında Hizmet</span>
+                        </div>
+                    </div>
+                </motion.div>
+
+                <motion.div
+                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: 0.2 }}
+                    className="relative"
+                >
+                    <p className="text-zinc-500 mb-8 font-mono text-sm leading-7">
+                        // PROTOKOL_BAŞLATILIYOR: <br/>
+                        MKG'de gerçek otomasyonun görünmez olduğuna inanıyoruz. Arka planda sorunsuz çalışır, güvenlik, kalite ve hızı garanti eder. Birleştiriyoruz:
+                    </p>
+                    <ul className="space-y-6">
+                        <li className="flex items-start gap-4 group">
+                            <div className="p-2 bg-white/5 border border-white/10 rounded group-hover:bg-brand-orange group-hover:text-black transition-colors flex-shrink-0">
+                                <Cpu size={20} />
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold mb-1 text-base">Gelişmiş Lojik Kontrolü</h4>
+                                <p className="text-sm text-zinc-400 leading-relaxed">Yüksek hızlı çalıştırma ve karmaşık kinematik için özel PLC algoritmaları.</p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-4 group">
+                            <div className="p-2 bg-white/5 border border-white/10 rounded group-hover:bg-brand-orange group-hover:text-black transition-colors flex-shrink-0">
+                                <ShieldCheck size={20} />
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold mb-1 text-base">Entegre Güvenlik</h4>
+                                <p className="text-sm text-zinc-400 leading-relaxed">Robotik verimlilikle birlikte insan güvenliğini sağlayan SIL3 / PLe uyumlu mimariler.</p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-4 group">
+                            <div className="p-2 bg-white/5 border border-white/10 rounded group-hover:bg-brand-orange group-hover:text-black transition-colors flex-shrink-0">
+                                <Globe size={20} />
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold mb-1 text-base">Uzaktan Telemetri</h4>
+                                <p className="text-sm text-zinc-400 leading-relaxed">7/24 uzaktan izleme ve anlık arıza teşhisi için güvenli VPN tünelleri.</p>
+                            </div>
+                        </li>
+                    </ul>
                 </motion.div>
             </div>
         </section>
     )
 }
 
-// --- 4. ECOSYSTEM BENTO GRID ---
+// --- 4. VISUAL CAPABILITIES (UPGRADED CARDS) ---
 const EcosystemGrid: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
-    return (
-        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-slate-950/60 backdrop-blur-sm">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-10 md:mb-12 gap-4">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white">MKG <span className="text-slate-600">Ekosistemi</span></h2>
-                    <NavLink to="/services" className="text-brand-orange font-mono text-xs sm:text-sm hover:underline tap-target">TÜM YETENEKLERİ GÖRÜNTÜLE &rarr;</NavLink>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 sm:gap-5 md:gap-6 h-auto md:h-[700px]">
-
-                    {/* Item 1: Large Video/Image */}
-                    <div className="md:col-span-2 md:row-span-2 rounded-2xl md:rounded-3xl overflow-hidden relative group border border-slate-800 bg-slate-900/40 backdrop-blur-md min-h-[300px] md:min-h-0">
-                        <img src="https://images.unsplash.com/photo-1535378437327-10ff28d45777?q=80&w=2070" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-                        <div className="absolute inset-0 bg-slate-900/60 group-hover:bg-transparent transition-colors"></div>
-                        <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-8 w-full bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent">
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">Robotik Entegrasyon</h3>
-                            <p className="text-slate-300 text-xs sm:text-sm max-w-sm">İnsan ve makine arasında sorunsuz işbirliği. Güvenlik dereceli, yüksek hızlı ve hassas.</p>
-                        </div>
-                        <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
-                            <ArrowUpRight className="text-white" size={18} />
-                        </div>
-                    </div>
-
-                    {/* Item 2: Stat Card */}
-                    <div className="md:col-span-1 md:row-span-1 rounded-2xl md:rounded-3xl bg-slate-900/60 backdrop-blur-md border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-brand-orange/50 transition-colors group min-h-[180px]">
-                        <Cpu className="text-brand-orange mb-3 sm:mb-4 group-hover:scale-110 transition-transform" size={32} />
-                        <div>
-                            <div className="text-3xl sm:text-4xl font-mono font-bold text-white mb-2">15ms</div>
-                            <div className="text-xs sm:text-sm text-slate-400">Ortalama Döngü Süresi</div>
-                        </div>
-                    </div>
-
-                    {/* Item 3: Service Card */}
-                    <div className="md:col-span-1 md:row-span-1 rounded-2xl md:rounded-3xl bg-slate-900/60 backdrop-blur-md border border-slate-800 p-6 sm:p-8 relative overflow-hidden group min-h-[180px]">
-                        <div className="absolute -right-4 -top-4 w-20 h-20 sm:w-24 sm:h-24 bg-brand-orange/20 rounded-full blur-2xl group-hover:bg-brand-orange/40 transition-colors"></div>
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 relative z-10">Elektrik <br />Mühendisliği</h3>
-                        <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-400 relative z-10">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange flex-shrink-0"></div> EPLAN Pro Panel</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange flex-shrink-0"></div> UL/CSA Standartları</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-orange flex-shrink-0"></div> Termal Analiz</li>
-                        </ul>
-                    </div>
-
-                    {/* Item 4: Wide Card */}
-                    <div className="md:col-span-2 md:row-span-1 rounded-2xl md:rounded-3xl bg-slate-800/60 backdrop-blur-md border border-slate-700 relative overflow-hidden group min-h-[200px]">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670" className="w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:opacity-60 transition-opacity" loading="lazy" />
-                        <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 md:px-8">
-                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Dijital İkiz Laboratuvarı</h3>
-                            <p className="text-slate-300 text-xs sm:text-sm max-w-md">Şirket içi Ar-Ge tesisimiz, tek bir kablo döşenmeden üretim hattınızın tamamını simüle eder.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    )
-}
-
-// --- 5. BLUEPRINT SLIDER (SECTORS) ---
-const BlueprintSlider = () => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-
-    const sectors = [
-        { id: "SEC-01", title: "Otomotiv", desc: "Montaj & Boya", img: "https://images.unsplash.com/photo-1613632826230-09e39f730634?q=80&w=800" },
-        { id: "SEC-02", title: "Yiyecek & İçecek", desc: "Hijyenik Kontrol", img: "https://images.unsplash.com/photo-1535914254981-b5012eebbd15?q=80&w=800" },
-        { id: "SEC-03", title: "Lojistik", desc: "Ayrıştırma & AGV", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800" },
-        { id: "SEC-04", title: "Enerji", desc: "Şebeke Dağıtımı", img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800" },
+    const caps = [
+        {
+            title: "Otelcilik & Konaklama",
+            img: "/images/projects/movenpick-bosphorus.jpg",
+            desc: "5 yıldızlı oteller için BMS, GRMS ve enerji yönetimi sistemleri. Konfor ve verimliliği bir arada sunuyoruz.",
+            features: ["Oda Otomasyon", "Merkezi İzleme", "Enerji Tasarrufu"]
+        },
+        {
+            title: "Premium Konut Projeleri",
+            img: "/images/projects/florya-villalari.jpg",
+            desc: "Lüks villa ve rezidanslar için akıllı ev sistemleri, güvenlik ve enerji yönetimi çözümleri.",
+            features: ["Smart Home KNX", "Güvenlik Entegrasyonu", "Aydınlatma Kontrolü"]
+        },
+        {
+            title: "Ticari & Rezidans",
+            img: "/images/projects/alkent-2000.jpg",
+            desc: "Karma kullanımlı kompleksler için elektrik altyapısı, jeneratör sistemleri ve bina otomasyonu.",
+            features: ["Güç Dağıtımı", "AGF/DGF Sistemleri", "BMS Entegrasyonu"]
+        }
     ];
 
-    const scroll = (offset: number) => {
-        if (scrollRef.current) scrollRef.current.scrollLeft += offset;
-    }
-
     return (
-        <section className="py-16 sm:py-20 md:py-24 bg-slate-900/80 backdrop-blur-sm border-y border-slate-800 relative">
-            <div className="px-4 sm:px-6 md:px-12 lg:px-20 mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-black">
+            <div className="max-w-[1920px] mx-auto mb-12 sm:mb-16 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-8">
                 <div>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white">Sektörler</h2>
-                    <p className="text-slate-500 text-xs sm:text-sm md:text-base">Endüstriye özel mühendislik uzmanlığı.</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-white mb-4">Temel Yetenekler</h2>
+                    <p className="text-zinc-400 max-w-xl text-sm sm:text-base">
+                        Teknik uzmanlığımız, elektromekanik mühendisliğin tam spektrumunu kapsar.
+                    </p>
                 </div>
-                <div className="hidden sm:flex gap-3 md:gap-4">
-                    <button onClick={() => scroll(-400)} className="p-2.5 md:p-3 border border-slate-700 rounded-full hover:bg-white hover:text-black transition-colors text-white tap-target" aria-label="Önceki"><ChevronLeft size={20} /></button>
-                    <button onClick={() => scroll(400)} className="p-2.5 md:p-3 border border-slate-700 rounded-full hover:bg-white hover:text-black transition-colors text-white tap-target" aria-label="Sonraki"><ChevronRight size={20} /></button>
-                </div>
+                <NavLink to="/services" className="text-brand-orange font-mono text-xs uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors tap-target mt-4 md:mt-0">
+                    Tüm Spesifikasyonları Görüntüle <ChevronRight size={14}/>
+                </NavLink>
             </div>
 
-            <div ref={scrollRef} className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto px-4 sm:px-6 md:px-12 lg:px-20 pb-8 sm:pb-10 md:pb-12 no-scrollbar snap-x snap-mandatory">
-                {sectors.map((s, i) => (
-                    <div key={i} className="min-w-[280px] sm:min-w-[300px] md:min-w-[350px] lg:min-w-[400px] h-[400px] sm:h-[450px] md:h-[500px] bg-slate-950 border border-slate-800 p-2 relative group snap-center cursor-pointer">
-                        {/* Blueprint Decoration */}
-                        <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20 text-[9px] sm:text-[10px] font-mono text-brand-orange border border-brand-orange px-1 bg-slate-900">
-                            {s.id}
+            <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                {caps.map((c, i) => (
+                    <motion.div
+                        key={i}
+                        className="group relative bg-zinc-900 border border-white/10 overflow-hidden flex flex-col hover:border-brand-orange/30 transition-colors"
+                        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
+                    >
+                        {/* Image */}
+                        <div className="h-64 relative overflow-hidden">
+                            <div
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                                style={{ backgroundImage: `url(${c.img})` }}
+                            ></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
                         </div>
-
-                        <div className="w-full h-3/4 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
-                            <img src={s.img} className="w-full h-full object-cover" loading="lazy" />
-                            {/* Crosshairs */}
-                            <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-3 h-3 sm:w-4 sm:h-4 border-t border-r border-white"></div>
-                                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-3 h-3 sm:w-4 sm:h-4 border-b border-l border-white"></div>
+                        
+                        {/* Content - Overlapping Card */}
+                        <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between relative bg-zinc-900 z-10 -mt-12 mx-4 mb-4 border border-white/5 shadow-2xl">
+                            <div>
+                                <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-4">{c.title}</h3>
+                                <p className="text-zinc-400 text-sm leading-relaxed mb-6">{c.desc}</p>
                             </div>
+                            
+                            <ul className="space-y-2 border-t border-white/10 pt-4">
+                                {c.features.map((f, idx) => (
+                                    <li key={idx} className="flex items-center gap-2 text-xs font-mono text-zinc-500">
+                                        <div className="w-1 h-1 bg-brand-orange rounded-full flex-shrink-0"></div> {f}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-
-                        <div className="h-1/4 p-4 sm:p-5 md:p-6 flex flex-col justify-center bg-slate-900">
-                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{s.title}</h3>
-                            <p className="text-slate-400 font-mono text-[10px] sm:text-xs">{s.desc}</p>
-                        </div>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </section>
-    )
-}
+    );
+};
 
-// --- 6. GLOBAL IMPACT (MAP) ---
-const GlobalImpact: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+// --- 5. STRATEGIC VALUES (NEW SECTION) ---
+const StrategicValues = () => {
+    const isMobile = useIsMobile();
+    
     return (
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden">
-            {/* Abstract Map Background */}
-            <div className="absolute inset-0 opacity-10 sm:opacity-15 md:opacity-20 pointer-events-none">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" className="w-full h-full object-cover md:object-contain invert" alt="" />
+        <section className="py-20 sm:py-24 md:py-32 bg-zinc-950 border-y border-white/10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <motion.div
+                    className="text-center mb-12 sm:mb-16"
+                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={isMobile ? { duration: 0.01 } : { duration: 0.4 }}
+                >
+                    <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Neden Lider Firmalar MKG'yi Seçiyor</h2>
+                    <p className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+                        Sadece donanım sunmuyoruz. Kesinlik sunuyoruz. Mühendislik felsefemiz üç tartışmasız sütun üzerine inşa edilmiştir.
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    {[
+                        {
+                            icon: Clock,
+                            title: "Pazara Hız",
+                            desc: "Yazılım mantığının %95'ini sahada kurulumdan önce doğrulamak için Sanal Devreye Alma (Dijital İkiz) teknolojisini kullanıyoruz. Bu, devreye alma süresini haftalarca azaltır ve üretime daha erken başlamanızı sağlar."
+                        },
+                        {
+                            icon: ShieldCheck,
+                            title: "Standartlara Uyum",
+                            desc: "Her panel ve kod satırı IEC, ISO ve CE düzenlemelerine uygundur. Uluslararası uyumluluğun karmaşık ortamında gezinerek tesisinizdeki denetim hazırlığını sağlıyoruz."
+                        },
+                        {
+                            icon: BarChart3,
+                            title: "Ölçeklenebilir Mimari",
+                            desc: "Yarın için tasarlıyoruz. Modüler kod yapılarımız (standart kütüphaneler kullanarak) yeni istasyonlar eklemeyi, yeni robotları entegre etmeyi veya çekirdek sistemi yeniden yazmadan üretim hatlarını genişletmeyi kolaylaştırır."
+                        }
+                    ].map((item, i) => (
+                        <motion.div
+                            key={i}
+                            className="p-6 sm:p-8 bg-black border border-white/10 hover:border-brand-orange transition-colors duration-300 group"
+                            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={isMobile ? { duration: 0.01 } : { duration: 0.4, delay: i * 0.1 }}
+                        >
+                            <item.icon className="text-brand-orange mb-6 group-hover:scale-110 transition-transform" size={32} />
+                            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{item.title}</h3>
+                            <p className="text-zinc-400 text-sm leading-relaxed">
+                                {item.desc}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// --- 6. INFINITE GALLERY ---
+const InfiniteGallery = () => {
+    const isMobile = useIsMobile();
+
+    const images = [
+        { img: "/images/projects/biancho-pera.jpg", title: "Biancho Pera Hotel", id: "01" },
+        { img: "/images/projects/alkent-2000.jpg", title: "Alkent 2000 Residence", id: "02" },
+        { img: "/images/projects/aksa-gida.jpg", title: "Aksa Gıda Tesisi", id: "03" },
+        { img: "/images/projects/enviropet.jpg", title: "Enviropet Üretim", id: "04" },
+        { img: "/images/projects/incirli-myo.jpg", title: "İncirli MYO Kampüs", id: "05" },
+        { img: "/images/projects/kultur-koleji.jpg", title: "Kültür Koleji", id: "06" },
+        { img: "/images/projects/otto-atasehir.jpg", title: "Otto Ataşehir AVM", id: "07" },
+        { img: "/images/projects/pelican-hill.jpg", title: "Pelican Hill Resort", id: "08" },
+        { img: "/images/projects/roche-bobois.jpg", title: "Roche Bobois Showroom", id: "09" },
+        { img: "/images/projects/vera-clinic.jpg", title: "Vera Clinic", id: "10" },
+        { img: "/images/projects/yali-atakoy.jpg", title: "Yalı Ataköy", id: "11" },
+        { img: "/images/projects/yelken-kalip.jpg", title: "Yelken Kalıp Sanayi", id: "12" },
+    ];
+
+    return (
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-zinc-950 overflow-hidden relative">
+            <div className="max-w-[1920px] mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+                <div>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-2">Proje Arşivi</h2>
+                    <p className="text-zinc-400 text-xs sm:text-sm">Gerçekleştirdiğimiz 28+ başarılı projeden görsel kayıtlar.</p>
+                </div>
+                <div className="text-brand-orange font-mono text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-2">
+                    <Play size={12} className="fill-current"/> Canlı Proje Akışı
+                </div>
             </div>
 
-            <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 items-center">
-                <div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white mb-6 sm:mb-8">
-                        Küresel <br /> Ayak İzi.
-                    </h2>
-                    <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-md mb-8 sm:mb-10 md:mb-12">
-                        Almanya'daki otomotiv hatlarından Türkiye'deki tekstil fabrikalarına kadar, sistemlerimiz 3 kıtada 7/24 çalışıyor.
-                    </p>
-                    <NavLink to="/projects">
-                        <button className="text-brand-orange font-bold font-mono border-b border-brand-orange pb-1 hover:text-white hover:border-white transition-colors text-sm sm:text-base tap-target">
-                            BAŞARI HİKAYELERİNİ GÖR
-                        </button>
-                    </NavLink>
-                </div>
+            {/* Gradient Masks */}
+            <div className="absolute top-0 left-0 w-20 sm:w-32 md:w-48 lg:w-64 h-full bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-20 sm:w-32 md:w-48 lg:w-64 h-full bg-gradient-to-l from-zinc-950 via-zinc-950/80 to-transparent z-10 pointer-events-none"></div>
 
-                <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                    {[
-                        { val: "500+", label: "Tamamlanan Projeler" },
-                        { val: "12", label: "Hizmet Verilen Ülkeler" },
-                        { val: "45", label: "Uzman Mühendisler" },
-                        { val: "7/24", label: "Destek Kapsamı" }
-                    ].map((s, i) => (
-                        <div key={i} className="bg-slate-900/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 border-l-2 border-brand-orange">
-                            <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-1 sm:mb-2">{s.val}</div>
-                            <div className="text-[10px] sm:text-xs font-mono text-slate-400 uppercase tracking-wider">{s.label}</div>
+            {/* Slider Track */}
+            <div className="flex w-full overflow-hidden">
+                <div className={`flex w-max items-center gap-4 sm:gap-5 md:gap-6 ${isMobile ? '' : 'animate-marquee hover:pause'}`}>
+                    {[...images, ...images].map((item, i) => (
+                        <div key={i} className="relative w-[320px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[320px] lg:w-[550px] lg:h-[350px] flex-shrink-0 group overflow-hidden border border-white/10 bg-black">
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                                loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 md:p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                <span className="text-brand-orange font-mono text-[10px] sm:text-xs uppercase tracking-widest block mb-1 sm:mb-1.5">PROJE_#{item.id}</span>
+                                <span className="text-white font-bold text-base sm:text-lg md:text-xl">{item.title}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
+
+// --- 7. LIVE TELEMETRY (STATS SECTION) ---
+const LiveTelemetry = () => {
+    const isMobile = useIsMobile();
+    
+    return (
+        <section className="py-16 sm:py-20 md:py-24 bg-black border-t border-white/10">
+            <div className="max-w-[1920px] mx-auto px-4 sm:px-6">
+                <motion.div
+                    className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12"
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
+                >
+                    {[
+                        { label: "Başarılı Proje", val: "28" },
+                        { label: "Uzmanlık Alanı", val: "10" },
+                        { label: "Yıl Deneyim", val: "10+" },
+                        { label: "Güvenlik Skoru", val: "A+" },
+                    ].map((stat, i) => (
+                        <motion.div
+                            key={i}
+                            className="text-center md:text-left border-l-2 border-white/10 pl-6 sm:pl-8"
+                            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
+                        >
+                            <div className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-2">{stat.val}</div>
+                            <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{stat.label}</div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+    );
+};
 
 export default HomePage;

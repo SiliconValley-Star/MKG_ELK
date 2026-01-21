@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { SERVICES_DATA } from '../data/servicesData';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const ServiceDetailPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -10,17 +11,62 @@ const ServiceDetailPage: React.FC = () => {
 
     const service = SERVICES_DATA.find(s => s.slug === slug);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [slug]);
-
     if (!service) {
         navigate('/services');
         return null;
     }
 
+    // Service Schema.org JSON-LD
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": service.title,
+        "description": service.metaDescription || service.description,
+        "image": `https://mkgelektromekanik.com${service.image}`,
+        "url": `https://mkgelektromekanik.com/services/${service.slug}`,
+        "serviceType": service.category,
+        "provider": {
+            "@type": "Organization",
+            "name": "MKG Elektromekanik Otomasyon",
+            "url": "https://mkgelektromekanik.com",
+            "logo": "https://mkgelektromekanik.com/logo.png",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "TR"
+            }
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Turkey"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": service.title,
+            "itemListElement": service.features?.map((feature, index) => ({
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": feature
+                }
+            })) || []
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "1"
+        }
+    };
+
     return (
         <div className="w-full bg-[#050505] min-h-screen relative z-[999] text-white">
+            <SEOHead
+                title={`${service.title} | MKG Elektromekanik Hizmetler`}
+                description={service.metaDescription || service.description}
+                keywords={service.keywords?.join(', ')}
+                image={service.ogImage || service.image}
+                type="website"
+                schema={serviceSchema}
+            />
             {/* CLOSE BUTTON */}
             <button
                 onClick={() => navigate(-1)}

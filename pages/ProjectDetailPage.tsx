@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Share2, Printer, Bookmark, ArrowRight } from 'lucide-react';
 import { PROJECTS } from '../data/projectsData';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const ProjectDetailPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
 
     const project = PROJECTS.find(p => p.slug === slug);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [slug]);
 
     if (!project) {
         navigate('/projects');
@@ -24,8 +21,54 @@ const ProjectDetailPage: React.FC = () => {
         .filter(p => p.id !== project.id && p.category === project.category)
         .slice(0, 3);
 
+    // Project Schema.org JSON-LD
+    const projectSchema = {
+        "@context": "https://schema.org",
+        "@type": "Project",
+        "name": project.title,
+        "description": project.metaDescription || project.description,
+        "image": `https://mkgelektromekanik.com${project.image}`,
+        "url": `https://mkgelektromekanik.com/projects/${project.slug}`,
+        "keywords": project.keywords?.join(', '),
+        "about": {
+            "@type": "Thing",
+            "name": project.category,
+            "description": project.description
+        },
+        "location": {
+            "@type": "Place",
+            "name": project.location,
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": project.location,
+                "addressCountry": "TR"
+            }
+        },
+        "startDate": project.year.split('-')[0],
+        "endDate": project.year.includes('-') ? project.year.split('-')[1] : project.year,
+        "creator": {
+            "@type": "Organization",
+            "name": "MKG Elektromekanik Otomasyon",
+            "url": "https://mkgelektromekanik.com",
+            "logo": "https://mkgelektromekanik.com/logo.png"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "1"
+        }
+    };
+
     return (
         <div className="w-full bg-[#050505] min-h-screen relative z-[999] text-white">
+            <SEOHead
+                title={`${project.title} | MKG Elektromekanik Projeler`}
+                description={project.metaDescription || project.description}
+                keywords={project.keywords?.join(', ')}
+                image={project.ogImage || project.image}
+                type="website"
+                schema={projectSchema}
+            />
             {/* CLOSE BUTTON */}
             <button
                 onClick={() => navigate(-1)}

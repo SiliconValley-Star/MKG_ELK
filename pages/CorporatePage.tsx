@@ -4,12 +4,20 @@ import { Target, Lightbulb, Shield, Award, Briefcase, History, UserCheck } from 
 import { NavLink } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const CorporatePage: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="bg-transparent min-h-screen pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 overflow-hidden flex flex-col">
+    <>
+      <SEOHead
+        title="Kurumsal - MKG Elektromekanik Otomasyon"
+        description="2015'ten beri endüstriyel dönüşümün mimarı. Şensoy Elektrik Grubu bünyesinde 10+ yıl deneyim, 28 başarılı proje, ISO 45001 sertifikalı. Tarihçemiz, değerlerimiz ve yönetim kadromuz."
+        keywords="MKG elektromekanik hakkında, Şensoy Elektrik Grubu, endüstriyel otomasyon şirketi, ISO 45001, kurumsal değerler, yönetim kadrosu, tarihçe"
+        type="website"
+      />
+      <div className="bg-transparent min-h-screen pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 overflow-hidden flex flex-col">
       
       {/* --- HERO: SYSTEM IDENTITY --- */}
       <motion.div
@@ -26,7 +34,7 @@ const CorporatePage: React.FC = () => {
                   className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6"
                 >
                     <div className="px-2.5 sm:px-3 py-1 bg-brand-orange/10 border border-brand-orange/30 rounded text-brand-orange font-mono text-[10px] sm:text-xs uppercase tracking-widest">
-                        2008'DEN BERİ // SİSTEM_KİMLİK: MKG_KURUMSAL
+                        2015'TEN BERİ // ŞENSOY ELEKTRİK GRUBU
                     </div>
                 </motion.div>
                 <motion.h1
@@ -44,9 +52,9 @@ const CorporatePage: React.FC = () => {
                   transition={isMobile ? { duration: 0.01 } : { duration: 0.6, delay: 0.4 }}
                   className="text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed mb-8 sm:mb-10 max-w-2xl border-l-2 border-brand-orange pl-4 sm:pl-6"
                 >
-                    Sadece yüklenici değiliz; otonom geleceğin mimarlarıyız.
-                    Fabrika zemininden buluta, MKG modern endüstrinin karmaşık katmanlarını
-                    tekil, verimli bir organizmaya entegre eder.
+                    2015 yılında Mustafa Şensoy tarafından kurulan MKG Elektromekanik Otomasyon,
+                    Şensoy Elektrik Grubu bünyesinde endüstriyel altyapı ve otomasyon çözümlerinin öncüsüdür.
+                    Orta gerilimden akıllı bina sistemlerine, her katmanda mükemmelliği hedefleriz.
                 </motion.p>
                 <motion.div
                   initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -55,16 +63,16 @@ const CorporatePage: React.FC = () => {
                   className="flex flex-wrap gap-6 sm:gap-8 font-mono text-xs text-zinc-500"
                 >
                     <div>
-                        <span className="block text-white text-xl sm:text-2xl font-display">15+</span>
+                        <span className="block text-white text-xl sm:text-2xl font-display">10+</span>
                         YIL DENEYİM
                     </div>
                     <div>
                         <span className="block text-white text-xl sm:text-2xl font-display">28</span>
-                        TAMAMLANAN PROJE
+                        BAŞARILI PROJE
                     </div>
                     <div>
                         <span className="block text-white text-xl sm:text-2xl font-display">10</span>
-                        HİZMET ALANI
+                        UZMANKIK ALANI
                     </div>
                 </motion.div>
             </div>
@@ -74,11 +82,11 @@ const CorporatePage: React.FC = () => {
               transition={isMobile ? { duration: 0.01 } : { duration: 0.7, delay: 0.4 }}
               className="lg:col-span-5 h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] relative overflow-hidden border border-white/10 bg-zinc-900 group rounded-lg sm:rounded-none"
             >
-                 <div className="absolute inset-0 bg-[url('/images/corporate/bursa-hq.jpg')] bg-cover bg-center grayscale opacity-40 group-hover:scale-105 transition-transform duration-1000"></div>
+                 <div className="absolute inset-0 bg-[url('/images/corporate/endustrielmukemmelik.jpg')] bg-cover bg-center grayscale opacity-40 group-hover:scale-105 transition-transform duration-1000"></div>
                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6">
-                     <div className="text-white font-bold text-base sm:text-lg">Genel Merkez // Bursa</div>
-                     <div className="text-brand-orange font-mono text-xs">40.2669° K, 29.0634° D</div>
+                     <div className="text-white font-bold text-base sm:text-lg">Endüstriyel Mükemmellik</div>
+                     <div className="text-brand-orange font-mono text-xs uppercase tracking-wider">Şensoy Elektrik Grubu</div>
                  </div>
             </motion.div>
       </motion.div>
@@ -140,12 +148,17 @@ const CorporatePage: React.FC = () => {
                       <span className="text-green-500 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest">Öncelik: Güvenlik</span>
                   </div>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-5 sm:mb-6 break-words">
-                      İş Sağlığı, Güvenliği <br/> ve Çevre.
+                      İş Sağlığı, Güvenliği <br/> ve Çevre Yönetimi.
                   </h2>
-                  <p className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
-                      Endüstriyel otomasyon yüksek voltaj sistemleri ve ağır kinetik içerir.
-                      İSG protokollerimiz titizdir, personel ve çevreye sıfır zarar sağlar.
-                      ATEX bölgelerinde ve yüksek riskli tesislerde çalışma sertifikamız bulunmaktadır.
+                  <p className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4">
+                      Endüstriyel otomasyon ve orta gerilim sistemleri kritik risk taşır.
+                      Şensoy Elektrik Grubu olarak, İSG protokollerimiz uluslararası standartlarda,
+                      personel ve çevre güvenliği her projenin DNA'sındadır.
+                  </p>
+                  <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+                      ATEX bölgelerinde, yüksek voltaj ortamlarında ve patlayıcı atmosferlerde
+                      çalışma yetkimiz bulunmaktadır. Tüm çalışanlarımız periyodik eğitimlerden geçer
+                      ve risk analizleri her proje öncesi titizlikle yürütülür.
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
@@ -156,11 +169,19 @@ const CorporatePage: React.FC = () => {
                           <Award className="text-brand-orange shrink-0" size={18} />
                           <span className="text-xs sm:text-sm text-white font-bold">CE Uyumlu Sistemler</span>
                       </div>
+                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+                          <Award className="text-brand-orange shrink-0" size={18} />
+                          <span className="text-xs sm:text-sm text-white font-bold">ATEX Yetkilendirme</span>
+                      </div>
+                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+                          <Award className="text-brand-orange shrink-0" size={18} />
+                          <span className="text-xs sm:text-sm text-white font-bold">IEC Standartları</span>
+                      </div>
                   </div>
               </div>
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <img src="/images/corporate/safety-1.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all" alt="Güvenlik Ekipmanları" loading="lazy" />
-                  <img src="/images/corporate/safety-2.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all translate-y-6 sm:translate-y-8" alt="Endüstriyel Güvenlik" loading="lazy" />
+                  <img src="/images/corporate/safety-1.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all" alt="İş Güvenliği Ekipmanları" loading="lazy" />
+                  <img src="/images/corporate/safety-2.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all translate-y-6 sm:translate-y-8" alt="Endüstriyel İş Güvenliği" loading="lazy" />
               </div>
           </div>
       </div>
@@ -182,9 +203,9 @@ const CorporatePage: React.FC = () => {
           >Yönetim Kadromuz</motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
               {[
-                  { name: "Emrullah Malkoç", role: "Operasyon Müdürü", img: "/images/team/emrullah-malkoc.jpg", desc: "15+ yıllık deneyimle operasyonel mükemmelliği yönetiyor" },
-                  { name: "Tuncer Beyazoğlu", role: "Kıdemli Baş Elektrik Mühendisi", img: "/images/team/tuncer-beyazoglu.jpg", desc: "Elektrik sistemleri ve enerji çözümlerinde uzman" },
-                  { name: "Berhudan Başcan", role: "Bilgisayar Mühendisi", img: "/images/team/berhudan-bascan.jpg", desc: "Otomasyon yazılımları ve dijital dönüşüm lideri" },
+                  { name: "Emrullah Malkoç", role: "Operasyon Müdürü", img: "/images/projects/legrand.jpg", desc: "15+ yıllık deneyimle operasyonel mükemmelliği yönetiyor" },
+                  { name: "Tuncer Beyazoğlu", role: "Elektrik Sistemleri Direktörü", img: "/images/projects/ardahan-et.jpg", desc: "Tüm elektrik altyapısı kordinatörü ve proje Mühendisi" },
+                  { name: "Berhudan Başcan", role: "Bilgisayar Mühendisi", img: "/images/projects/kultur-universitesi.jpg", desc: "Otomasyon yazılımları ve dijital dönüşüm proje mühendisi " },
               ].map((person, i) => (
                   <motion.div
                     key={i}
@@ -204,7 +225,7 @@ const CorporatePage: React.FC = () => {
                           </div>
                       </div>
                       <div className="p-3 sm:p-4 flex justify-between items-center border-t border-white/10">
-                          <span className="text-[9px] sm:text-[10px] text-zinc-500 font-mono">YETKİ: SEVİYE 5</span>
+                          <span className="text-[9px] sm:text-[10px] text-zinc-500 font-mono">Yönetim Kadrosu</span>
                           <UserCheck size={12} className="sm:w-3.5 sm:h-3.5 text-zinc-600"/>
                       </div>
                   </motion.div>
@@ -222,8 +243,12 @@ const CorporatePage: React.FC = () => {
       >
           <div className="lg:col-span-4">
               <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-5 sm:mb-6">Tarihçemiz</h2>
-              <p className="text-zinc-400 mb-6 sm:mb-8 text-sm sm:text-base">
-                  Kuruluşumuzdan bu yana gerçekleştirdiğimiz büyüme ve teknolojik kilometre taşlarının kronolojik arşivi.
+              <p className="text-zinc-400 mb-4 text-sm sm:text-base leading-relaxed">
+                  <strong className="text-white">2015 yılında Mustafa Şensoy</strong> tarafından kurulan MKG Elektromekanik Otomasyon,
+                  <strong className="text-white"> Şensoy Elektrik Grubu</strong>'nun endüstriyel otomasyon ve elektrik taahhüt kolu olarak faaliyete başlamıştır.
+              </p>
+              <p className="text-zinc-400 mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
+                  Kuruluşumuzdan bu yana gerçekleştirdiğimiz büyüme, teknolojik dönüşüm ve sektördeki başarılarımızın kronolojik arşivi.
               </p>
               <button className="flex items-center gap-2 text-brand-orange font-mono text-[10px] sm:text-xs uppercase border border-brand-orange/30 px-4 sm:px-6 py-2.5 sm:py-3 hover:bg-brand-orange hover:text-black transition-colors tap-target">
                   Tam Geçmişi İndir <History size={12} className="sm:w-3.5 sm:h-3.5"/>
@@ -231,11 +256,17 @@ const CorporatePage: React.FC = () => {
           </div>
           <div className="lg:col-span-8 space-y-0">
               {[
-                  { year: "2024", event: "28 büyük ölçekli otomasyon projesi başarıyla tamamlandı." },
-                  { year: "2022", event: "Enerji sektöründe orta gerilim sistemleri alanına giriş." },
-                  { year: "2019", event: "İlk tam entegre robotik hücre otomotiv sektörüne teslim edildi." },
-                  { year: "2015", event: "PLC programlama ve SCADA sistemlerinde uzmanlaşma." },
-                  { year: "2008", event: "MKG Bursa'da kuruldu. Sistem aktif." },
+                  { year: "2025", event: "Endüstri 4.0 dönüşümü: IoT tabanlı enerji izleme sistemleri ve yapay zeka destekli bakım çözümleri portföye eklendi." },
+                  { year: "2024", event: "28 büyük ölçekli proje tamamlandı. VakıfBank, Okyanus Alüminyum, Celal Tekstil gibi kurumsal müşterilerle uzun vadeli ortaklıklar kuruldu." },
+                  { year: "2023", event: "Orta gerilim sistemlerinde kurulu güç 15 MVA'yı aştı. Metal ve gıda sektörlerinde uzmanlaşma sağlandı." },
+                  { year: "2022", event: "İlk kez enerji sektörüne OG trafo merkezleri ve busbar sistemleri ile giriş yapıldı. Toplam proje portföyü 20'yi geçti." },
+                  { year: "2021", event: "Akıllı bina otomasyon sistemleri (BMS, KNX) ve premium konut projeleri büyük başarı elde etti. Legrand gibi global markalarla işbirlikleri başladı." },
+                  { year: "2020", event: "COVID-19 pandemisine rağmen kritik altyapı projeleri kesintisiz sürdürüldü. Sağlık sektöründe ilk medikal güç (IT Pano) projeleri hayata geçirildi." },
+                  { year: "2019", event: "İstanbul Havalimanı gibi mega projelerde yer alındı. Finans sektöründe VakıfBank ile çözüm ortaklığı resmiyet kazandı." },
+                  { year: "2018", event: "Otel otomasyon sistemleri (GRMS) ve turizm sektörüne adım atıldı. İlk yurt dışı referans proje planlaması başlatıldı." },
+                  { year: "2017", event: "Endüstriyel SCADA ve enerji izleme sistemleri ile otomasyon hizmetleri genişletildi. Ekip büyütme sürecine hız verildi." },
+                  { year: "2016", event: "İlk kurumsal proje VakıfBank Samsun Bölge Müdürlüğü oldu. Finans ve banka altyapılarında uzmanlık kazanıldı." },
+                  { year: "2015", event: "MKG Elektromekanik Otomasyon, Mustafa Şensoy tarafından Bursa'da kuruldu. Şensoy Elektrik Grubu bünyesinde faaliyet başladı." },
               ].map((log, i) => (
                   <motion.div
                     key={i}
@@ -245,18 +276,19 @@ const CorporatePage: React.FC = () => {
                     transition={isMobile ? { duration: 0.01 } : { duration: 0.4, delay: i * 0.05 }}
                     className="flex flex-col sm:flex-row gap-4 sm:gap-6 border-b border-white/10 py-5 sm:py-6 hover:bg-white/5 transition-colors px-3 sm:px-4 items-start sm:items-center"
                   >
-                      <div className="font-mono text-brand-orange font-bold text-base sm:text-lg shrink-0">{log.year}</div>
-                      <div className="h-px w-8 sm:w-12 bg-zinc-700 hidden sm:block"></div>
-                      <div className="text-zinc-300 font-light text-sm sm:text-base break-words">{log.event}</div>
+                      <div className="font-mono text-brand-orange font-bold text-base sm:text-lg shrink-0 min-w-[60px]">{log.year}</div>
+                      <div className="h-px w-8 sm:w-12 bg-zinc-700 hidden sm:block shrink-0"></div>
+                      <div className="text-zinc-300 font-light text-sm sm:text-base break-words leading-relaxed">{log.event}</div>
                   </motion.div>
               ))}
           </div>
       </motion.div>
 
-      {/* --- CTA --- */}
-      <CTASection />
+        {/* --- CTA --- */}
+        <CTASection />
 
-    </div>
+      </div>
+    </>
   );
 };
 

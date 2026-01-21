@@ -9,11 +9,7 @@ import CTASection from '../components/CTASection';
 
 const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean; onClick: () => void }> = ({ item, index, isDark = false, onClick }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+        <div
             onClick={onClick}
             className={`service-row group relative border-t ${isDark ? 'border-white/10 hover:bg-white/5' : 'border-black/10 hover:bg-black/5'} transition-colors duration-500 py-8 sm:py-12 md:py-16 overflow-hidden cursor-pointer`}
         >
@@ -63,7 +59,7 @@ const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean;
             </div>
 
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-orange to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 opacity-50"></div>
-        </motion.div>
+        </div>
     );
 };
 
