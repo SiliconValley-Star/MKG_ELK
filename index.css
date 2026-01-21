@@ -166,6 +166,11 @@ html {
   animation: marquee 60s linear infinite;
 }
 
+/* Pause animation on hover */
+.hover\:pause:hover {
+  animation-play-state: paused;
+}
+
 /* Prevent horizontal overflow on mobile */
 body {
   overflow-x: hidden;
