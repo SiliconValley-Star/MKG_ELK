@@ -1,9 +1,18 @@
 import React from 'react';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const PrivacyPage: React.FC = () => {
     return (
-        <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
+        <>
+            <SEOHead
+                title="Gizlilik Politikası - MKG Elektromekanik Otomasyon"
+                description="MKG Elektromekanik gizlilik politikası. Kişisel verilerinizin toplanması, kullanımı ve korunması hakkında bilgiler. KVKK uyumlu veri güvenliği."
+                keywords="gizlilik politikası, KVKK, kişisel veri koruma, veri güvenliği, MKG elektromekanik gizlilik"
+                type="website"
+                noindex={true}
+            />
+            <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
             <div className="max-w-3xl mx-auto">
 
                 <div className="mb-10 sm:mb-12 pb-6 sm:pb-8 border-b border-slate-800">
@@ -60,9 +69,10 @@ const PrivacyPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* CTA SECTION */}
-            <CTASection />
-        </div>
+                {/* CTA SECTION */}
+                <CTASection />
+            </div>
+        </>
     );
 };
 

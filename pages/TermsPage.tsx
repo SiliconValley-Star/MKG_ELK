@@ -1,9 +1,18 @@
 import React from 'react';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const TermsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
+    <>
+      <SEOHead
+        title="Hizmet Şartları - MKG Elektromekanik Otomasyon"
+        description="MKG Elektromekanik hizmet şartları ve kullanım koşulları. Web sitesi kullanım kuralları, fikri mülkiyet hakları ve sorumluluk sınırlamaları."
+        keywords="hizmet şartları, kullanım koşulları, MKG elektromekanik şartlar, yasal bildirim"
+        type="website"
+        noindex={true}
+      />
+      <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
       <div className="max-w-3xl mx-auto">
 
         <div className="mb-10 sm:mb-12 pb-6 sm:pb-8 border-b border-slate-800">
@@ -39,9 +48,10 @@ const TermsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* CTA SECTION */}
-      <CTASection />
-    </div>
+        {/* CTA SECTION */}
+        <CTASection />
+      </div>
+    </>
   );
 };
 

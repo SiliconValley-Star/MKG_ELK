@@ -1,10 +1,19 @@
 import React from 'react';
 import { Cookie, Info } from 'lucide-react';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const CookiePolicyPage: React.FC = () => {
     return (
-        <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
+        <>
+            <SEOHead
+                title="Çerez Politikası - MKG Elektromekanik Otomasyon"
+                description="MKG Elektromekanik çerez politikası. Web sitemizde kullanılan çerezler, çerez türleri ve yönetimi hakkında detaylı bilgiler."
+                keywords="çerez politikası, cookie policy, çerez kullanımı, Google Analytics, web sitesi çerezleri"
+                type="website"
+                noindex={true}
+            />
+            <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
             <div className="max-w-3xl mx-auto">
 
                 <div className="mb-10 sm:mb-12 pb-6 sm:pb-8 border-b border-slate-800">
@@ -74,9 +83,10 @@ const CookiePolicyPage: React.FC = () => {
 
             </div>
 
-            {/* CTA SECTION */}
-            <CTASection />
-        </div>
+                {/* CTA SECTION */}
+                <CTASection />
+            </div>
+        </>
     );
 };
 

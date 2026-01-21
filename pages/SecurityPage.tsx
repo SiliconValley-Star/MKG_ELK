@@ -3,10 +3,18 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, Lock, Server, FileCheck, Eye, Key } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import CTASection from '../components/CTASection';
+import SEOHead from '../components/SEOHead';
 
 const SecurityPage: React.FC = () => {
     return (
-        <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
+        <>
+            <SEOHead
+                title="Güvenlik & Uyumluluk - MKG Elektromekanik Otomasyon"
+                description="MKG Elektromekanik güvenlik politikaları. ISO 27001, GDPR, KVKK, IEC 62443 uyumlu. SSL şifreleme, veri güvenliği ve siber güvenlik standartları."
+                keywords="siber güvenlik, ISO 27001, GDPR, KVKK, IEC 62443, SSL şifreleme, veri güvenliği, endüstriyel güvenlik standartları"
+                type="website"
+            />
+            <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 pb-16 sm:pb-20 md:pb-24">
 
             {/* Hero */}
             <div className="max-w-7xl mx-auto text-center mb-16 sm:mb-18 md:mb-20">
@@ -59,8 +67,9 @@ const SecurityPage: React.FC = () => {
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/10 via-transparent to-transparent"></div>
                             <img
                                 src="https://img.icons8.com/fluency/240/null/fingerprint-scan.png"
-                                alt="Security Scan"
+                                alt="Güvenlik Tarama - Parmak İzi Tanıma Sistemi"
                                 className="relative z-10 opacity-80 drop-shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+                                loading="lazy"
                             />
                         </div>
                     </div>
@@ -105,9 +114,10 @@ const SecurityPage: React.FC = () => {
                 </a>
             </div>
 
-            {/* CTA SECTION */}
-            <CTASection />
-        </div>
+                {/* CTA SECTION */}
+                <CTASection />
+            </div>
+        </>
     );
 };
 
