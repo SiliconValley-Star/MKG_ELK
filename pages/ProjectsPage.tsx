@@ -79,10 +79,10 @@ const ProjectsPage: React.FC = () => {
             </motion.div>
 
             {/* --- GRID --- */}
-            <div className="max-w-[1920px] mx-auto w-full">
+            <div className="max-w-[1920px] mx-auto w-full mb-12">
                 <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
                     <AnimatePresence>
-                        {filteredProjects.map((project, index) => (
+                        {filteredProjects.map((project) => (
                             <motion.div
                                 layout
                                 initial={{ opacity: 0, scale: 0.95 }}
@@ -90,10 +90,10 @@ const ProjectsPage: React.FC = () => {
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.4 }}
                                 key={project.id}
-                                className={`group relative flex flex-col bg-zinc-950 border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors ${index === 0 ? 'md:col-span-2 md:row-span-2' : 'col-span-1'}`}
+                                className={`group relative flex flex-col bg-zinc-950 border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors ${project.size === 'large' ? 'md:col-span-2 md:row-span-2' : 'col-span-1'}`}
                             >
                                 {/* Image Area */}
-                                <NavLink to={`/projects/${project.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${index === 0 ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
+                                <NavLink to={`/projects/${project.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${project.size === 'large' ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
                                     <div className="absolute inset-0 bg-zinc-900 z-0"></div>
                                     <img
                                         src={project.image}
@@ -113,10 +113,10 @@ const ProjectsPage: React.FC = () => {
                                 </NavLink>
 
                                 {/* Content Area */}
-                                <div className={`relative z-10 flex flex-col justify-between p-5 sm:p-6 ${index === 0 ? 'md:absolute md:bottom-0 md:left-0 md:w-full md:bg-gradient-to-t md:from-black md:to-transparent md:pt-20 lg:pt-24' : 'bg-zinc-950 border-t border-white/10'}`}>
+                                <div className={`relative z-10 flex flex-col justify-between p-5 sm:p-6 ${project.size === 'large' ? 'md:absolute md:bottom-0 md:left-0 md:w-full md:bg-gradient-to-t md:from-black md:to-transparent md:pt-20 lg:pt-24' : 'bg-zinc-950 border-t border-white/10'}`}>
                                     <div>
                                         <NavLink to={`/projects/${project.slug}`}>
-                                            <h3 className={`font-display font-bold text-white mb-2 group-hover:text-brand-orange transition-colors ${index === 0 ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-lg sm:text-xl'}`}>
+                                            <h3 className={`font-display font-bold text-white mb-2 group-hover:text-brand-orange transition-colors ${project.size === 'large' ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-lg sm:text-xl'}`}>
                                                 {project.title}
                                             </h3>
                                         </NavLink>

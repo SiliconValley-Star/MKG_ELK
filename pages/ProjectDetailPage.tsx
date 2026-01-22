@@ -13,7 +13,7 @@ const ProjectDetailPage: React.FC = () => {
     const project = PROJECTS.find(p => p.slug === slug);
 
     if (!project) {
-        navigate('/projects');
+        navigate('/projeler');
         return null;
     }
 
@@ -238,14 +238,14 @@ const ProjectDetailPage: React.FC = () => {
             {/* FOOTER NAV */}
             <div className="border-t border-white/10 bg-black py-8 px-6 md:px-12 flex justify-between items-center">
                 <button
-                    onClick={() => navigate('/projects')}
+                    onClick={() => navigate('/projeler')}
                     className="text-gray-500 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2"
                 >
                     <span>←</span><span className="hidden sm:inline"> Tüm Projeler</span>
                 </button>
                 {relatedProjects.length > 0 && (
                     <NavLink
-                        to={`/projects/${relatedProjects[0].slug}`}
+                        to={`/projeler/${relatedProjects[0].slug}`}
                         className="text-gray-500 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2"
                     >
                         <span className="hidden sm:inline">Sonraki Proje </span><span>→</span>
