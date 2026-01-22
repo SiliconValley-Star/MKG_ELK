@@ -23,7 +23,20 @@ const BlogPostPage: React.FC = () => {
 
     // SEO için tarih formatını ISO 8601'e çevir (dd.mm.yyyy -> yyyy-mm-dd)
     const formatDateToISO = (dateStr: string): string => {
-        const [day, month, year] = dateStr.split('.');
+        if (!dateStr || typeof dateStr !== 'string') {
+            return new Date().toISOString().split('T')[0];
+        }
+        
+        const parts = dateStr.split('.');
+        if (parts.length !== 3) {
+            return new Date().toISOString().split('T')[0];
+        }
+        
+        const [day, month, year] = parts;
+        if (!day || !month || !year) {
+            return new Date().toISOString().split('T')[0];
+        }
+        
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
     };
 

@@ -9,10 +9,10 @@ import { blogPosts } from '../data/blogPosts';
 const NotFoundPage: React.FC = () => {
   const popularLinks = [
     { label: 'Ana Sayfa', path: '/', icon: Home },
-    { label: 'Hizmetler', path: '/services', icon: Search },
-    { label: 'Projeler', path: '/projects', icon: Search },
+    { label: 'Hizmetler', path: '/hizmetler', icon: Search },
+    { label: 'Projeler', path: '/projeler', icon: Search },
     { label: 'Blog', path: '/blog', icon: Search },
-    { label: 'İletişim', path: '/contact', icon: Search },
+    { label: 'İletişim', path: '/iletisim', icon: Search },
   ];
 
   const recentServices = SERVICES_DATA.slice(0, 3);
@@ -86,7 +86,7 @@ const NotFoundPage: React.FC = () => {
                 {recentServices.map((service, idx) => (
                   <li key={idx}>
                     <Link
-                      to={`/services/${service.slug}`}
+                      to={`/hizmetler/${service.slug}`}
                       className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
                     >
                       <span className="w-1 h-1 bg-gray-700 rounded-full group-hover:bg-brand-orange transition-colors"></span>
@@ -96,7 +96,7 @@ const NotFoundPage: React.FC = () => {
                 ))}
                 <li className="pt-2">
                   <Link
-                    to="/services"
+                    to="/hizmetler"
                     className="text-xs text-brand-orange hover:text-white transition-colors flex items-center gap-1"
                   >
                     Tüm Hizmetler <ArrowRight size={12} />
@@ -114,7 +114,7 @@ const NotFoundPage: React.FC = () => {
                 {recentProjects.map((project, idx) => (
                   <li key={idx}>
                     <Link
-                      to={`/projects/${project.slug}`}
+                      to={`/projeler/${project.slug}`}
                       className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
                     >
                       <span className="w-1 h-1 bg-gray-700 rounded-full group-hover:bg-brand-orange transition-colors"></span>
@@ -124,7 +124,7 @@ const NotFoundPage: React.FC = () => {
                 ))}
                 <li className="pt-2">
                   <Link
-                    to="/projects"
+                    to="/projeler"
                     className="text-xs text-brand-orange hover:text-white transition-colors flex items-center gap-1"
                   >
                     Tüm Projeler <ArrowRight size={12} />
@@ -168,7 +168,7 @@ const NotFoundPage: React.FC = () => {
               Yine de aradığınızı bulamadınız mı?
             </p>
             <Link
-              to="/contact"
+              to="/iletisim"
               className="inline-flex items-center gap-2 bg-brand-orange text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105"
             >
               Bize Ulaşın
