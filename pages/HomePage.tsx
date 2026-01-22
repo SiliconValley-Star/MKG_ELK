@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
         "url": "https://mkgelektromekanik.com",
         "logo": "https://mkgelektromekanik.com/logo.png",
         "description": "Endüstriyel otomasyon, elektrik mühendisliği ve akıllı bina sistemleri konusunda uzman. 2008'den beri Türkiye genelinde orta gerilim, alçak gerilim, BMS, SCADA ve güvenlik sistemleri kuruyoruz.",
-        "foundingDate": "2008",
+        "foundingDate": "2015",
         "address": {
             "@type": "PostalAddress",
             "addressCountry": "TR",
@@ -90,7 +90,7 @@ const HomePage: React.FC = () => {
         <div className="bg-transparent text-white overflow-x-hidden">
             <SEOHead
                 title="MKG Elektromekanik Otomasyon | Endüstriyel Elektrik & Otomasyon Çözümleri"
-                description="2008'den beri Türkiye genelinde endüstriyel otomasyon, orta-alçak gerilim sistemleri, BMS, SCADA, trafo merkezi ve akıllı bina çözümleri. 28+ başarılı proje, 10 yıl tecrübe."
+                description="2015'ten beri Türkiye genelinde endüstriyel otomasyon, orta-alçak gerilim sistemleri, BMS, SCADA, trafo merkezi ve akıllı bina çözümleri. 28+ başarılı proje, 10 yıl tecrübe."
                 keywords="endüstriyel otomasyon, elektrik mühendisliği, trafo merkezi, BMS, SCADA, orta gerilim, alçak gerilim, akıllı bina, güvenlik sistemleri, enerji yönetimi"
                 type="website"
                 schema={combinedSchema}
@@ -107,130 +107,260 @@ const HomePage: React.FC = () => {
     );
 };
 
-// --- 1. HERO SECTION: TECHNICAL HUD STYLE ---
-const heroSlides = [
-    {
-        id: "01",
-        img: "/images/projects/vakifbank-hq.jpg",
-        title: "KURUMSAL\nALTYAPI",
-        subtitle: "FİNANS SEKTÖRÜ ÇÖZÜM ORTAKLIĞI",
-        desc: "VakıfBank ile 2015'ten beri 30+ lokasyonda kesintisiz enerji ve data altyapısı kuruyoruz."
-    },
-    {
-        id: "02",
-        img: "/images/projects/okyanus-aluminyum.jpg",
-        title: "ENDÜSTRİYEL\nGÜÇ",
-        subtitle: "OG/AG SİSTEMLERİ & BUSBAR",
-        desc: "2500 kVA trafo merkezleri ve busbar enerji dağıtımı ile modern üretim tesisleri inşa ediyoruz."
-    },
-    {
-        id: "03",
-        img: "/images/projects/celal-tekstil.jpg",
-        title: "AKILLI\nOTOMASYON",
-        subtitle: "BMS & ENERJI YÖNETİMİ",
-        desc: "DALI/KNX tabanlı akıllı aydınlatma ve enerji takip sistemleri ile verimliliği maksimize ediyoruz."
-    }
-];
-
+// --- 1. CINEMATIC HERO (SOFT & SMOOTH VERSION) ---
 const HeroSection = () => {
-    const [current, setCurrent] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [direction, setDirection] = useState(0);
+    const slideDuration = 6000;
+    const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const isMobile = useIsMobile();
 
+    const slides = [
+        {
+            id: 0,
+            image: "/images/projects/vakifbank-hq.jpg",
+            title: "KURUMSAL ALTYAPI",
+            subtitle: "VakıfBank ile 2015'ten beri 30+ lokasyonda kesintisiz enerji ve data altyapısı kuruyoruz.",
+            tag: "FİNANS SEKTÖRÜ",
+            stats: { load: "99.9%", temp: "OPTIMAL", net: "SECURE" }
+        },
+        {
+            id: 1,
+            image: "/images/projects/okyanus-aluminyum.jpg",
+            title: "ENDÜSTRİYEL GÜÇ",
+            subtitle: "2500 kVA trafo merkezleri ve busbar enerji dağıtımı ile modern üretim tesisleri inşa ediyoruz.",
+            tag: "OG/AG SİSTEMLERİ",
+            stats: { load: "2.5MW", temp: "42°C", net: "GRID_ON" }
+        },
+        {
+            id: 2,
+            image: "/images/projects/celal-tekstil.jpg",
+            title: "AKILLI OTOMASYON",
+            subtitle: "DALI/KNX tabanlı akıllı aydınlatma ve enerji takip sistemleri ile verimliliği maksimize ediyoruz.",
+            tag: "BMS & ENERJİ",
+            stats: { load: "89%", temp: "38°C", net: "SYNCED" }
+        }
+    ];
+
+    const resetTimer = () => {
+        if (timerRef.current) clearInterval(timerRef.current);
+        timerRef.current = setInterval(() => {
+            nextSlide();
+        }, slideDuration);
+    };
+
+    const nextSlide = () => {
+        setDirection(1);
+        setCurrentIndex((prev) => (prev + 1) % slides.length);
+    };
+
+    const prevSlide = () => {
+        setDirection(-1);
+        setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+    };
+
     useEffect(() => {
-        // Mobilde daha yavaş slideshow (15 saniye), desktop'ta normal (7 saniye)
-        const intervalTime = isMobile ? 15000 : 7000;
-        
-        const timer = setInterval(() => {
-            setCurrent((prev) => (prev + 1) % heroSlides.length);
-        }, intervalTime);
-        return () => clearInterval(timer);
-    }, [isMobile]);
+        resetTimer();
+        return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    }, [currentIndex]);
+
+    const easeCurve: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+    // Smoother, softer image transitions - optimized for mobile
+    const slideVariants = {
+        enter: (direction: number) => ({
+            opacity: 0,
+            scale: isMobile ? 1 : 1.1,
+            filter: isMobile ? "blur(0px)" : "blur(10px)"
+        }),
+        center: {
+            zIndex: 1,
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            transition: {
+                duration: isMobile ? 0.6 : 1.4,
+                ease: easeCurve
+            }
+        },
+        exit: (direction: number) => ({
+            zIndex: 0,
+            opacity: 0,
+            scale: isMobile ? 1 : 0.95,
+            filter: isMobile ? "blur(0px)" : "blur(10px)",
+            transition: {
+                duration: isMobile ? 0.5 : 1.2,
+                ease: easeCurve
+            }
+        })
+    };
 
     return (
-        <section className="relative h-screen w-full overflow-hidden bg-transparent">
-            <div className="absolute inset-0 z-0">
-                {heroSlides.map((slide, index) => (
+        <section className="relative h-screen w-full overflow-hidden bg-black">
+            
+            {/* Background Image Slider */}
+            <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                    key={currentIndex}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="absolute inset-0 z-0"
+                >
+                    {/* Image */}
                     <div
-                        key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'}`}
-                    >
-                        <div
-                            className="absolute inset-0 bg-cover bg-center transform transition-transform duration-[6000ms] ease-out"
-                            style={{
-                                backgroundImage: `url(${slide.img})`,
-                                transform: !isMobile && index === current ? 'scale(1.1)' : 'scale(1.0)'
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
+                    />
+                    {/* Soft Overlays */}
+                    <div className="absolute inset-0 bg-black/50"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]"></div>
+                    
+                    {/* Texture */}
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1IiAvPjwvc3ZnPg==')] opacity-20 mix-blend-overlay"></div>
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Content Container */}
+            <div className="relative z-10 h-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12 flex flex-col justify-center">
+                <div className="max-w-7xl relative min-h-[400px] flex flex-col justify-center">
+                    
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: isMobile ? -10 : -20 }}
+                            transition={{
+                                duration: isMobile ? 0.5 : 1.0,
+                                ease: easeCurve,
+                                delay: isMobile ? 0.1 : 0.2
                             }}
-                        ></div>
-                        <div className="absolute inset-0 bg-black/40"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
-                    </div>
-                ))}
+                            className="flex flex-col"
+                        >
+                            {/* Animated Tag */}
+                            <div className="flex items-center gap-4 mb-6 sm:mb-8">
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ width: 60 }}
+                                    transition={{
+                                        duration: isMobile ? 0.4 : 1,
+                                        delay: isMobile ? 0.2 : 0.4
+                                    }}
+                                    className="h-[2px] bg-brand-orange"
+                                />
+                                <span className="text-brand-orange font-mono text-[10px] sm:text-xs font-bold tracking-[0.3em] uppercase">
+                                    {slides[currentIndex].tag}
+                                </span>
+                            </div>
+
+                            {/* Title - Soft Reveal */}
+                            <div className="overflow-visible mb-4 sm:mb-6">
+                                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-display font-bold text-white tracking-tighter leading-[0.9]">
+                                    {slides[currentIndex].title}
+                                </h1>
+                            </div>
+
+                            {/* Subtitle */}
+                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-zinc-300 font-light max-w-2xl leading-relaxed mb-8 sm:mb-10 md:mb-12 border-l-2 border-white/20 pl-4 sm:pl-6">
+                                {slides[currentIndex].subtitle}
+                            </p>
+
+                            {/* Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                                <NavLink to="/projects">
+                                    <button className="group relative px-8 sm:px-10 py-4 sm:py-5 bg-white text-black font-bold uppercase tracking-widest text-xs overflow-hidden tap-target w-full sm:w-auto">
+                                        <span className="relative z-10 group-hover:text-white transition-colors duration-500">Projeleri Keşfet</span>
+                                        <div className="absolute inset-0 bg-brand-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ease-out"></div>
+                                    </button>
+                                </NavLink>
+                                <NavLink to="/contact">
+                                    <button className="group px-8 sm:px-10 py-4 sm:py-5 border border-white/30 text-white font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-colors backdrop-blur-sm flex items-center justify-center gap-3 tap-target w-full sm:w-auto">
+                                        İletişime Geç <ChevronRight className="group-hover:translate-x-1 transition-transform" size={14}/>
+                                    </button>
+                                </NavLink>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
 
-            <div className="absolute inset-0 z-10 flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-20">
-                <div className="max-w-5xl border-l-2 border-brand-orange/50 pl-4 sm:pl-6 md:pl-12 lg:pl-16 relative">
-                    {/* Decorator Line */}
-                    <div className="absolute top-0 left-[-2px] w-[2px] h-16 sm:h-20 md:h-24 bg-brand-orange"></div>
+            {/* --- HUD CONTROLS (Bottom Right) --- */}
+            <div className="absolute bottom-8 sm:bottom-12 right-4 sm:right-6 md:right-12 z-20 flex items-center gap-4 sm:gap-6 md:gap-8">
+                
+                {/* Active Data Stats (Fade key change) */}
+                <div className="hidden md:flex gap-6 lg:gap-8 mr-4 lg:mr-8">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="flex gap-6 lg:gap-8"
+                        >
+                            <div className="text-right">
+                                <div className="text-[10px] font-mono text-zinc-500 uppercase">Sys_Load</div>
+                                <div className="text-sm font-mono text-white font-bold">{slides[currentIndex].stats.load}</div>
+                            </div>
+                            <div className="text-right">
+                                <div className="text-[10px] font-mono text-zinc-500 uppercase">Core_Temp</div>
+                                <div className="text-sm font-mono text-white font-bold">{slides[currentIndex].stats.temp}</div>
+                            </div>
+                            <div className="text-right">
+                                <div className="text-[10px] font-mono text-zinc-500 uppercase">Network</div>
+                                <div className="text-sm font-mono text-brand-orange font-bold animate-pulse">{slides[currentIndex].stats.net}</div>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
 
-                    <motion.div
-                        key={current + "text"}
-                        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: 0.1 }}
+                {/* Navigation Arrows */}
+                <div className="flex items-center gap-3 sm:gap-4">
+                    <button
+                        onClick={prevSlide}
+                        className="w-12 h-12 sm:w-14 sm:h-14 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-md tap-target"
+                        aria-label="Önceki Slayt"
                     >
-                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
-                            <span className="px-2 sm:px-3 py-1 bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-[10px] sm:text-xs font-mono tracking-widest uppercase rounded">
-                                {heroSlides[current].subtitle}
-                            </span>
-                            <span className="text-slate-500 font-mono text-[10px] sm:text-xs">EST. 2008</span>
-                        </div>
-
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white leading-[0.9] tracking-tighter mb-4 sm:mb-6 md:mb-8 whitespace-pre-line drop-shadow-2xl">
-                            {heroSlides[current].title}
-                        </h1>
-
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 max-w-xl leading-relaxed font-light mb-5 sm:mb-6 md:mb-10">
-                            {heroSlides[current].desc}
-                        </p>
-
-                        <NavLink to="/services">
-                            <button className="group relative overflow-hidden bg-white text-slate-950 px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 rounded-none skew-x-[-10deg] hover:bg-brand-orange transition-colors duration-300 tap-target">
-                                <div className="skew-x-[10deg] font-bold tracking-widest flex items-center gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
-                                    ÇÖZÜMLERİ KEŞFET <ArrowRight size={16} className="sm:w-[18px] sm:h-[18px]" />
-                                </div>
-                            </button>
-                        </NavLink>
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* Bottom Status Bar (HUD) */}
-            <div className="absolute bottom-0 left-0 w-full border-t border-white/10 bg-slate-950/50 backdrop-blur-md px-4 sm:px-6 md:px-12 lg:px-20 py-3 sm:py-4 md:py-6 flex justify-between items-center z-20">
-                <div className="flex items-center gap-3 sm:gap-4 md:gap-8">
-                    <div className="text-[10px] sm:text-xs font-mono text-slate-500">
-                        <span className="hidden sm:inline">SİSTEM DURUMU: </span><span className="text-green-500">ÇEVRİMİÇİ</span>
-                    </div>
-                    <div className="text-[10px] sm:text-xs font-mono text-slate-500 hidden lg:block">
-                        LOC: 40.1828° N, 29.0665° E
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-                    <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-white">0{current + 1}</span>
-                    <div className="w-16 sm:w-24 md:w-32 h-[2px] bg-slate-800 relative overflow-hidden">
-                        {!isMobile && (
-                            <motion.div
-                                key={current}
-                                initial={{ width: 0 }}
-                                animate={{ width: "100%" }}
-                                transition={{ duration: 7, ease: "linear" }}
-                                className="absolute top-0 left-0 h-full bg-brand-orange"
+                        <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
+                    </button>
+                    
+                    {/* Progress Ring / Next Button */}
+                    <button
+                        onClick={nextSlide}
+                        className="relative w-12 h-12 sm:w-14 sm:h-14 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-md group tap-target"
+                        aria-label="Sonraki Slayt"
+                    >
+                        {/* SVG Circle for Timer - Now visible on mobile too */}
+                        <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none">
+                            <circle
+                                cx={isMobile ? "24" : "28"}
+                                cy={isMobile ? "24" : "28"}
+                                r={isMobile ? "22" : "26"}
+                                stroke="currentColor" strokeWidth="1" fill="transparent"
+                                className="text-white/10"
                             />
-                        )}
-                    </div>
-                    <span className="font-mono text-xs sm:text-sm text-slate-500">03</span>
+                            <motion.circle
+                                key={currentIndex}
+                                cx={isMobile ? "24" : "28"}
+                                cy={isMobile ? "24" : "28"}
+                                r={isMobile ? "22" : "26"}
+                                stroke="currentColor" strokeWidth="2" fill="transparent"
+                                className="text-brand-orange"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: 1 }}
+                                transition={{ duration: slideDuration / 1000, ease: "linear" }}
+                                strokeDasharray="0 1"
+                            />
+                        </svg>
+                        <ChevronRight size={20} className="sm:w-6 sm:h-6" />
+                    </button>
+                </div>
+                
+                {/* Slide Numbers */}
+                <div className="font-mono text-xs font-bold tracking-widest text-white">
+                    0{currentIndex + 1} <span className="text-zinc-600">/ 0{slides.length}</span>
                 </div>
             </div>
         </section>
@@ -245,7 +375,7 @@ const BrandTicker: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     ];
 
     return (
-        <section className="pt-6 sm:pt-8 md:pt-10 pb-8 sm:pb-10 md:pb-12 bg-black/40 backdrop-blur-md border-y border-white/10 relative flex flex-col items-center justify-center">
+        <section className="pt-6 sm:pt-8 md:pt-10 pb-8 sm:pb-10 md:pb-12 bg-black/5 backdrop-blur-sm border-y border-white/10 relative flex flex-col items-center justify-center">
 
             {/* Label - Now inside flow with proper spacing */}
             <div className="mb-4 sm:mb-5 md:mb-6 z-20 bg-black px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 border border-white/10 rounded-full shadow-lg">
@@ -261,7 +391,7 @@ const BrandTicker: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 
             {/* Scrolling Track */}
             <div className="flex w-full overflow-hidden">
-                <div className={`flex w-max items-center ${isMobile ? '' : 'animate-marquee'}`}>
+                <div className="flex w-max items-center animate-marquee">
                     {/* Quadruple the list to ensure seamless looping on large screens */}
                     {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
                         <div key={i} className="flex items-center mx-4 sm:mx-6 md:mx-8 lg:mx-12 group cursor-default select-none">
@@ -281,13 +411,13 @@ const BrandTicker: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 // --- 3. CORPORATE INTRO (2 COLUMN LAYOUT) ---
 const CorporateIntro: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     return (
-        <section className="py-20 sm:py-24 md:py-32 bg-zinc-950 border-b border-white/10">
+        <section className="py-20 sm:py-24 md:py-32 bg-transparent border-b border-white/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start">
                 <motion.div
-                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.4 }}
+                    transition={{ duration: isMobile ? 0.3 : 0.4 }}
                 >
                     <div className="flex items-center gap-2 mb-6">
                         <div className="w-2 h-2 bg-brand-orange rounded-full"></div>
@@ -299,7 +429,7 @@ const CorporateIntro: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                     <div className="flex flex-col gap-6">
                         <div className="pl-6 border-l-2 border-white/20">
                             <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
-                                2008'den beri, MKG elektrik mühendisliği ile dijital zeka arasındaki köprüde yer alıyor. Sadece komponent tedarik etmiyoruz; fabrikaların, veri merkezlerinin ve enerji santrallerinin sinir sistemlerini tasarlıyoruz.
+                                2015'ten beri, MKG elektrik mühendisliği ile dijital zeka arasındaki köprüde yer alıyor. Sadece komponent tedarik etmiyoruz; fabrikaların, veri merkezlerinin ve enerji santrallerinin sinir sistemlerini tasarlıyoruz.
                             </p>
                         </div>
                         <div className="pl-6 border-l-2 border-brand-orange">
@@ -323,10 +453,10 @@ const CorporateIntro: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                 </motion.div>
 
                 <motion.div
-                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: 0.2 }}
+                    transition={{ duration: isMobile ? 0.4 : 0.5, delay: isMobile ? 0.1 : 0.2 }}
                     className="relative"
                 >
                     <p className="text-zinc-500 mb-8 font-mono text-sm leading-7">
@@ -392,7 +522,7 @@ const EcosystemGrid: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     ];
 
     return (
-        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-black">
+        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-transparent">
             <div className="max-w-[1920px] mx-auto mb-12 sm:mb-16 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-8">
                 <div>
                     <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-white mb-4">Temel Yetenekler</h2>
@@ -410,10 +540,10 @@ const EcosystemGrid: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
                     <motion.div
                         key={i}
                         className="group relative bg-zinc-900 border border-white/10 overflow-hidden flex flex-col hover:border-brand-orange/30 transition-colors"
-                        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
+                        transition={{ duration: isMobile ? 0.4 : 0.5, delay: isMobile ? i * 0.05 : i * 0.1 }}
                     >
                         {/* Image */}
                         <div className="h-64 relative overflow-hidden">
@@ -451,14 +581,14 @@ const StrategicValues = () => {
     const isMobile = useIsMobile();
     
     return (
-        <section className="py-20 sm:py-24 md:py-32 bg-zinc-950 border-y border-white/10">
+        <section className="py-20 sm:py-24 md:py-32 bg-transparent border-y border-white/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <motion.div
                     className="text-center mb-12 sm:mb-16"
-                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.4 }}
+                    transition={{ duration: isMobile ? 0.3 : 0.4 }}
                 >
                     <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Neden Lider Firmalar MKG'yi Seçiyor</h2>
                     <p className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
@@ -487,10 +617,10 @@ const StrategicValues = () => {
                         <motion.div
                             key={i}
                             className="p-6 sm:p-8 bg-black border border-white/10 hover:border-brand-orange transition-colors duration-300 group"
-                            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={isMobile ? { duration: 0.01 } : { duration: 0.4, delay: i * 0.1 }}
+                            transition={{ duration: isMobile ? 0.3 : 0.4, delay: isMobile ? i * 0.05 : i * 0.1 }}
                         >
                             <item.icon className="text-brand-orange mb-6 group-hover:scale-110 transition-transform" size={32} />
                             <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{item.title}</h3>
@@ -525,7 +655,7 @@ const InfiniteGallery = () => {
     ];
 
     return (
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-zinc-950 overflow-hidden relative">
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-transparent overflow-hidden relative">
             <div className="max-w-[1920px] mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div>
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-2">Proje Arşivi</h2>
@@ -542,7 +672,7 @@ const InfiniteGallery = () => {
 
             {/* Slider Track */}
             <div className="flex w-full overflow-hidden">
-                <div className={`flex w-max items-center gap-4 sm:gap-5 md:gap-6 ${isMobile ? '' : 'animate-marquee hover:pause'}`}>
+                <div className="flex w-max items-center gap-4 sm:gap-5 md:gap-6 animate-marquee hover:pause">
                     {[...images, ...images].map((item, i) => (
                         <div key={i} className="relative w-[320px] h-[200px] sm:w-[400px] sm:h-[250px] md:w-[500px] md:h-[320px] lg:w-[550px] lg:h-[350px] flex-shrink-0 group overflow-hidden border border-white/10 bg-black">
                             <img
@@ -569,14 +699,14 @@ const LiveTelemetry = () => {
     const isMobile = useIsMobile();
     
     return (
-        <section className="py-16 sm:py-20 md:py-24 bg-black border-t border-white/10">
+        <section className="py-16 sm:py-20 md:py-24 bg-transparent border-t border-white/10">
             <div className="max-w-[1920px] mx-auto px-4 sm:px-6">
                 <motion.div
                     className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12"
-                    initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
+                    initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
+                    transition={{ duration: isMobile ? 0.4 : 0.6 }}
                 >
                     {[
                         { label: "Başarılı Proje", val: "28" },
@@ -587,10 +717,10 @@ const LiveTelemetry = () => {
                         <motion.div
                             key={i}
                             className="text-center md:text-left border-l-2 border-white/10 pl-6 sm:pl-8"
-                            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
+                            transition={{ duration: isMobile ? 0.4 : 0.5, delay: isMobile ? i * 0.05 : i * 0.1 }}
                         >
                             <div className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-2">{stat.val}</div>
                             <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{stat.label}</div>

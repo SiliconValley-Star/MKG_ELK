@@ -124,7 +124,7 @@ const ContactPage: React.FC = () => {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="flex items-center gap-2 mb-2"
                     >
-                        <span className={`w-2 h-2 bg-brand-orange rounded-full ${isMobile ? '' : 'animate-pulse'}`}></span>
+                        <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></span>
                         <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Sistem Aktif</span>
                     </motion.div>
                     <motion.h1
@@ -172,7 +172,7 @@ const ContactPage: React.FC = () => {
                         className="absolute top-[24%] left-[41%] flex flex-col items-center group/pin cursor-pointer hover:scale-110 transition-transform"
                         aria-label="Google Maps'te MKG Elektromekanik Ofisimizi Görüntüle"
                     >
-                        {!isMobile && <div className="w-3 h-3 bg-brand-orange rounded-full animate-ping absolute"></div>}
+                        <div className="w-3 h-3 bg-brand-orange rounded-full animate-ping absolute"></div>
                         <div className="w-3 h-3 bg-brand-orange rounded-full relative z-10 border-2 border-black shadow-lg"></div>
                         <div className="mt-2 bg-black/90 backdrop-blur border border-white/20 px-3 py-1 rounded text-[10px] text-white opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
                             <span className="text-brand-orange font-bold">📍 MERKEZ:</span> DAP Vadisi, Merkez, A Blok, Ofis 49
@@ -256,9 +256,9 @@ const ContactPage: React.FC = () => {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {submitSuccess && (
                                 <motion.div
-                                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                                    initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={isMobile ? { duration: 0.01 } : { duration: 0.3 }}
+                                    transition={{ duration: 0.3 }}
                                     className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-green-500 text-sm"
                                 >
                                     ✓ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
@@ -267,9 +267,9 @@ const ContactPage: React.FC = () => {
 
                             {errors.submit && (
                                 <motion.div
-                                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                                    initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={isMobile ? { duration: 0.01 } : { duration: 0.3 }}
+                                    transition={{ duration: 0.3 }}
                                     className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-500 text-sm"
                                 >
                                     {errors.submit}
@@ -384,16 +384,12 @@ const ContactPage: React.FC = () => {
                             >
                                 {isSubmitting ? (
                                     <>
-                                        {isMobile ? (
+                                        <motion.div
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                                        >
                                             <Send size={16} />
-                                        ) : (
-                                            <motion.div
-                                                animate={{ rotate: 360 }}
-                                                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                                            >
-                                                <Send size={16} />
-                                            </motion.div>
-                                        )}
+                                        </motion.div>
                                         VERİ İLETİLİYOR...
                                     </>
                                 ) : (

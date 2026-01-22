@@ -1,10 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Target, Lightbulb, Shield, Award, Briefcase, History, UserCheck } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Target, Lightbulb, Shield, Award, History, UserCheck, ArrowRight, Zap, Hash, Globe, TrendingUp } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile';
 import CTASection from '../components/CTASection';
 import SEOHead from '../components/SEOHead';
+import { PROJECTS } from '../data/projectsData';
 
 const CorporatePage: React.FC = () => {
   const isMobile = useIsMobile();
@@ -17,279 +18,465 @@ const CorporatePage: React.FC = () => {
         keywords="MKG elektromekanik hakkında, Şensoy Elektrik Grubu, endüstriyel otomasyon şirketi, ISO 45001, kurumsal değerler, yönetim kadrosu, tarihçe"
         type="website"
       />
-      <div className="bg-transparent min-h-screen pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 overflow-hidden flex flex-col">
-      
-      {/* --- HERO: SYSTEM IDENTITY --- */}
-      <motion.div
-        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
-        className="max-w-[1920px] mx-auto w-full mb-20 sm:mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 md:gap-12 items-center border-b border-white/10 pb-10 sm:pb-12"
-      >
-            <div className="lg:col-span-7">
-                <motion.div
-                  initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: 0.2 }}
-                  className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-6"
-                >
-                    <div className="px-2.5 sm:px-3 py-1 bg-brand-orange/10 border border-brand-orange/30 rounded text-brand-orange font-mono text-[10px] sm:text-xs uppercase tracking-widest">
-                        2015'TEN BERİ // ŞENSOY ELEKTRİK GRUBU
-                    </div>
-                </motion.div>
-                <motion.h1
-                  initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={isMobile ? { duration: 0.01 } : { duration: 0.6, delay: 0.3 }}
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white mb-6 sm:mb-8 leading-[0.9]"
-                >
-                    ENDÜSTRİYEL <br/>
-                    <span className="text-zinc-600">DÖNÜŞÜMÜN MİMARI.</span>
-                </motion.h1>
-                <motion.p
-                  initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={isMobile ? { duration: 0.01 } : { duration: 0.6, delay: 0.4 }}
-                  className="text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed mb-8 sm:mb-10 max-w-2xl border-l-2 border-brand-orange pl-4 sm:pl-6"
-                >
-                    2015 yılında Mustafa Şensoy tarafından kurulan MKG Elektromekanik Otomasyon,
-                    Şensoy Elektrik Grubu bünyesinde endüstriyel altyapı ve otomasyon çözümlerinin öncüsüdür.
-                    Orta gerilimden akıllı bina sistemlerine, her katmanda mükemmelliği hedefleriz.
-                </motion.p>
-                <motion.div
-                  initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={isMobile ? { duration: 0.01 } : { duration: 0.6, delay: 0.5 }}
-                  className="flex flex-wrap gap-6 sm:gap-8 font-mono text-xs text-zinc-500"
-                >
-                    <div>
-                        <span className="block text-white text-xl sm:text-2xl font-display">10+</span>
-                        YIL DENEYİM
-                    </div>
-                    <div>
-                        <span className="block text-white text-xl sm:text-2xl font-display">28</span>
-                        BAŞARILI PROJE
-                    </div>
-                    <div>
-                        <span className="block text-white text-xl sm:text-2xl font-display">10</span>
-                        UZMANKIK ALANI
-                    </div>
-                </motion.div>
-            </div>
-            <motion.div
-              initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={isMobile ? { duration: 0.01 } : { duration: 0.7, delay: 0.4 }}
-              className="lg:col-span-5 h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] relative overflow-hidden border border-white/10 bg-zinc-900 group rounded-lg sm:rounded-none"
-            >
-                 <div className="absolute inset-0 bg-[url('/images/corporate/endustrielmukemmelik.jpg')] bg-cover bg-center grayscale opacity-40 group-hover:scale-105 transition-transform duration-1000"></div>
-                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6">
-                     <div className="text-white font-bold text-base sm:text-lg">Endüstriyel Mükemmellik</div>
-                     <div className="text-brand-orange font-mono text-xs uppercase tracking-wider">Şensoy Elektrik Grubu</div>
-                 </div>
-            </motion.div>
-      </motion.div>
-
-      {/* --- STRATEJİK DEĞERLER --- */}
-      <motion.div
-        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
-        className="max-w-[1920px] mx-auto w-full mb-24 sm:mb-28 md:mb-32"
-      >
-         <motion.div
-           initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
-           whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: 0.2 }}
-           className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 sm:mb-12 gap-4"
-         >
-             <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">Stratejik Değerlerimiz</h2>
-             <div className="hidden md:block h-[1px] flex-grow mx-8 bg-white/10"></div>
-             <p className="text-zinc-500 font-mono text-xs uppercase">Temel İlkeler</p>
-         </motion.div>
-         
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-px sm:gap-1">
-             {[
-                 { title: "Hassasiyet", icon: Target, desc: "Şematik tasarım ve mantık akışında sıfır hata toleransı. Her detay mükemmellik için optimize edilir.", code: "DEĞER_01" },
-                 { title: "İnovasyon", icon: Lightbulb, desc: "Dijital İkiz ve Endüstri 4.0 teknolojilerinde öncü. Geleceğin fabrikalarını bugünden inşa ediyoruz.", code: "DEĞER_02" },
-                 { title: "Güvenilirlik", icon: Shield, desc: "Şeffaf protokoller ve IEC standartlarına tam uyum. Her kod satırında kalite güvencesi.", code: "DEĞER_03" }
-             ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
-                  className="bg-zinc-950 border border-white/10 p-6 sm:p-8 md:p-10 hover:bg-zinc-900 transition-colors group relative overflow-hidden"
-                >
-                     <div className="absolute top-3 sm:top-4 right-3 sm:right-4 text-[9px] sm:text-[10px] font-mono text-zinc-600 group-hover:text-brand-orange transition-colors">{item.code}</div>
-                     <item.icon size={28} className="sm:w-8 sm:h-8 text-zinc-500 mb-5 sm:mb-6 group-hover:text-white transition-colors" />
-                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">{item.title}</h3>
-                     <p className="text-zinc-400 leading-relaxed text-sm">
-                         {item.desc}
-                     </p>
-                 </motion.div>
-             ))}
-         </div>
-      </motion.div>
-
-      {/* --- İSG & GÜVENLİK PROTOKOLLERI --- */}
-      <div className="w-full -mx-4 sm:-mx-6 bg-zinc-900 border-y border-white/10 py-16 sm:py-20 md:py-24 mb-24 sm:mb-28 md:mb-32 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-20 sm:p-32 opacity-5 hidden lg:block">
-              <Shield size={300} className="xl:w-[400px] xl:h-[400px]" />
-          </div>
-          <div className="max-w-[1920px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-16 items-center relative z-10">
-              <div>
-                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                      <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full ${isMobile ? '' : 'animate-pulse'}`}></div>
-                      <span className="text-green-500 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest">Öncelik: Güvenlik</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-5 sm:mb-6 break-words">
-                      İş Sağlığı, Güvenliği <br/> ve Çevre Yönetimi.
-                  </h2>
-                  <p className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4">
-                      Endüstriyel otomasyon ve orta gerilim sistemleri kritik risk taşır.
-                      Şensoy Elektrik Grubu olarak, İSG protokollerimiz uluslararası standartlarda,
-                      personel ve çevre güvenliği her projenin DNA'sındadır.
-                  </p>
-                  <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-                      ATEX bölgelerinde, yüksek voltaj ortamlarında ve patlayıcı atmosferlerde
-                      çalışma yetkimiz bulunmaktadır. Tüm çalışanlarımız periyodik eğitimlerden geçer
-                      ve risk analizleri her proje öncesi titizlikle yürütülür.
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-                          <Award className="text-brand-orange shrink-0" size={18} />
-                          <span className="text-xs sm:text-sm text-white font-bold">ISO 45001 Sertifikalı</span>
-                      </div>
-                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-                          <Award className="text-brand-orange shrink-0" size={18} />
-                          <span className="text-xs sm:text-sm text-white font-bold">CE Uyumlu Sistemler</span>
-                      </div>
-                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-                          <Award className="text-brand-orange shrink-0" size={18} />
-                          <span className="text-xs sm:text-sm text-white font-bold">ATEX Yetkilendirme</span>
-                      </div>
-                      <div className="border border-white/10 bg-black p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
-                          <Award className="text-brand-orange shrink-0" size={18} />
-                          <span className="text-xs sm:text-sm text-white font-bold">IEC Standartları</span>
-                      </div>
-                  </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <img src="/images/corporate/safety-1.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all" alt="İş Güvenliği Ekipmanları" loading="lazy" />
-                  <img src="/images/corporate/safety-2.jpg" className="w-full h-48 sm:h-56 md:h-64 object-cover border border-white/10 rounded-sm filter grayscale hover:grayscale-0 transition-all translate-y-6 sm:translate-y-8" alt="Endüstriyel İş Güvenliği" loading="lazy" />
-              </div>
-          </div>
-      </div>
-
-      {/* --- YÖNETİM KADROSU --- */}
-      <motion.div
-        initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
-        className="max-w-[1920px] mx-auto w-full mb-24 sm:mb-28 md:mb-32"
-      >
-          <motion.h2
-            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={isMobile ? { duration: 0.01 } : { duration: 0.5 }}
-            className="text-2xl sm:text-3xl font-display font-bold text-white mb-10 sm:mb-12"
-          >Yönetim Kadromuz</motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {[
-                  { name: "Emrullah Malkoç", role: "Operasyon Müdürü", img: "/images/projects/legrand.jpg", desc: "15+ yıllık deneyimle operasyonel mükemmelliği yönetiyor" },
-                  { name: "Tuncer Beyazoğlu", role: "Elektrik Sistemleri Direktörü", img: "/images/projects/ardahan-et.jpg", desc: "Tüm elektrik altyapısı kordinatörü ve proje Mühendisi" },
-                  { name: "Berhudan Başcan", role: "Bilgisayar Mühendisi", img: "/images/projects/kultur-universitesi.jpg", desc: "Otomasyon yazılımları ve dijital dönüşüm proje mühendisi " },
-              ].map((person, i) => (
-                  <motion.div
-                    key={i}
-                    initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.5, delay: i * 0.1 }}
-                    className="group bg-zinc-950 border border-white/10 overflow-hidden"
-                  >
-                      <div className="h-64 sm:h-72 md:h-80 overflow-hidden relative">
-                          <img src={person.img} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={person.name} loading="lazy" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
-                          <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
-                              <div className="text-white font-bold text-base sm:text-lg break-words">{person.name}</div>
-                              <div className="text-brand-orange font-mono text-[10px] sm:text-xs uppercase mb-2">{person.role}</div>
-                              <div className="text-zinc-400 text-[10px] sm:text-xs leading-relaxed">{person.desc}</div>
-                          </div>
-                      </div>
-                      <div className="p-3 sm:p-4 flex justify-between items-center border-t border-white/10">
-                          <span className="text-[9px] sm:text-[10px] text-zinc-500 font-mono">Yönetim Kadrosu</span>
-                          <UserCheck size={12} className="sm:w-3.5 sm:h-3.5 text-zinc-600"/>
-                      </div>
-                  </motion.div>
-              ))}
-          </div>
-      </motion.div>
-
-      {/* --- TARİHÇE --- */}
-      <motion.div
-        initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={isMobile ? { duration: 0.01 } : { duration: 0.6 }}
-        className="max-w-[1920px] mx-auto w-full mb-24 sm:mb-28 md:mb-32 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 md:gap-12 border-t border-white/10 pt-16 sm:pt-20 md:pt-24"
-      >
-          <div className="lg:col-span-4">
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-5 sm:mb-6">Tarihçemiz</h2>
-              <p className="text-zinc-400 mb-4 text-sm sm:text-base leading-relaxed">
-                  <strong className="text-white">2015 yılında Mustafa Şensoy</strong> tarafından kurulan MKG Elektromekanik Otomasyon,
-                  <strong className="text-white"> Şensoy Elektrik Grubu</strong>'nun endüstriyel otomasyon ve elektrik taahhüt kolu olarak faaliyete başlamıştır.
-              </p>
-              <p className="text-zinc-400 mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-                  Kuruluşumuzdan bu yana gerçekleştirdiğimiz büyüme, teknolojik dönüşüm ve sektördeki başarılarımızın kronolojik arşivi.
-              </p>
-              <button className="flex items-center gap-2 text-brand-orange font-mono text-[10px] sm:text-xs uppercase border border-brand-orange/30 px-4 sm:px-6 py-2.5 sm:py-3 hover:bg-brand-orange hover:text-black transition-colors tap-target">
-                  Tam Geçmişi İndir <History size={12} className="sm:w-3.5 sm:h-3.5"/>
-              </button>
-          </div>
-          <div className="lg:col-span-8 space-y-0">
-              {[
-                  { year: "2025", event: "Endüstri 4.0 dönüşümü: IoT tabanlı enerji izleme sistemleri ve yapay zeka destekli bakım çözümleri portföye eklendi." },
-                  { year: "2024", event: "28 büyük ölçekli proje tamamlandı. VakıfBank, Okyanus Alüminyum, Celal Tekstil gibi kurumsal müşterilerle uzun vadeli ortaklıklar kuruldu." },
-                  { year: "2023", event: "Orta gerilim sistemlerinde kurulu güç 15 MVA'yı aştı. Metal ve gıda sektörlerinde uzmanlaşma sağlandı." },
-                  { year: "2022", event: "İlk kez enerji sektörüne OG trafo merkezleri ve busbar sistemleri ile giriş yapıldı. Toplam proje portföyü 20'yi geçti." },
-                  { year: "2021", event: "Akıllı bina otomasyon sistemleri (BMS, KNX) ve premium konut projeleri büyük başarı elde etti. Legrand gibi global markalarla işbirlikleri başladı." },
-                  { year: "2020", event: "COVID-19 pandemisine rağmen kritik altyapı projeleri kesintisiz sürdürüldü. Sağlık sektöründe ilk medikal güç (IT Pano) projeleri hayata geçirildi." },
-                  { year: "2019", event: "İstanbul Havalimanı gibi mega projelerde yer alındı. Finans sektöründe VakıfBank ile çözüm ortaklığı resmiyet kazandı." },
-                  { year: "2018", event: "Otel otomasyon sistemleri (GRMS) ve turizm sektörüne adım atıldı. İlk yurt dışı referans proje planlaması başlatıldı." },
-                  { year: "2017", event: "Endüstriyel SCADA ve enerji izleme sistemleri ile otomasyon hizmetleri genişletildi. Ekip büyütme sürecine hız verildi." },
-                  { year: "2016", event: "İlk kurumsal proje VakıfBank Samsun Bölge Müdürlüğü oldu. Finans ve banka altyapılarında uzmanlık kazanıldı." },
-                  { year: "2015", event: "MKG Elektromekanik Otomasyon, Mustafa Şensoy tarafından Bursa'da kuruldu. Şensoy Elektrik Grubu bünyesinde faaliyet başladı." },
-              ].map((log, i) => (
-                  <motion.div
-                    key={i}
-                    initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={isMobile ? { duration: 0.01 } : { duration: 0.4, delay: i * 0.05 }}
-                    className="flex flex-col sm:flex-row gap-4 sm:gap-6 border-b border-white/10 py-5 sm:py-6 hover:bg-white/5 transition-colors px-3 sm:px-4 items-start sm:items-center"
-                  >
-                      <div className="font-mono text-brand-orange font-bold text-base sm:text-lg shrink-0 min-w-[60px]">{log.year}</div>
-                      <div className="h-px w-8 sm:w-12 bg-zinc-700 hidden sm:block shrink-0"></div>
-                      <div className="text-zinc-300 font-light text-sm sm:text-base break-words leading-relaxed">{log.event}</div>
-                  </motion.div>
-              ))}
-          </div>
-      </motion.div>
-
-        {/* --- CTA --- */}
+      <div className="bg-transparent min-h-screen pt-24 sm:pt-28 md:pt-32 flex flex-col font-sans text-white overflow-hidden">
+        <HeroSection isMobile={isMobile} />
+        <ManifestoSection isMobile={isMobile} />
+        <GlobalStats isMobile={isMobile} />
+        <LegacyTimeline isMobile={isMobile} />
+        <ExecutiveDossier isMobile={isMobile} />
+        <ComplianceVault isMobile={isMobile} />
         <CTASection />
-
       </div>
     </>
   );
+};
+
+// --- 1. HERO: THE MONOLITH ---
+const HeroSection: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    return (
+        <section className="relative min-h-[80vh] flex flex-col justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 border-b border-white/10">
+            {/* Background Texture */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60"></div>
+            </div>
+
+            <div className="relative z-10 max-w-[1920px] mx-auto w-full">
+                <motion.div 
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: isMobile ? 0.6 : 1, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                         <div className="w-12 sm:w-16 h-[2px] bg-brand-orange"></div>
+                         <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-brand-orange">2015'TEN BERİ // ŞENSOY ELEKTRİK GRUBU</span>
+                    </div>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-8 sm:mb-12 mix-blend-difference">
+                        ENDÜSTRİYEL <br/> 
+                        <span className="text-zinc-700">DÖNÜŞÜMÜN MİMARI.</span>
+                    </h1>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 border-t border-white/20 pt-6 sm:pt-8">
+                    <div className="hidden md:block">
+                        <p className="font-mono text-[10px] text-zinc-500 max-w-[200px] leading-relaxed">
+                            // SYS_ID: MKG_CORP<br/>
+                            // EST: 2015<br/>
+                            // STATUS: OPERATIONAL
+                        </p>
+                    </div>
+                    <div className="md:col-span-2">
+                        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-zinc-300 font-light leading-snug">
+                            2015 yılında <span className="text-white font-medium">Mustafa Şensoy</span> tarafından kurulan MKG Elektromekanik Otomasyon, Şensoy Elektrik Grubu bünyesinde endüstriyel altyapı ve otomasyon çözümlerinin <span className="text-white font-medium">öncüsüdür</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// --- 2. MANIFESTO: SCROLLYTELLING ---
+const ManifestoSection: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    const text = "Hassasiyet İnovasyon ve Güvenilirlik Şematik tasarım ve mantık akışında sıfır hata toleransı Dijital İkiz ve Endüstri 4.0 teknolojilerinde öncü Şeffaf protokoller ve IEC standartlarına tam uyum Her detay mükemmellik için optimize edilir";
+    const words = text.split(" ");
+
+    return (
+        <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 bg-black/30 backdrop-blur-sm relative">
+            <div className="max-w-5xl mx-auto">
+                <div className="mb-12 sm:mb-16 text-center">
+                    <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-4">Stratejik Değerlerimiz</h2>
+                    <p className="text-zinc-500 font-mono text-xs uppercase">Temel İlkeler</p>
+                </div>
+                <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-2 justify-center">
+                    {words.map((word, i) => (
+                        <Word key={i} word={word} index={i} isMobile={isMobile} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const Word = ({ word, index, isMobile }: { word: string, index: number, isMobile: boolean }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-20% 0px -20% 0px", once: true });
+
+    return (
+        <span 
+            ref={ref}
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold transition-colors duration-1000 ${isInView ? 'text-white' : 'text-zinc-800'}`}
+        >
+            {word}
+        </span>
+    );
+};
+
+// --- 3. GLOBAL STATS: DATA GRID ---
+const GlobalStats: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    return (
+        <section className="border-y border-white/10 bg-black/20 backdrop-blur-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/10">
+                {[
+                    { label: "Yıl Deneyim", val: "10", unit: "+", icon: Zap },
+                    { label: "Başarılı Proje", val: "28", unit: "+", icon: Hash },
+                    { label: "Uzmanlık Alanı", val: "10", unit: "Alan", icon: Globe },
+                    { label: "Müşteri Memnuniyeti", val: "A", unit: "+", icon: TrendingUp },
+                ].map((stat, i) => (
+                    <motion.div 
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: isMobile ? 0.4 : 0.6, delay: i * 0.1 }}
+                        className="p-8 sm:p-10 md:p-12 group hover:bg-white/5 transition-colors relative overflow-hidden"
+                    >
+                        <stat.icon size={isMobile ? 18 : 20} className="text-zinc-600 mb-6 sm:mb-8 group-hover:text-brand-orange transition-colors" />
+                        <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-2">{stat.val}</h3>
+                        <p className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500">{stat.label} <span className="text-brand-orange">[{stat.unit}]</span></p>
+                    </motion.div>
+                ))}
+            </div>
+        </section>
+    );
+};
+
+// --- 4. LEGACY TIMELINE: STRUCTURAL ---
+const LegacyTimeline: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    // Proje datasından dinamik milestone oluştur
+    const generateMilestones = () => {
+        const yearMap: Record<string, {categories: Set<string>, projects: string[], count: number}> = {};
+        
+        PROJECTS.forEach(project => {
+            const year = project.year.split('-')[0]; // "2024" veya "2015-2023" gibi durumlar için ilk yılı al
+            
+            if (!yearMap[year]) {
+                yearMap[year] = {
+                    categories: new Set(),
+                    projects: [],
+                    count: 0
+                };
+            }
+            
+            yearMap[year].categories.add(project.category);
+            yearMap[year].projects.push(project.title);
+            yearMap[year].count++;
+        });
+        
+        // Milestone açıklamalarını oluştur
+        const milestones: Array<{year: string, title: string, desc: string}> = [];
+        
+        // 2025 - Gelecek vizyonu
+        milestones.push({
+            year: "2025",
+            title: "Endüstri 4.0 Dönüşümü",
+            desc: "IoT tabanlı enerji izleme sistemleri ve yapay zeka destekli bakım çözümleri portföye eklendi."
+        });
+        
+        // 2024
+        if (yearMap["2024"]) {
+            const cats = Array.from(yearMap["2024"].categories);
+            milestones.push({
+                year: "2024",
+                title: cats.join(" & "),
+                desc: `${yearMap["2024"].count} büyük ölçekli proje tamamlandı. Endüstriyel üretim tesislerinde OG/AG sistemleri uzmanlığı.`
+            });
+        }
+        
+        // 2023
+        if (yearMap["2023"]) {
+            const cats = Array.from(yearMap["2023"].categories);
+            milestones.push({
+                year: "2023",
+                title: cats.join(" & "),
+                desc: `${yearMap["2023"].count} proje ile metal ve tekstil sektöründe uzmanlaşma. Kurulu güç kapasitesi 15 MVA'yı aştı.`
+            });
+        }
+        
+        // 2022
+        if (yearMap["2022"]) {
+            const cats = Array.from(yearMap["2022"].categories);
+            milestones.push({
+                year: "2022",
+                title: cats.join(" & "),
+                desc: `${yearMap["2022"].count} proje ile geri dönüşüm, gıda ve lüks konut segmentlerinde büyüme.`
+            });
+        }
+        
+        // 2021
+        if (yearMap["2021"]) {
+            const cats = Array.from(yearMap["2021"].categories);
+            milestones.push({
+                year: "2021",
+                title: "Akıllı Binalar & Kurumsal",
+                desc: `${yearMap["2021"].count} proje: BMS, KNX otomasyonu ve Legrand gibi global markalarla işbirlikleri başladı.`
+            });
+        }
+        
+        // 2020
+        if (yearMap["2020"]) {
+            milestones.push({
+                year: "2020",
+                title: "Çok Sektörlü Genişleme",
+                desc: `${yearMap["2020"].count} proje ile eğitim, sağlık ve lüks konut segmentlerinde başarılı işler. COVID-19'a rağmen kesintisiz hizmet.`
+            });
+        }
+        
+        // 2019
+        if (yearMap["2019"]) {
+            milestones.push({
+                year: "2019",
+                title: "Mega Projeler",
+                desc: `İstanbul Havalimanı ve Mövenpick gibi prestijli projeler. ${yearMap["2019"].count} büyük ölçekli işbirliği.`
+            });
+        }
+        
+        // 2018
+        if (yearMap["2018"]) {
+            milestones.push({
+                year: "2018",
+                title: "Otel & Sağlık Sektörü",
+                desc: `${yearMap["2018"].count} proje ile otel otomasyonu (GRMS) ve medikal elektrik altyapılarında uzmanlık.`
+            });
+        }
+        
+        // 2017
+        if (yearMap["2017"]) {
+            milestones.push({
+                year: "2017",
+                title: "Finans & Premium Ofis",
+                desc: `${yearMap["2017"].count} proje ile banka şubeleri ve A+ ofis segmentlerinde genişleme.`
+            });
+        }
+        
+        // 2016
+        if (yearMap["2016"]) {
+            milestones.push({
+                year: "2016",
+                title: "Finans Sektörü Girişi",
+                desc: "İlk kurumsal proje VakıfBank. Finans ve banka altyapılarında uzmanlık başladı."
+            });
+        }
+        
+        // 2015
+        milestones.push({
+            year: "2015",
+            title: "Kuruluş",
+            desc: "MKG Elektromekanik Otomasyon, Mustafa Şensoy tarafından Şensoy Elektrik Grubu bünyesinde kuruldu."
+        });
+        
+        return milestones;
+    };
+    
+    const milestones = generateMilestones();
+
+    return (
+        <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 bg-transparent overflow-hidden">
+            <div className="max-w-[1920px] mx-auto">
+                <div className="mb-16 sm:mb-20 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6 sm:pb-8">
+                    <div>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-2">Tarihçemiz</h2>
+                        <p className="text-zinc-400 text-sm sm:text-base">Kuruluşumuzdan bu yana gerçekleştirdiğimiz büyüme ve teknolojik dönüşüm.</p>
+                    </div>
+                    <div className="text-zinc-500 font-mono text-[10px] sm:text-xs">Timeline: 2015 — 2025</div>
+                </div>
+
+                <div className="relative">
+                    {/* Horizontal Line */}
+                    <div className="absolute top-[50%] left-0 w-full h-[1px] bg-zinc-800 hidden lg:block"></div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-10 md:gap-12 relative z-10">
+                        {milestones.map((m, i) => (
+                            <motion.div 
+                                key={i} 
+                                className="group relative"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: isMobile ? 0.4 : 0.6, delay: i * 0.05 }}
+                            >
+                                {/* Year Marker */}
+                                <div className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-zinc-800 group-hover:text-white transition-colors duration-500 mb-4 sm:mb-6 bg-transparent inline-block pr-4">
+                                    {m.year}
+                                </div>
+                                {/* Dot */}
+                                <div className="w-3 h-3 bg-zinc-800 rounded-full mb-4 sm:mb-6 group-hover:bg-brand-orange transition-colors duration-300"></div>
+                                {/* Content */}
+                                <div className="border-l border-zinc-800 pl-4 lg:border-0 lg:pl-0">
+                                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{m.title}</h3>
+                                    <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed">{m.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// --- 5. EXECUTIVE DOSSIER: LIST VIEW ---
+const ExecutiveDossier: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    const [hoveredExec, setHoveredExec] = useState<number | null>(null);
+
+    const executives = [
+        { id: 1, name: "Emrullah Malkoç", role: "Operasyon Müdürü", img: "/images/team/emrullah-malkoc.jpg", bio: "15+ yıllık deneyimle operasyonel mükemmelliği yönetiyor." },
+        { id: 2, name: "Tuncer Beyazoğlu", role: "Elektrik Sistemleri Direktörü", img: "/images/team/tuncer-beyazoglu.jpg", bio: "Tüm elektrik altyapısı koordinatörü ve proje mühendisi." },
+        { id: 3, name: "Berhudan Başcan", role: "Bilgisayar Mühendisi", img: "/images/team/berhudan-bascan.jpg", bio: "Otomasyon yazılımları ve dijital dönüşüm proje mühendisi." },
+    ];
+
+    return (
+        <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 bg-zinc-900/30 backdrop-blur-sm border-y border-white/10 relative">
+            <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12">
+                
+                {/* Left: Header */}
+                <div className="lg:col-span-4">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 sm:mb-8">Yönetim Kadromuz</h2>
+                    <p className="text-zinc-400 mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed">
+                        Endüstriyel mükemmelliğin mimarları. Liderlik ekibimiz, derin teknik uzmanlık ve global stratejik vizyonu bir araya getiriyor.
+                    </p>
+                    <NavLink to="/contact">
+                        <button className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 text-white font-mono text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors tap-target">
+                            İletişime Geçin
+                        </button>
+                    </NavLink>
+                </div>
+
+                {/* Right: Executive Cards - Grid on Mobile, List on Desktop */}
+                <div className="lg:col-span-8 relative">
+                    {/* Mobile: Grid with Photos */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6">
+                        {executives.map((exec, i) => (
+                            <motion.div
+                                key={exec.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: i * 0.1 }}
+                                className="group bg-zinc-950/40 backdrop-blur-sm border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors"
+                            >
+                                <div className="h-64 overflow-hidden relative">
+                                    <img src={exec.img} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={exec.name} />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                                    <div className="absolute top-3 left-3">
+                                        <span className="font-mono text-xs text-brand-orange">0{exec.id}</span>
+                                    </div>
+                                </div>
+                                <div className="p-5">
+                                    <h3 className="text-xl font-display font-bold text-white mb-2">{exec.name}</h3>
+                                    <p className="text-brand-orange font-mono text-[10px] uppercase mb-3">{exec.role}</p>
+                                    <p className="text-zinc-400 text-xs leading-relaxed">{exec.bio}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Desktop: Interactive List */}
+                    <div className="hidden lg:flex flex-col">
+                        {executives.map((exec) => (
+                            <motion.div
+                                key={exec.id}
+                                className="group relative border-b border-white/10 py-8 flex justify-between items-center cursor-pointer overflow-hidden"
+                                onMouseEnter={() => setHoveredExec(exec.id)}
+                                onMouseLeave={() => setHoveredExec(null)}
+                                initial={{ opacity: 0.8 }}
+                                whileHover={{ opacity: 1, paddingLeft: '20px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <div className="flex items-center gap-6 relative z-10">
+                                    <span className="font-mono text-xs text-zinc-600">0{exec.id}</span>
+                                    <h3 className="text-4xl font-display font-bold text-white group-hover:text-brand-orange transition-colors">{exec.name}</h3>
+                                </div>
+                                <div className="flex items-center gap-12 relative z-10">
+                                    <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">{exec.role}</span>
+                                    <ArrowRight className="text-zinc-700 group-hover:text-brand-orange opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0" size={20} />
+                                </div>
+                                
+                                {/* Background Highlight */}
+                                <div className="absolute inset-0 bg-white/5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Floating Image Preview (Desktop only) */}
+                    {hoveredExec && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="hidden lg:block absolute top-0 -left-[300px] w-[280px] h-[360px] bg-zinc-900/80 backdrop-blur-md border border-white/20 pointer-events-none z-20 overflow-hidden"
+                        >
+                            <img
+                                src={executives.find(e => e.id === hoveredExec)?.img}
+                                className="w-full h-full object-cover filter grayscale contrast-125"
+                                alt="Executive"
+                            />
+                            <div className="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-sm p-4 border-t border-white/10">
+                                <p className="text-xs text-zinc-300 font-mono">
+                                    {executives.find(e => e.id === hoveredExec)?.bio}
+                                </p>
+                            </div>
+                        </motion.div>
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// --- 6. COMPLIANCE VAULT: CARDS ---
+const ComplianceVault: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+    return (
+        <section className="py-16 sm:py-20 md:py-24 bg-white/95 backdrop-blur-xl text-black">
+            <div className="max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 border-b border-black/10 pb-6 sm:pb-8 gap-6">
+                    <div>
+                        <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                            <Shield size={isMobile ? 16 : 20} className="text-brand-orange"/>
+                            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500">Sertifikasyon & Uyumluluk</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold">Kalite Güvencesi</h2>
+                    </div>
+                    <div className="max-w-md md:text-right">
+                        <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
+                            Operasyonlarımız yıllık olarak uluslararası kurumlar tarafından denetlenir. Kalite bir söz değil, dokümante edilmiş bir gerçektir.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    {[
+                        { title: "ISO 45001", subtitle: "İş Sağlığı & Güvenliği", desc: "Yüksek voltaj sahalarında sıfır zarar protokolleri." },
+                        { title: "CE Uyumlu", subtitle: "Avrupa Standartları", desc: "Tüm sistemlerimiz CE direktiflerine tam uyumludur." },
+                        { title: "ATEX", subtitle: "Patlayıcı Ortamlar", desc: "Ex bölgelerinde çalışma yetkilendirmesi mevcuttur." },
+                        { title: "IEC 61439", subtitle: "Tip Test Edilmiş", desc: "Alçak gerilim pano montaj standartları sertifikası." },
+                    ].map((cert, i) => (
+                        <motion.div 
+                            key={i} 
+                            className="group border border-black/10 p-6 sm:p-8 hover:bg-black hover:text-white transition-all duration-500 cursor-default"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: isMobile ? 0.4 : 0.6, delay: i * 0.1 }}
+                        >
+                            <div className="flex justify-between items-start mb-8 sm:mb-12">
+                                <Award size={isMobile ? 20 : 24} className="text-zinc-400 group-hover:text-brand-orange transition-colors" />
+                                <span className="font-mono text-[9px] sm:text-[10px] uppercase border border-black/20 group-hover:border-white/20 px-2 py-1 rounded">
+                                    Sertifikalı
+                                </span>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-bold mb-2">{cert.title}</h3>
+                            <h4 className="font-mono text-[10px] sm:text-xs uppercase text-zinc-500 group-hover:text-zinc-400 mb-4 sm:mb-6">{cert.subtitle}</h4>
+                            <p className="text-xs sm:text-sm text-zinc-600 group-hover:text-zinc-400 leading-relaxed border-t border-black/10 group-hover:border-white/10 pt-4">
+                                {cert.desc}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default CorporatePage;

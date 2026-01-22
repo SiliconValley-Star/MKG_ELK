@@ -60,11 +60,11 @@ const PrivacyPage: React.FC = () => {
                         Bu Gizlilik Politikası hakkında sorularınız veya yorumlarınız varsa, lütfen bizimle iletişime geçin:
                     </p>
                     <address className="not-italic bg-slate-900 p-4 sm:p-5 md:p-6 rounded-lg sm:rounded-xl border border-slate-800 mt-3 sm:mt-4 text-sm sm:text-base break-words">
-                        <strong>MKG Elektromekanik</strong><br />
-                        Nilüfer Org. San. Böl.<br />
-                        Bursa, 16000<br />
+                        <strong>MKG Elektromekanik Otomasyon</strong><br />
+                        DAP Vadisi, Merkez, A Blok, Ofis No: 49<br />
+                        34406 Kağıthane / İstanbul<br />
                         Türkiye<br />
-                        E-posta: legal@mkg.com
+                        E-posta: info@mkgelektromekanik.com
                     </address>
                 </div>
             </div>
