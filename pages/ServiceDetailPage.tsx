@@ -12,7 +12,7 @@ const ServiceDetailPage: React.FC = () => {
     const service = SERVICES_DATA.find(s => s.slug === slug);
 
     if (!service) {
-        navigate('/services');
+        navigate('/hizmetler');
         return null;
     }
 
@@ -236,7 +236,7 @@ const ServiceDetailPage: React.FC = () => {
             {/* FOOTER NAV */}
             <div className="border-t border-white/10 bg-black py-8 px-6 md:px-12 flex justify-between items-center">
                 <button
-                    onClick={() => navigate('/services')}
+                    onClick={() => navigate('/hizmetler')}
                     className="text-gray-500 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2"
                 >
                     <span>←</span><span className="hidden sm:inline"> Tüm Hizmetler</span>

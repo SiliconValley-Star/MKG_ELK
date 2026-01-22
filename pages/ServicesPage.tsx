@@ -7,7 +7,7 @@ import CTASection from '../components/CTASection';
 
 // --- SUB-COMPONENTS ---
 
-const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean; onClick: () => void }> = ({ item, index, isDark = false, onClick }) => {
+const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean; onClick: () => void }> = ({ item, index, isDark = true, onClick }) => {
     return (
         <div
             onClick={onClick}
@@ -27,10 +27,10 @@ const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean;
                 </div>
 
                 <div className="md:col-span-6 pr-0 md:pr-8">
-                    <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-3 sm:mb-6 text-white group-hover:text-brand-orange transition-colors duration-300">
+                    <h3 className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'} group-hover:text-brand-orange transition-colors duration-300`}>
                         {item.title}
                     </h3>
-                    <p className="text-xs sm:text-sm md:text-base leading-relaxed max-w-lg text-white opacity-90">
+                    <p className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-lg ${isDark ? 'text-white opacity-90' : 'text-gray-800 opacity-95'}`}>
                         {item.description}
                     </p>
                 </div>
@@ -64,16 +64,16 @@ const ServiceRow: React.FC<{ item: ServiceItem; index: number; isDark?: boolean;
 };
 
 const SectionHeader: React.FC<{ title: string; subtitle: string; isDark?: boolean }> = ({ title, subtitle, isDark }) => (
-    <div className={`px-4 sm:px-6 max-w-7xl mx-auto mb-8 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between border-b ${isDark ? 'border-white/20 pb-6 sm:pb-8' : 'border-white/10 pb-6 sm:pb-8'}`}>
+    <div className={`px-4 sm:px-6 max-w-7xl mx-auto mb-8 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between border-b ${isDark ? 'border-white/20 pb-6 sm:pb-8' : 'border-gray-800/20 pb-6 sm:pb-8'}`}>
         <div>
             <span className={`block font-mono text-[10px] sm:text-xs tracking-[0.2em] mb-2 uppercase text-brand-orange`}>
                 {subtitle}
             </span>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
+            <h2 className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {title}
             </h2>
         </div>
-        <div className="mt-4 md:mt-0 font-mono text-[10px] sm:text-xs text-gray-400">
+        <div className={`mt-4 md:mt-0 font-mono text-[10px] sm:text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             DETAY İÇİN TIKLAYIN
         </div>
     </div>
@@ -146,29 +146,29 @@ const ServicesPage: React.FC = () => {
 
             {/* GRUP 1: GÜÇ SİSTEMLERİ */}
             <section className="mb-0 pb-12 sm:pb-20 bg-transparent mt-16 sm:mt-20 md:mt-24">
-                <SectionHeader title="GÜÇ SİSTEMLERİ" subtitle="Faz 01 — Kuvvetli Akım" />
+                <SectionHeader title="GÜÇ SİSTEMLERİ" subtitle="Faz 01 — Kuvvetli Akım" isDark={true} />
                 {group1.map((item, i) => (
-                    <ServiceRow key={item.id} item={item} index={i} onClick={() => handleServiceClick(item.slug)} />
+                    <ServiceRow key={item.id} item={item} index={i} isDark={true} onClick={() => handleServiceClick(item.slug)} />
                 ))}
             </section>
 
             {/* GRUP 2: ALTYAPI SİSTEMLERİ */}
-            <section className="bg-gradient-to-b from-slate-800 to-slate-900 py-16 sm:py-24 md:py-32 relative">
-                <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(to_right,#475569_1px,transparent_1px),linear-gradient(to_bottom,#475569_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+            <section className="bg-gradient-to-b from-stone-50/95 to-zinc-100/95 backdrop-blur-sm py-16 sm:py-24 md:py-32 relative">
+                <div className="absolute inset-0 pointer-events-none opacity-[0.15] bg-[linear-gradient(to_right,#78716c_1px,transparent_1px),linear-gradient(to_bottom,#78716c_1px,transparent_1px)] bg-[size:60px_60px]"></div>
 
                 <div className="relative z-10">
-                    <SectionHeader title="ALTYAPI" subtitle="Faz 02 — Otomasyon & Topraklama" isDark={true} />
+                    <SectionHeader title="ALTYAPI" subtitle="Faz 02 — Otomasyon & Topraklama" isDark={false} />
                     {group2.map((item, i) => (
-                        <ServiceRow key={item.id} item={item} index={i + 3} isDark={true} onClick={() => handleServiceClick(item.slug)} />
+                        <ServiceRow key={item.id} item={item} index={i + 3} isDark={false} onClick={() => handleServiceClick(item.slug)} />
                     ))}
                 </div>
             </section>
 
             {/* GRUP 3: ZAYIF AKIM SİSTEMLERİ */}
             <section className="pt-16 sm:pt-24 md:pt-32 pb-16 sm:pb-24 md:pb-32 bg-transparent">
-                <SectionHeader title="ZAYIF AKIM" subtitle="Faz 03 — Güvenlik & İletişim" />
+                <SectionHeader title="ZAYIF AKIM" subtitle="Faz 03 — Güvenlik & İletişim" isDark={true} />
                 {group3.map((item, i) => (
-                    <ServiceRow key={item.id} item={item} index={i + 6} onClick={() => handleServiceClick(item.slug)} />
+                    <ServiceRow key={item.id} item={item} index={i + 6} isDark={true} onClick={() => handleServiceClick(item.slug)} />
                 ))}
             </section>
 
