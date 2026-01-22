@@ -34,19 +34,19 @@ const AnimatedRoutes: React.FC = () => {
         <Suspense fallback={<SuspenseFallback />}>
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/corporate" element={<CorporatePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/kurumsal" element={<CorporatePage />} />
+            <Route path="/hizmetler" element={<ServicesPage />} />
+            <Route path="/hizmetler/:slug" element={<ServiceDetailPage />} />
+            <Route path="/projeler" element={<ProjectsPage />} />
+            <Route path="/projeler/:slug" element={<ProjectDetailPage />} />
+            <Route path="/iletisim" element={<ContactPage />} />
 
             {/* New Enterprise Routes */}
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/security" element={<SecurityPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/cookies" element={<CookiePolicyPage />} />
+            <Route path="/sss" element={<FAQPage />} />
+            <Route path="/guvenlik" element={<SecurityPage />} />
+            <Route path="/gizlilik" element={<PrivacyPage />} />
+            <Route path="/kullanim-sartlari" element={<TermsPage />} />
+            <Route path="/cerez-politikasi" element={<CookiePolicyPage />} />
 
             {/* Blog Routes */}
             <Route path="/blog" element={<BlogPage />} />

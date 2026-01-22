@@ -11,6 +11,10 @@ export interface Project {
     scope: string[];
     systems: string[];
     metrics: { label: string; value: string }[];
+    size?: "large" | "standard";
+    metaDescription?: string;
+    keywords?: string[];
+    ogImage?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -22,6 +26,7 @@ export const PROJECTS: Project[] = [
         year: "2015-2023",
         image: "/images/projects/vakifbank-hq.jpg",
         slug: "vakifbank-finansal-cozumler",
+        size: "large",
         description: "Türkiye genelinde VakıfBank Şubeleri ve Bölge Müdürlüklerinin elektrik, data ve güvenlik altyapı işleri.",
         fullDescription: "VakıfBank ile yürütülen uzun soluklu çözüm ortaklığı kapsamında; Samsun Bölge Müdürlüğü başta olmak üzere, İstanbul (Dolayoba, Göztepe, Kazlıçeşme, Batı Ataşehir), Bursa (Uluyol, Nilüfer), Kocaeli (İzmit), Sakarya (Adapazarı), Çanakkale (Lapseki), Samsun (Kutlukent, Sanayi, Atakum, Bafra), Ordu (Altınordu), Giresun, Trabzon (Of), Rize (Ardeşen), Kars, Ardahan, Bayburt, Gümüşhane, Kastamonu (Tosya) ve Muğla (Fethiye) gibi Türkiye'nin dört bir yanındaki şubelerde; kesintisiz enerji (UPS), ATM güç altyapısı, sistem odası iklimlendirme ve yüksek güvenlikli data sistemleri başarıyla kurulmuştur. Ayrıca Halkbank (Kartal, Malazgirt) ve Fibabanka (Antalya Muratpaşa) şubeleriyle finans sektöründeki yetkinliğimiz pekiştirilmiştir.",
         scope: [
@@ -126,6 +131,7 @@ export const PROJECTS: Project[] = [
         year: "2024",
         image: "/images/projects/okyanus-aluminyum.jpg",
         slug: "okyanus-aluminyum-uretim-tesisi",
+        size: "large",
         description: "Modern alüminyum üretim tesisinin tüm elektrik altyapı, OG/AG sistemleri ve otomasyon süreçlerinin anahtar teslim projelendirilmesi.",
         fullDescription: "Esenyurt Akçaburgaz mevkiinde faaliyet gösteren Okyanus Alüminyum San. Tic. A.Ş.'ye ait modern üretim tesisinin enerji sürekliliğini garanti altına alan kapsamlı bir altyapı projesidir. Proje kapsamında, tesisin yüksek enerji talebini karşılayacak Orta Gerilim (OG) hücreleri, trafo merkezleri ve Alçak Gerilim (AG) dağıtım sistemleri en güncel IEC standartlarına uygun olarak tasarlanmış ve devreye alınmıştır. Üretim bantlarının kesintisiz çalışması için yedekli güç sistemleri ve busbar enerji dağıtım hatları entegre edilmiştir.",
         scope: [
@@ -406,6 +412,7 @@ export const PROJECTS: Project[] = [
         year: "2021",
         image: "/images/projects/kultur-universitesi.jpg",
         slug: "istanbul-kultur-universitesi",
+        size: "large",
         description: "Ataköy yerleşkesinin akademik birimler, laboratuvarlar ve sosyal alanlarını kapsayan kapsamlı elektrik ve zayıf akım projesi.",
         fullDescription: "İstanbul Kültür Üniversitesi'nin Ataköy yerleşkesinde gerçekleştirilen projede, modern eğitimin gerekliliklerine uygun teknolojik altyapı tesis edilmiştir. Amfîler ve dersliklerdeki akıllı sunum sistemleri, laboratuvarlardaki hassas cihazlar için regüleli güç hatları ve kampüs genelindeki fiber optik backbone altyapısı başarıyla devreye alınmıştır. Ayrıca kütüphane ve sosyal alanlarda enerji verimliliği odaklı aydınlatma otomasyonu uygulanmıştır.",
         scope: [
@@ -756,6 +763,7 @@ export const PROJECTS: Project[] = [
         year: "2019",
         image: "/images/projects/movenpick-bosphorus.jpg",
         slug: "movenpick-hotel-istanbul-bosphorus",
+        size: "large",
         description: "5 yıldızlı otelin ana dağıtım panoları ve enerji altyapısının modernizasyonu ve revizyon işlemleri.",
         fullDescription: "İstanbul Boğazı manzaralı ikonik Mövenpick Hotel Istanbul Bosphorus'un enerji güvenliğini artırmak amacıyla kapsamlı bir pano revizyon projesi gerçekleştirilmiştir. Otelin operasyonel sürekliliğini etkilemeden, mevcut Ana Dağıtım Panoları (ADP) ve kat dağıtım merkezleri incelenmiş, termal kamera analizleri ile tespit edilen riskli noktalar modernize edilmiştir. Eski nesil şalt malzemeleri, enerji izleme özellikli yeni nesil donanımlarla değiştirilerek sistemin verimliliği ve güvenliği IEC 61439 standartlarına yükseltilmiştir.",
         scope: [
@@ -791,6 +799,7 @@ export const PROJECTS: Project[] = [
         year: "2018",
         image: "/images/projects/vera-clinic.jpg",
         slug: "vera-clinic-sube-2",
+        size: "large",
         description: "30.000 m² alana kurulu modern sağlık kompleksinin medikal elektrik altyapısı ve otomasyon sistemleri.",
         fullDescription: "Kartal sahil şeridinde 30.000 m² kapalı alana sahip Vera Clinic Şube 2 projesi, uluslararası sağlık standartlarına (JCI) uygun elektrik altyapısı ile donatılmıştır. Operasyon odalarında hayati önem taşıyan İzole Güç Sistemleri (IT Pano) kullanılmış, cerrahi aydınlatmalar için gölgesiz ve yüksek lümenli özel armatürler tercih edilmiştir. Tesisin iklimlendirme ve sterilizasyon süreçleri, firmamız tarafından kurulan BMS (Bina Yönetim Sistemi) üzerinden 7/24 izlenmektedir.",
         scope: [
@@ -896,6 +905,7 @@ export const PROJECTS: Project[] = [
         year: "2016",
         image: "/images/projects/otto-atasehir.jpg",
         slug: "otto-atasehir-lankon",
+        size: "large",
         description: "Modern karma yaşam projesinin busbar enerji dağıtımı ve akıllı bina altyapısı (3. ve 4. Katlar).",
         fullDescription: "İstanbul Finans Merkezi'ne komşu Otto Ataşehir projesinde, konut ve ticari alanların iç içe olduğu (mixed-use) 3. ve 4. katların tüm elektrik taahhüt işleri firmamızca yürütülmüştür. Dikey enerji dağıtımı için kompakt busbar sistemleri tercih edilerek yangın güvenliği ve enerji verimliliği artırılmıştır. Dairelerde görüntülü interkom ve akıllı ev altyapısı kurulmuş, otopark alanlarında ise karbonmonoksit (CO) algılama ve jet fan havalandırma sistemleri entegre edilmiştir.",
         scope: [

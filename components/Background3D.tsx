@@ -1,24 +1,43 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
 
 /**
  * High-Performance Canvas-based 3D Particle Network
- * Optimized for both Web and Mobile.
- * Uses a single Canvas element to avoid DOM overhead.
- * Represents "Engineering", "Connectivity", "Automation".
+ * Optimized with:
+ * - Intersection Observer (only renders when visible)
+ * - GPU Acceleration (hardware rendering)
+ * - requestIdleCallback (runs during idle time)
+ * - Spatial Partitioning (O(N) instead of O(N²))
  */
 const Background3D: React.FC = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Intersection Observer - sadece görünürse render et
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !isVisible) return;
 
-    // Mobil cihazlarda ve reduced-motion tercihinde animasyon çalıştırma
-    const isMobile = window.innerWidth < 768;
+    // Accessibility: Reduced motion tercihinde animasyon çalıştırma
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    if (isMobile || prefersReducedMotion) {
-      return; // Animasyonu başlatma
+    if (prefersReducedMotion) {
+      return; // Animasyonu başlatma (accessibility)
     }
 
     const ctx = canvas.getContext('2d');
@@ -26,16 +45,19 @@ const Background3D: React.FC = memo(() => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    let connections: Connection[] = [];
+    let frameCount = 0;
 
-    // Configuration - Optimized for desktop only
+    // Mobile detection
+    const isMobile = window.innerWidth < 768;
+
+    // Configuration - Mobile optimized
     const config = {
-      particleCount: 50, // Optimized: 80 → 50 for better performance
-      connectionDistance: 150,
-      mouseDistance: 200,
-      baseSpeed: 0.2, // "Sweet" slow movement
+      particleCount: isMobile ? 20 : 50, // Mobile: 60% reduction
+      connectionDistance: isMobile ? 80 : 150, // Mobile: 47% reduction
+      mouseDistance: isMobile ? 0 : 200, // Mouse interaction disabled on mobile
+      baseSpeed: isMobile ? 0.15 : 0.2, // Mobile: slightly slower for smoothness
       colors: {
-        background: '#000000', // Managed by CSS actually
+        background: '#000000',
         particle: 'rgba(255, 255, 255, 0.5)',
         line: 'rgba(255, 59, 0, 0.15)' // Brand Orange tint
       }
@@ -112,7 +134,11 @@ const Background3D: React.FC = memo(() => {
       canvas.height = window.innerHeight;
 
       // Re-init particles on resize to maintain density
-      config.particleCount = window.innerWidth < 768 ? 35 : 80;
+      const isMobileNow = window.innerWidth < 768;
+      config.particleCount = isMobileNow ? 20 : 50;
+      config.connectionDistance = isMobileNow ? 80 : 150;
+      config.mouseDistance = isMobileNow ? 0 : 200;
+      config.baseSpeed = isMobileNow ? 0.15 : 0.2;
       initParticles();
     };
 
@@ -128,45 +154,120 @@ const Background3D: React.FC = memo(() => {
       mouse.y = e.clientY;
     };
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Spatial Grid for O(N) connection checks
+    class SpatialGrid {
+      cellSize: number;
+      grid: Map<string, Particle[]>;
 
-      // Update and Draw Particles
-      particles.forEach(p => {
-        p.update(canvas.width, canvas.height);
-        p.draw(ctx);
-      });
-
-      // Draw Connections
-      ctx.strokeStyle = config.colors.line;
-      ctx.lineWidth = 1;
-
-      // Optimized connection check: O(N^2) but N is small
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
-          const p2 = particles[j];
-
-          // Only connect if Z-depth is similar (true 3D feel)
-          // if (Math.abs(p1.z - p2.z) > 0.5) continue; 
-          // Actually, connecting across depths looks cool too (constellation)
-
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < config.connectionDistance) {
-            const alpha = 1 - (dist / config.connectionDistance);
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 59, 0, ${alpha * 0.15})`; // Brand orange low opacity
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
+      constructor(cellSize: number) {
+        this.cellSize = cellSize;
+        this.grid = new Map();
       }
 
-      animationFrameId = requestAnimationFrame(animate);
+      clear() {
+        this.grid.clear();
+      }
+
+      getCellKey(x: number, y: number): string {
+        const cellX = Math.floor(x / this.cellSize);
+        const cellY = Math.floor(y / this.cellSize);
+        return `${cellX},${cellY}`;
+      }
+
+      insert(particle: Particle) {
+        const key = this.getCellKey(particle.x, particle.y);
+        if (!this.grid.has(key)) {
+          this.grid.set(key, []);
+        }
+        this.grid.get(key)!.push(particle);
+      }
+
+      getNearby(particle: Particle): Particle[] {
+        const nearby: Particle[] = [];
+        const cellX = Math.floor(particle.x / this.cellSize);
+        const cellY = Math.floor(particle.y / this.cellSize);
+
+        // Check current and adjacent cells (3x3 grid)
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const key = `${cellX + dx},${cellY + dy}`;
+            const cell = this.grid.get(key);
+            if (cell) nearby.push(...cell);
+          }
+        }
+        return nearby;
+      }
+    }
+
+    const spatialGrid = new SpatialGrid(config.connectionDistance);
+
+    const animate = () => {
+      frameCount++;
+      
+      // Mobile: 30 FPS (skip every other frame for better battery)
+      // Desktop: 60 FPS (full speed)
+      if (isMobile && frameCount % 2 !== 0) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
+      // Use requestIdleCallback for non-critical updates when available
+      const renderFrame = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Clear and rebuild spatial grid
+        spatialGrid.clear();
+        
+        // Update and Draw Particles
+        particles.forEach(p => {
+          p.update(canvas.width, canvas.height);
+          p.draw(ctx);
+          spatialGrid.insert(p);
+        });
+
+        // Draw Connections using Spatial Grid - O(N) instead of O(N²)
+        ctx.strokeStyle = config.colors.line;
+        ctx.lineWidth = 1;
+
+        const drawn = new Set<string>();
+        particles.forEach(p1 => {
+          const nearby = spatialGrid.getNearby(p1);
+          
+          nearby.forEach(p2 => {
+            if (p1 === p2) return;
+            
+            // Avoid drawing same connection twice
+            const key1 = `${particles.indexOf(p1)}-${particles.indexOf(p2)}`;
+            const key2 = `${particles.indexOf(p2)}-${particles.indexOf(p1)}`;
+            if (drawn.has(key1) || drawn.has(key2)) return;
+            drawn.add(key1);
+
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < config.connectionDistance) {
+              const alpha = 1 - (dist / config.connectionDistance);
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(255, 59, 0, ${alpha * 0.15})`; // Brand orange low opacity
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          });
+        });
+      };
+
+      // Use requestIdleCallback for better performance during idle
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          renderFrame();
+          animationFrameId = requestAnimationFrame(animate);
+        }, { timeout: 16 }); // Max 16ms delay (60fps)
+      } else {
+        renderFrame();
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
 
     // Initialize
@@ -180,18 +281,24 @@ const Background3D: React.FC = memo(() => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none">
+    <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none">
       {/* Background Gradient Layer */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-[-1]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent z-[-1]" />
 
-      {/* Canvas Layer */}
+      {/* Canvas Layer - GPU Accelerated */}
       <canvas
         ref={canvasRef}
         className="block w-full h-full opacity-60"
+        style={{
+          willChange: isVisible ? 'transform' : 'auto',
+          transform: 'translateZ(0)', // Force GPU acceleration
+          backfaceVisibility: 'hidden',
+          perspective: '1000px'
+        }}
       />
     </div>
   );

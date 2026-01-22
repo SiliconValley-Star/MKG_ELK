@@ -66,9 +66,9 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, currentPageTitle }) => {
   }
   
   return (
-    <nav 
-      aria-label="Breadcrumb" 
-      className="bg-black/20 backdrop-blur-sm border-b border-white/10 py-3"
+    <nav
+      aria-label="Breadcrumb"
+      className="sr-only"
     >
       <div className="max-w-[1920px] mx-auto px-6 md:px-12">
         <ol 

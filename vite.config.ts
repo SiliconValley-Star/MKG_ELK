@@ -34,10 +34,14 @@ export default defineConfig(({ mode }) => {
           compress: {
             drop_console: isProduction,
             drop_debugger: isProduction,
-            pure_funcs: isProduction ? ['console.log', 'console.info'] : []
+            pure_funcs: isProduction ? ['console.log', 'console.info', 'console.debug'] : [],
+            passes: 2 // Multiple passes for better compression
           },
           format: {
             comments: false
+          },
+          mangle: {
+            safari10: true // Fix Safari 10/11 bugs
           }
         },
         // Chunk size warning limit (500kb)
@@ -46,13 +50,39 @@ export default defineConfig(({ mode }) => {
         rollupOptions: {
           output: {
             // Manual chunk splitting for better caching
-            manualChunks: {
-              // React vendor chunk
-              'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-              // Animation libraries
-              'animation-vendor': ['framer-motion'],
-              // Other utilities
-              'utils': ['./hooks/useForm', './hooks/useIsMobile', './hooks/useScrollMemory']
+            manualChunks(id) {
+              // Vendor chunks
+              if (id.includes('node_modules')) {
+                // React core
+                if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+                  return 'react-vendor';
+                }
+                // Framer Motion (isolate large animation library)
+                if (id.includes('framer-motion')) {
+                  return 'animation-vendor';
+                }
+                // Lucide icons
+                if (id.includes('lucide-react')) {
+                  return 'icons-vendor';
+                }
+                // EmailJS
+                if (id.includes('@emailjs')) {
+                  return 'email-vendor';
+                }
+                // Other vendor code
+                return 'vendor';
+              }
+              
+              // Data chunks - lazy load large data files
+              if (id.includes('data/blogPosts')) {
+                return 'data-blog';
+              }
+              if (id.includes('data/projectsData')) {
+                return 'data-projects';
+              }
+              if (id.includes('data/servicesData')) {
+                return 'data-services';
+              }
             },
             // Asset file naming
             assetFileNames: (assetInfo) => {
