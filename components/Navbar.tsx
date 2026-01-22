@@ -8,11 +8,11 @@ import { SERVICES_DATA } from '../data/servicesData';
 
 const NAV_ITEMS = [
   { label: 'ANA SAYFA', href: '/', id: '01' },
-  { label: 'KURUMSAL', href: '/corporate', id: '02' },
-  { label: 'HİZMETLER', href: '/services', id: '03', megaMenu: true },
-  { label: 'PROJELER', href: '/projects', id: '04', megaMenu: true },
+  { label: 'KURUMSAL', href: '/kurumsal', id: '02' },
+  { label: 'HİZMETLER', href: '/hizmetler', id: '03', megaMenu: true },
+  { label: 'PROJELER', href: '/projeler', id: '04', megaMenu: true },
   { label: 'BLOG', href: '/blog', id: '05', megaMenu: true },
-  { label: 'İLETİŞİM', href: '/contact', id: '06' },
+  { label: 'İLETİŞİM', href: '/iletisim', id: '06' },
 ];
 
 const Navbar: React.FC = memo(() => {
@@ -24,14 +24,19 @@ const Navbar: React.FC = memo(() => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  // Scroll Effect - Optimized
+  // Scroll Effect - Throttled with requestAnimationFrame
   useEffect(() => {
     let ticking = false;
+    let lastTime = 0;
+    const throttleMs = 100; // 100ms throttle
     
     const handleScroll = () => {
-      if (!ticking) {
+      const now = Date.now();
+      
+      if (!ticking && (now - lastTime >= throttleMs)) {
         window.requestAnimationFrame(() => {
           setScrolled(window.scrollY > 50);
+          lastTime = now;
           ticking = false;
         });
         ticking = true;
@@ -99,9 +104,9 @@ const Navbar: React.FC = memo(() => {
               <p className="text-sm text-gray-500 leading-relaxed">
                 Orta gerilim, trafo merkezleri, otomasyon ve akıllı bina sistemleri için anahtar teslim mühendislik hizmetleri.
               </p>
-              <Link 
-                to="/services" 
-                onClick={() => setHoveredItem(null)} 
+              <Link
+                to="/hizmetler"
+                onClick={() => setHoveredItem(null)}
                 className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest cursor-pointer text-black hover:text-brand-orange transition-colors"
               >
                 <span>Tüm Hizmetler</span>
@@ -112,7 +117,7 @@ const Navbar: React.FC = memo(() => {
               {topServices.map((service, idx) => (
                 <Link
                   key={idx}
-                  to={`/services/${service.slug}`}
+                  to={`/hizmetler/${service.slug}`}
                   onClick={() => setHoveredItem(null)}
                   className="group bg-white rounded-xl p-6 border border-black/5 hover:border-brand-orange/50 transition-all cursor-pointer shadow-sm"
                 >
@@ -145,9 +150,9 @@ const Navbar: React.FC = memo(() => {
               <p className="text-sm text-gray-500 leading-relaxed">
                 Türkiye'nin önde gelen sanayi kuruluşları, bankalar ve enerji tesisleri için geliştirdiğimiz çözümler.
               </p>
-              <Link 
-                to="/projects" 
-                onClick={() => setHoveredItem(null)} 
+              <Link
+                to="/projeler"
+                onClick={() => setHoveredItem(null)}
                 className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest cursor-pointer text-black hover:text-brand-orange transition-colors"
               >
                 <span>Tüm Projeler</span>
@@ -156,10 +161,10 @@ const Navbar: React.FC = memo(() => {
             </div>
             <div className="col-span-9 grid grid-cols-3 gap-6">
               {latestProjects.map((project, idx) => (
-                <Link 
+                <Link
                   key={idx}
-                  to={`/projects/${project.slug}`} 
-                  onClick={() => setHoveredItem(null)} 
+                  to={`/projeler/${project.slug}`}
+                  onClick={() => setHoveredItem(null)}
                   className="group bg-white rounded-xl p-6 border border-black/5 hover:border-brand-orange/50 transition-all cursor-pointer shadow-sm"
                 >
                   <div className="aspect-video bg-gray-200 rounded-lg mb-4 overflow-hidden relative">
@@ -309,7 +314,7 @@ const Navbar: React.FC = memo(() => {
           {/* Desktop CTA & Mobile Toggle */}
           <div className="flex items-center gap-4 relative z-50">
             <Link
-              to="/contact"
+              to="/iletisim"
               className={`hidden md:block border px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
                 scrolled
                   ? 'border-white/20 text-white hover:bg-white hover:text-black'
@@ -403,9 +408,9 @@ const Navbar: React.FC = memo(() => {
               Nilüfer Organize Sanayi Bölgesi<br />
               123 Otomasyon Cad. Bursa / TÜRKİYE 16000
             </p>
-            <Link 
-              to="/contact" 
-              onClick={() => setIsMobileMenuOpen(false)} 
+            <Link
+              to="/iletisim"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="bg-white text-black py-4 rounded-full font-bold uppercase tracking-widest text-xs mt-4 text-center hover:bg-brand-orange hover:text-white transition-colors"
             >
               Teklif Talep Edin

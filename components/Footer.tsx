@@ -17,13 +17,8 @@ const GLOBAL_STATS = [
     { label: "Sistem Durumu", value: "Optimal" },
 ];
 
-const Footer: React.FC = memo(() => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState('');
+// Separate LiveClock component to prevent Footer re-renders
+const LiveClock = memo(() => {
     const [time, setTime] = useState(new Date().toLocaleTimeString('tr-TR'));
 
     useEffect(() => {
@@ -32,6 +27,28 @@ const Footer: React.FC = memo(() => {
         }, 1000);
         return () => clearInterval(timer);
     }, []);
+
+    return (
+        <div className="flex flex-col gap-1 ml-auto pl-8 border-l border-white/10">
+            <span className="text-[9px] font-bold text-gray-600 uppercase tracking-widest">
+                YEREL SAAT (IST)
+            </span>
+            <span className="font-mono text-xs text-brand-orange animate-pulse">
+                {time}
+            </span>
+        </div>
+    );
+});
+
+LiveClock.displayName = 'LiveClock';
+
+const Footer: React.FC = memo(() => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [email, setEmail] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState('');
 
     const handleSubmit = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
@@ -83,18 +100,21 @@ const Footer: React.FC = memo(() => {
     const FOOTER_LINKS = [
         {
             title: "GÜÇ SİSTEMLERİ",
-            items: SERVICES_DATA.slice(0, 3).map(s => ({ label: s.title, path: `/services/${s.slug}` }))
+            items: SERVICES_DATA.slice(0, 3).map(s => ({ label: s.title, path: `/hizmetler/${s.slug}` }))
         },
         {
             title: "ALTYAPI & OTOMASYON",
-            items: SERVICES_DATA.slice(3, 8).map(s => ({ label: s.title, path: `/services/${s.slug}` }))
+            items: SERVICES_DATA.slice(3, 8).map(s => ({ label: s.title, path: `/hizmetler/${s.slug}` }))
         },
         {
             title: "VİTRİN PROJELER",
-            items: displayProjects.map(p => ({
-                label: p!.title.length > 25 ? p!.title.substring(0, 25) + '...' : p!.title,
-                path: `/projects/${p!.slug}`
-            }))
+            items: [
+                ...displayProjects.map(p => ({
+                    label: p!.title.length > 25 ? p!.title.substring(0, 25) + '...' : p!.title,
+                    path: `/projeler/${p!.slug}`
+                })),
+                { label: "Proje Arşivi →", path: "/projeler" }
+            ]
         },
         {
             title: "BİLGİ MERKEZİ",
@@ -106,26 +126,26 @@ const Footer: React.FC = memo(() => {
         {
             title: "KURUMSAL",
             items: [
-                { label: "Hakkımızda", path: "/corporate" },
-                { label: "Vizyon & Değerler", path: "/corporate" },
-                { label: "Başarı Hikayeleri", path: "/projects" },
-                { label: "SSS", path: "/faq" },
-                { label: "Güvenlik & Uyum", path: "/security" },
+                { label: "Hakkımızda", path: "/kurumsal" },
+                { label: "Vizyon & Değerler", path: "/kurumsal" },
+                { label: "Başarı Hikayeleri", path: "/projeler" },
+                { label: "SSS", path: "/sss" },
+                { label: "Güvenlik & Uyum", path: "/guvenlik" },
             ]
         },
         {
             title: "İLETİŞİM",
             items: [
-                { label: "Bize Ulaşın", path: "/contact" },
-                { label: "Teklif Talep Et", path: "/contact" },
-                { label: "Kariyer Fırsatları", path: "/contact" },
+                { label: "Bize Ulaşın", path: "/iletisim" },
+                { label: "Teklif Talep Et", path: "/iletisim" },
+                { label: "Kariyer Fırsatları", path: "/iletisim" },
                 { label: "E-Posta", path: "mailto:info@mkgelektromekanik.com" },
             ]
         }
     ];
 
     return (
-        <footer role="contentinfo" className="bg-[#050505]/90 text-white border-t border-white/10 relative z-20 overflow-hidden font-sans backdrop-blur-sm">
+        <footer role="contentinfo" className="bg-transparent text-white border-t border-white/10 relative z-20 overflow-hidden font-sans">
 
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
@@ -298,7 +318,7 @@ const Footer: React.FC = memo(() => {
                                     {stat.label}
                                 </span>
                                 <span className={`font-mono text-xs ${
-                                    stat.label.includes('Sistem') ? 'text-green-500' : 
+                                    stat.label.includes('Sistem') ? 'text-green-500' :
                                     stat.label.includes('Uptime') ? 'text-green-500' :
                                     'text-gray-300'
                                 }`}>
@@ -307,15 +327,8 @@ const Footer: React.FC = memo(() => {
                             </div>
                         ))}
 
-                        {/* Real-time Clock */}
-                        <div className="flex flex-col gap-1 ml-auto pl-8 border-l border-white/10">
-                            <span className="text-[9px] font-bold text-gray-600 uppercase tracking-widest">
-                                YEREL SAAT (IST)
-                            </span>
-                            <span className="font-mono text-xs text-brand-orange animate-pulse">
-                                {time}
-                            </span>
-                        </div>
+                        {/* Real-time Clock - Separate component to prevent Footer re-renders */}
+                        <LiveClock />
                     </div>
 
                 </div>
