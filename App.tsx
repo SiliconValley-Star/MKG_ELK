@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import LoadingScreen from './components/LoadingScreen';
 import ErrorBoundary from './components/ErrorBoundary';
 import SuspenseFallback from './components/SuspenseFallback';
+import CookieConsent from './components/CookieConsent';
 import { useIsMobile } from './hooks/useIsMobile';
 
 // Lazy-loaded pages for code splitting and better performance
@@ -128,6 +129,7 @@ const App: React.FC = () => {
             <Layout>
               <AnimatedRoutes />
             </Layout>
+            <CookieConsent />
           </BrowserRouter>
         )}
       </MotionConfig>

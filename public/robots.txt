@@ -1,15 +1,12 @@
 # MKG Elektromekanik Otomasyon - robots.txt
-# https://mkgelektromekanik.com/
+# https://www.mkgelektromekanik.com/
 
 # Tüm arama motorlarına izin ver
 User-agent: *
 Allow: /
 
 # Sitemap konumu
-Sitemap: https://mkgelektromekanik.com/sitemap.xml
-
-# Crawl gecikmeleri (isteğe bağlı - sunucu yükünü azaltır)
-Crawl-delay: 10
+Sitemap: https://www.mkgelektromekanik.com/sitemap.xml
 
 # Belirli yolları engelle (eğer varsa)
 # Disallow: /admin/

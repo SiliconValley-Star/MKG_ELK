@@ -89,12 +89,12 @@ const ServicesPage: React.FC = () => {
     const group3 = SERVICES_DATA.slice(6, 10); // Zayıf Akım
 
     const handleServiceClick = (slug: string) => {
-        navigate(`/services/${slug}`);
+        navigate(`/hizmetler/${slug}`);
     };
 
     return (
         <main className="w-full bg-transparent min-h-screen pt-24 overflow-x-hidden relative">
-            
+
             {/* HERO */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -110,7 +110,7 @@ const ServicesPage: React.FC = () => {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="flex items-center gap-2 mb-3 sm:mb-4"
                         >
-                            <Database size={14} className="text-brand-orange"/>
+                            <Database size={14} className="text-brand-orange" />
                             <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Hizmet Kataloğu</span>
                         </motion.div>
                         <motion.h1
@@ -119,7 +119,7 @@ const ServicesPage: React.FC = () => {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white leading-[0.9]"
                         >
-                            Mühendislik <br/> Çözümlerimiz
+                            Mühendislik <br /> Çözümlerimiz
                         </motion.h1>
                     </div>
                     <div className="flex flex-col items-start md:items-end gap-3 sm:gap-4 w-full md:w-auto">

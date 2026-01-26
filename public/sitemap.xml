@@ -7,436 +7,436 @@
     
     <!-- Ana Sayfa - En yüksek priority, günlük güncelleme -->
     <url>
-        <loc>https://mkgelektromekanik.com/</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     
     <!-- Hizmetler Ana Sayfa - Kritik kategori sayfası -->
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <!-- Hizmet Detay Sayfaları (10 adet) - İş odaklı içerik -->
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/yuksek-gerilim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/yuksek-gerilim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/alcak-gerilim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/alcak-gerilim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/jenerator</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/jenerator</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/ups-sistemleri</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/ups-sistemleri</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/topraklama</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/topraklama</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/paratoner</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/paratoner</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/otomasyon</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/otomasyon</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/zayif-akim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/zayif-akim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/teknik-destek</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/teknik-destek</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/hizmetler/danismanlik</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/hizmetler/danismanlik</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <!-- Projeler Ana Sayfa - Portföy sayfası -->
     <url>
-        <loc>https://mkgelektromekanik.com/projeler</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <!-- Proje Detay Sayfaları (26 adet) - Referans projeler -->
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/vakifbank-hq</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/vakifbank-hq</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/movenpick-bosphorus</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/movenpick-bosphorus</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/fibabanka-antalya</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/fibabanka-antalya</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/halkbank-malazgirt</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/halkbank-malazgirt</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/biancho-hotel</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/biancho-hotel</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/biancho-pera</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/biancho-pera</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/florya-villalari</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/florya-villalari</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/pelican-hill</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/pelican-hill</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/otto-atasehir</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/otto-atasehir</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/yali-atakoy</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/yali-atakoy</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/alkent-2000</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/alkent-2000</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/kultur-universitesi</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/kultur-universitesi</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/kultur-koleji</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/kultur-koleji</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/incirli-myo</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/incirli-myo</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/aksa-gida</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/aksa-gida</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/ardahan-et</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/ardahan-et</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/enviropet</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/enviropet</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/okyanus-aluminyum</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/okyanus-aluminyum</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/yelken-kalip</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/yelken-kalip</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/celal-tekstil</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/celal-tekstil</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/general-oto</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/general-oto</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/legrand</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/legrand</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/roche-bobois</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/roche-bobois</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/cups-clouds</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/cups-clouds</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/estevera-saglik</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/estevera-saglik</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/projeler/vera-clinic</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/projeler/vera-clinic</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <!-- Blog Ana Sayfa - İçerik kategorisi -->
     <url>
-        <loc>https://mkgelektromekanik.com/blog</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <!-- Blog Yazıları (21 adet) - SEO içerik -->
     <url>
-        <loc>https://mkgelektromekanik.com/blog/endustriyel-otomasyon-nedir</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/endustriyel-otomasyon-nedir</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/plc-programlama</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/plc-programlama</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/scada-sistemleri</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/scada-sistemleri</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/pano-imalat</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/pano-imalat</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/servo-motor-kontrolu</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/servo-motor-kontrolu</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/endustriyel-iletisim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/endustriyel-iletisim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/otomasyon-projeleri</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/otomasyon-projeleri</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/bakim-onemleri</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/bakim-onemleri</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/enerji-yonetimi</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/enerji-yonetimi</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/gida-otomasyon</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/gida-otomasyon</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/isg-standartlari</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/isg-standartlari</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/gelecek-trendler</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/gelecek-trendler</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/yesil-enerji</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/yesil-enerji</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/hidrojen-teknolojisi</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/hidrojen-teknolojisi</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/batarya-uretim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/batarya-uretim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/akilli-fabrikalar</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/akilli-fabrikalar</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/bulut-scada</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/bulut-scada</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/siber-guvenlik</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/siber-guvenlik</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/yapay-zeka-otomasyon</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/yapay-zeka-otomasyon</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/dijital-ikiz</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/dijital-ikiz</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://mkgelektromekanik.com/blog/yerli-yazilim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/blog/yerli-yazilim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <!-- İletişim Sayfası - Dönüşüm odaklı -->
     <url>
-        <loc>https://mkgelektromekanik.com/iletisim</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/iletisim</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <!-- Kurumsal Sayfa - Şirket bilgisi -->
     <url>
-        <loc>https://mkgelektromekanik.com/kurumsal</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/kurumsal</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <!-- SSS Sayfası - Destek içerik -->
     <url>
-        <loc>https://mkgelektromekanik.com/sss</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/sss</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     
     <!-- Gizlilik Politikası - Düşük priority -->
     <url>
-        <loc>https://mkgelektromekanik.com/gizlilik</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/gizlilik</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     
     <!-- Çerez Politikası - Düşük priority -->
     <url>
-        <loc>https://mkgelektromekanik.com/cerez-politikasi</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/cerez-politikasi</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     
     <!-- Güvenlik Politikası - Düşük priority -->
     <url>
-        <loc>https://mkgelektromekanik.com/guvenlik</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/guvenlik</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     
     <!-- Kullanım Şartları - Düşük priority -->
     <url>
-        <loc>https://mkgelektromekanik.com/kullanim-sartlari</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.mkgelektromekanik.com/kullanim-sartlari</loc>
+        <lastmod>2026-01-26</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>

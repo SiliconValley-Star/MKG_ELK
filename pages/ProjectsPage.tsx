@@ -14,7 +14,7 @@ const ProjectsPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-transparent pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 flex flex-col pb-16 sm:pb-20 md:pb-24">
-            
+
             {/* --- HEADER --- */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,7 @@ const ProjectsPage: React.FC = () => {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="flex items-center gap-2 mb-3 sm:mb-4"
                         >
-                            <Database size={14} className="text-brand-orange"/>
+                            <Database size={14} className="text-brand-orange" />
                             <span className="font-mono text-xs text-brand-orange tracking-widest uppercase">Proje Portföyü</span>
                         </motion.div>
                         <motion.h1
@@ -39,7 +39,7 @@ const ProjectsPage: React.FC = () => {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-display font-bold text-white leading-[0.9]"
                         >
-                            Referans <br/> Projelerimiz
+                            Referans <br /> Projelerimiz
                         </motion.h1>
                     </div>
                     <div className="flex flex-col items-start md:items-end gap-3 sm:gap-4 w-full md:w-auto">
@@ -63,11 +63,10 @@ const ProjectsPage: React.FC = () => {
                                     <button
                                         key={cat}
                                         onClick={() => setFilter(cat)}
-                                        className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap tap-target ${
-                                            filter === cat
-                                            ? 'bg-brand-orange text-black font-bold shadow-[0_0_15px_rgba(255,59,0,0.3)]'
-                                            : 'text-zinc-500 hover:text-white hover:bg-white/5'
-                                        }`}
+                                        className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap tap-target ${filter === cat
+                                                ? 'bg-brand-orange text-black font-bold shadow-[0_0_15px_rgba(255,59,0,0.3)]'
+                                                : 'text-zinc-500 hover:text-white hover:bg-white/5'
+                                            }`}
                                     >
                                         {cat}
                                     </button>
@@ -93,7 +92,7 @@ const ProjectsPage: React.FC = () => {
                                 className={`group relative flex flex-col bg-zinc-950 border border-white/10 overflow-hidden hover:border-brand-orange/50 transition-colors ${project.size === 'large' ? 'md:col-span-2 md:row-span-2' : 'col-span-1'}`}
                             >
                                 {/* Image Area */}
-                                <NavLink to={`/projects/${project.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${project.size === 'large' ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
+                                <NavLink to={`/projeler/${project.slug}`} className={`relative w-full overflow-hidden cursor-pointer ${project.size === 'large' ? 'h-[350px] sm:h-[400px] md:h-full' : 'h-56 sm:h-64'}`}>
                                     <div className="absolute inset-0 bg-zinc-900 z-0"></div>
                                     <img
                                         src={project.image}
@@ -102,7 +101,7 @@ const ProjectsPage: React.FC = () => {
                                         loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
-                                    
+
                                     {/* Overlay Badge */}
                                     <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20">
                                         <div className="px-2.5 sm:px-3 py-1 bg-black/50 backdrop-blur border border-white/10 text-[10px] font-mono text-brand-orange uppercase tracking-widest flex items-center gap-2">
@@ -115,7 +114,7 @@ const ProjectsPage: React.FC = () => {
                                 {/* Content Area */}
                                 <div className={`relative z-10 flex flex-col justify-between p-5 sm:p-6 ${project.size === 'large' ? 'md:absolute md:bottom-0 md:left-0 md:w-full md:bg-gradient-to-t md:from-black md:to-transparent md:pt-20 lg:pt-24' : 'bg-zinc-950 border-t border-white/10'}`}>
                                     <div>
-                                        <NavLink to={`/projects/${project.slug}`}>
+                                        <NavLink to={`/projeler/${project.slug}`}>
                                             <h3 className={`font-display font-bold text-white mb-2 group-hover:text-brand-orange transition-colors ${project.size === 'large' ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-lg sm:text-xl'}`}>
                                                 {project.title}
                                             </h3>
@@ -128,11 +127,11 @@ const ProjectsPage: React.FC = () => {
                                     {/* Meta Info Grid */}
                                     <div className="grid grid-cols-2 gap-y-3 sm:gap-y-4 gap-x-2 text-[10px] font-mono text-zinc-500 uppercase border-t border-white/10 pt-3 sm:pt-4">
                                         <div className="flex items-center gap-2">
-                                            <Calendar size={12} className="text-zinc-600 shrink-0"/>
+                                            <Calendar size={12} className="text-zinc-600 shrink-0" />
                                             <span className="truncate">{project.year}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <MapPin size={12} className="text-zinc-600 shrink-0"/>
+                                            <MapPin size={12} className="text-zinc-600 shrink-0" />
                                             <span className="truncate">{project.location}</span>
                                         </div>
                                         <div className="flex items-center gap-2 col-span-2">
@@ -142,7 +141,7 @@ const ProjectsPage: React.FC = () => {
                                 </div>
 
                                 {/* Corner Interaction */}
-                                <NavLink to={`/projects/${project.slug}`} className="absolute top-0 right-0 p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                <NavLink to={`/projeler/${project.slug}`} className="absolute top-0 right-0 p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
                                     <div className="w-9 h-9 sm:w-10 sm:h-10 bg-brand-orange text-black flex items-center justify-center tap-target">
                                         <ArrowUpRight size={18} className="sm:w-5 sm:h-5" />
                                     </div>
@@ -152,7 +151,7 @@ const ProjectsPage: React.FC = () => {
                         ))}
                     </AnimatePresence>
                 </motion.div>
-                
+
                 {/* Empty State */}
                 {filteredProjects.length === 0 && (
                     <div className="py-16 sm:py-20 text-center border border-dashed border-zinc-800 rounded-xl">
